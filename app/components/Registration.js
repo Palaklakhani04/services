@@ -13,7 +13,7 @@ export default function Registration() {
 
   console.log(name, 'name')
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
 
     const data = JSON.stringify(
       {
@@ -65,7 +65,7 @@ export default function Registration() {
             <input type="password" placeholder="Enter Password" name="password" value={password} onChange={(e) => setPasswrod(e.target.value)} required />
             <label htmlFor="psw-confim"><b>Confirm Password</b></label>
             <input type="password" placeholder="confirm Password" name="confirmpassword" value={confirmpassword} onChange={(e) => setConfirmpassword(e.target.value)} required />
-            <button onClick={() => handleLogin()} className="registerbtn">Register</button>
+            <button onClick={() => handleRegister()} className="registerbtn">Register</button>
             <p>Already have an account? <a href="/login">login</a>.</p>
             <hr />
             <a href="/" className="centerhome">Home</a>

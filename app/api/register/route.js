@@ -7,8 +7,10 @@ export async function POST(req) {
 
     try {
         await dbConnect();
-        const { name, email, mobile, address, password } = await req.json();
-        console.log(name, email, mobile, address, password,'data--------------------')
+        const body = await req.json(); // Read request body
+        const { name, email, mobile, address, password } = body;
+        
+        console.log(name, email, mobile, address, password, 'data--------------------')
         const existingUser = await RegisterUser.findOne({ email });
 
         if (existingUser) {
