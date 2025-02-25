@@ -1,14 +1,17 @@
 "use client"
 import axios from "axios"
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 
 export default function Registration() {
+
+  const router = useRouter();
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [mobile, setMobile] = useState('')
   const [address, setAddress] = useState('')
-  const [password, setPasswrod] = useState('')
+  const [password, setPassword] = useState('')
   const [confirmpassword, setConfirmpassword] = useState('')
 
   console.log(name, 'name')
@@ -30,6 +33,7 @@ export default function Registration() {
       if (response.status === 200) {
         // navigate('/dashboard')
         console.log(response, 'register-response')
+        router.push('/login');
       } else {
         alert('Something went wrong')
       }
@@ -62,7 +66,7 @@ export default function Registration() {
             <label htmlFor="address"><b>Address</b></label>
             <textarea name="address" placeholder="Enter Your Full Address " value={address} onChange={(e) => setAddress(e.target.value)} defaultValue={""} />
             <label htmlFor="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" value={password} onChange={(e) => setPasswrod(e.target.value)} required />
+            <input type="password" placeholder="Enter Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             <label htmlFor="psw-confim"><b>Confirm Password</b></label>
             <input type="password" placeholder="confirm Password" name="confirmpassword" value={confirmpassword} onChange={(e) => setConfirmpassword(e.target.value)} required />
             <button onClick={() => handleRegister()} className="registerbtn">Register</button>

@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 const RegisterUserSchema = new mongoose.Schema({
     name: {
         type: String,
-        unique: true,
     },
     email: {
         type: String,
@@ -19,10 +18,10 @@ const RegisterUserSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        unique: true,
     },
     password: {
         type: String,
+        require: true,
     }
 },
     {
