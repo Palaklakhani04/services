@@ -7,17 +7,25 @@ export default function Registration() {
 
   const router = useRouter();
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [mobile, setMobile] = useState('')
-  const [address, setAddress] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmpassword, setConfirmpassword] = useState('')
+  const [input, setInput] = useState({
+    name:'',
+    email:'',
+    mobile:'',
+    address:'',
+    password:'',
+    confirmpassword:'',
+  });
 
-  console.log(name, 'name')
+  const [validations, setValidations] = useState({
+    name:false,
+    email:false,
+    mobile:false,
+    address:false,
+    password:false,
+    confirmpassword:false,
+  })
 
   const handleRegister = async () => {
-
 
     const data = JSON.stringify(
       {
@@ -60,17 +68,17 @@ export default function Registration() {
             <p>Please fill in this form to create an account.</p>
             <hr />
             <label htmlFor="name"><b>Name</b></label>
-            <input type="text" placeholder="Enter Full Name" value={name} onChange={(e) => setName(e.target.value)} name="name" id="name" required />
+            <input type="text" placeholder="Enter Full Name" value={input.name} onChange={handelInputs} name="name" id="name" required />
             <label htmlFor="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <input type="text" placeholder="Enter Email" name="email" value={input.email} onChange={handelInputs} required />
             <label htmlFor="contact"><b>Contact Number</b></label>
-            <input size="number" placeholder="Enter contact number" name="mobile" value={mobile} onChange={(e) => setMobile(e.target.value)} maxLength={10} required />
+            <input size="number" placeholder="Enter contact number" name="mobile" value={input.mobile} onChange={handelInputs} maxLength={10} required />
             <label htmlFor="address"><b>Address</b></label>
-            <textarea name="address" placeholder="Enter Your Full Address " value={address} onChange={(e) => setAddress(e.target.value)} defaultValue={""} />
+            <textarea name="address" placeholder="Enter Your Full Address " value={input.address} onChange={handelInputs} defaultValue={""} />
             <label htmlFor="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <input type="password" placeholder="Enter Password" name="password" value={input.password} onChange={handelInputs} required />
             <label htmlFor="psw-confim"><b>Confirm Password</b></label>
-            <input type="password" placeholder="confirm Password" name="confirmpassword" value={confirmpassword} onChange={(e) => setConfirmpassword(e.target.value)} required />
+            <input type="password" placeholder="confirm Password" name="confirmpassword" value={input.confirmpassword} onChange={handelInputs} required />
             <button onClick={() => handleRegister()} className="registerbtn">Register</button>
             <p>Already have an account? <a href="/login">login</a>.</p>
             <hr />
