@@ -7,7 +7,7 @@ export default function Setpsw(){
             <img src="assets/img/logo/black-logo.svg" alt="logo-img" />
           </a>
         </div>
-  <form action="action_page.php">
+  <div>
     <div className="container">
       <h2>Set Password</h2>
       <hr />
@@ -19,7 +19,7 @@ export default function Setpsw(){
       <hr />
                         <a href="/" className="centerhome">Home</a>
     </div>  
-  </form>
+  </div>
 </div>
 
         </div>

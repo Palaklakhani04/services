@@ -19,6 +19,9 @@ const RegisterUserSchema = new mongoose.Schema({
     address: {
         type: String,
     },
+    otp: {
+        type:Number,
+    },
     password: {
         type: String,
         require: true,

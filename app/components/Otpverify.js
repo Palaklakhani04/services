@@ -1,13 +1,13 @@
 export default function Otpverify(){
     return(
         <div>
-            <div className="otp-verify">
+            <div className="registration">
             <div className="logo">
           <a className="header-logo" href="/">
             <img src="assets/img/logo/black-logo.svg" alt="logo-img" />
           </a>
         </div>
-  <form action="action_page.php">
+  <div>
     <div className="container">
       <h2>OTP Verify</h2>
       <hr />
@@ -20,7 +20,7 @@ export default function Otpverify(){
       <hr />
         <a href="/" className="centerhome">Home</a>
     </div>  
-  </form>
+  </div>
 </div>
 
         </div>

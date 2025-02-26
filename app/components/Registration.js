@@ -18,12 +18,14 @@ export default function Registration() {
 
   const handleRegister = async () => {
 
+
     const data = JSON.stringify(
       {
         name: name,
         email: email,
         mobile: mobile,
         address: address,
+        otp: '',
         password: password
       });
 
@@ -33,9 +35,9 @@ export default function Registration() {
       if (response.status === 200) {
         // navigate('/dashboard')
         console.log(response, 'register-response')
-        router.push('/login');
+        // router.push('/login');
       } else {
-        alert('Something went wrong')
+        console.log ('Something went wrong')
       }
     } catch (error) {
       console.log('Error in login api', error)

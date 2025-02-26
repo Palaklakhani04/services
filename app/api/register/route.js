@@ -8,7 +8,7 @@ export async function POST(req) {
     try {
         await dbConnect();
         const body = await req.json(); // Read request body
-        const { name, email, mobile, address, password } = body;
+        const { name, email, mobile, address, otp, password } = body;
         
         console.log(name, email, mobile, address, password, 'data--------------------')
         const existingUser = await RegisterUser.findOne({ email });
@@ -19,7 +19,7 @@ export async function POST(req) {
                 { status: 400 }
             );
         }
-        const newUser = new RegisterUser({ name, email, mobile, address, password });
+        const newUser = new RegisterUser({ name, email, mobile, address,otp, password });
         await newUser.save();
         return NextResponse.json(
             { message: 'User registered successfully' },
