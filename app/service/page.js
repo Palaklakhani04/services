@@ -1,3 +1,5 @@
+'use client'
+
 import BackToTopStart from "../components/BackToTopStart";
 import FooterSection from "../components/FooterSection";
 import Header from "../components/Header";
