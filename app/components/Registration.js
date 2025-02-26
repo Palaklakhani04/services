@@ -35,7 +35,7 @@ export default function Registration() {
       if (response.status === 200) {
         // navigate('/dashboard')
         console.log(response, 'register-response')
-        // router.push('/login');
+        router.push('/login');
       } else {
         console.log ('Something went wrong')
       }
