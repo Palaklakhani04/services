@@ -1,40 +1,99 @@
 "use client"
 import axios from "axios"
 import { useRouter } from "next/navigation";
-import { useState } from "react"
+import { useState } from "react";
+import { EMAIL_REGEX } from "../utils/constants";
+
 
 export default function Registration() {
 
   const router = useRouter();
 
+  const [message, setMessage] = useState()
+
   const [input, setInput] = useState({
-    name:'',
-    email:'',
-    mobile:'',
-    address:'',
-    password:'',
-    confirmpassword:'',
+    name: '',
+    email: '',
+    mobile: '',
+    address: '',
+    otp: '',
+    password: '',
+    confirmpassword: '',
   });
 
   const [validations, setValidations] = useState({
-    name:false,
-    email:false,
-    mobile:false,
-    address:false,
-    password:false,
-    confirmpassword:false,
-  })
+    name: false,
+    email: false,
+    mobile: false,
+    address: false,
+    password: false,
+    confirmpassword: false,
+  });
+
+  const handelInputs = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+    setValidations({ ...validations, [e.target.name]: false });
+  };
+
+
 
   const handleRegister = async () => {
 
+    if (!input.name) {
+      setValidations({ ...validations, name: true });
+      setMessage('Name is required.');
+      return;
+    }
+
+    if (!input.email) {
+      setValidations({ ...validations, email: true });
+      setMessage('Email is required.');
+      return;
+    }
+    if (!EMAIL_REGEX.test(input.email)) {
+      setValidations({ ...validations, email: true });
+      setMessage('Please enter valid email address.');
+      return;
+    }
+
+    if (!input.mobile) {
+      setValidations({ ...validations, mobile: true });
+      setMessage('Mobile number is required.');
+      return;
+    }
+
+    if (!input.address) {
+      setValidations({ ...validations, address: true });
+      setMessage('Address is required.');
+      return;
+    }
+
+    if (!input.password) {
+      setValidations({ ...validations, password: true });
+      setMessage('Password is required.');
+      return;
+    }
+
+    if (input.password.length < 8) {
+      setValidations({ ...validations, password: true });
+      setMessage('Enter Valid Password minimum 8 character.');
+      return;
+    }
+
+    if (!(input.confirmpassword === input.password)) {
+      setValidations({ ...validations, confirmpassword: true });
+      setMessage('Password Not Match.');
+      return;
+    }
+
     const data = JSON.stringify(
       {
-        name: name,
-        email: email,
-        mobile: mobile,
-        address: address,
+        name: input.name,
+        email: input.email,
+        mobile: input.mobile,
+        address: input.address,
         otp: '',
-        password: password
+        password: input.password
       });
 
 
@@ -45,12 +104,17 @@ export default function Registration() {
         console.log(response, 'register-response')
         router.push('/login');
       } else {
-        console.log ('Something went wrong')
+        console.log('Something went wrong')
       }
     } catch (error) {
       console.log('Error in login api', error)
     }
+
+
   }
+
+
+
 
 
 
@@ -65,12 +129,15 @@ export default function Registration() {
         <div>
           <div className="container">
             <h2>Register</h2>
-            <p>Please fill in this form to create an account.</p>
+            <p>Please fill this form to create an account.</p>
+            {message &&
+              <p className="text-[#ff5555] text-lg">{message}</p>
+            }
             <hr />
             <label htmlFor="name"><b>Name</b></label>
             <input type="text" placeholder="Enter Full Name" value={input.name} onChange={handelInputs} name="name" id="name" required />
             <label htmlFor="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" value={input.email} onChange={handelInputs} required />
+            <input type="email" placeholder="Enter Email" name="email" value={input.email} onChange={handelInputs} required />
             <label htmlFor="contact"><b>Contact Number</b></label>
             <input size="number" placeholder="Enter contact number" name="mobile" value={input.mobile} onChange={handelInputs} maxLength={10} required />
             <label htmlFor="address"><b>Address</b></label>

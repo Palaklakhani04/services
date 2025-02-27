@@ -5738,7 +5738,7 @@ input.main-search-input::placeholder {
 .registration{
   border: 2px solid var(--theme2);
   width:50%;
-  margin: 50px auto; 
+  margin: auto; 
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);

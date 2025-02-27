@@ -7,8 +7,20 @@ import { useState } from "react"
 export default function Otpverify() {
 
   const router = useRouter();
-
+  const [message, setMessage] = useState('')
   const [otp, setOtp] = useState('')
+  const [validations, setValidations] = useState(false)
+
+  const handelValidation = () => {
+  
+      if (!otp) {
+        setValidations(true);
+        setMessage('Please enter valid 6 digit otp.');
+        return;
+      }
+  
+      handleSubmit()
+    }
 
   const handleSubmit = async () => {
     const data = JSON.stringify(
@@ -44,12 +56,15 @@ export default function Otpverify() {
         <div>
           <div className="container">
             <h2>OTP Verify</h2>
+            {validations &&
+              <p className="text-[#ff5555] text-lg">{message}</p>
+            }
             <hr />
             <label htmlFor="email"><b>Email</b></label>
             <input type="email" placeholder="Enter Email" name="email" className="email" value={localStorage?.getItem('email')} onChange={(e) => setEmail(e.target.value)} disabled />
             <label htmlFor="email"><b>OTP</b></label>
-            <input size="number" placeholder="Enter OTP" name="otp" className="otp" value={otp} onChange={(e) => setOtp(e.target.value)} maxLength={6} required />
-            <button onClick={() => handleSubmit()} className="loginbtn">Submit</button>
+            <input size="number" placeholder="Enter OTP" name="otp" className="otp" value={otp} onChange={(e) => {setOtp(e.target.value),setValidations(false)}} maxLength={6} required />
+            <button onClick={() => handelValidation()} className="loginbtn">Submit</button>
             <hr />
             <a href="/" className="centerhome">Home</a>
           </div>

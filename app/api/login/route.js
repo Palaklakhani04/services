@@ -1,6 +1,8 @@
 import dbConnect from "@/app/lib/db";
 import { NextResponse } from "next/server";
 import RegisterUser from "../model/RegisterModel";
+const jwt = require('jsonwebtoken');
+
 
 export async function POST(req) {
     try {
@@ -13,11 +15,12 @@ export async function POST(req) {
             const loginStatus = await RegisterUser.findOne({ email, password });
 
             if (loginStatus) {
-
-                console.log(loginStatus, 'login status')
+                let token;
+                console.log(loginStatus, 'login status-----')
+                token = await jwt.sign({ id: loginStatus._id, email: loginStatus.email, name: loginStatus.name, mobile: loginStatus.mobile }, process.env.NEXT_PUBLIC_TOKEN_SCRET, { expiresIn: '30m' });
+                console.log(token, 'token -----------------')
                 return NextResponse.json(
-                    { message: 'User login sucessfully' },
-                    { status: 200 }
+                    { status: 200, token: token, message: 'User login sucessfully' },
                 );
             } else {
                 return NextResponse.json(
