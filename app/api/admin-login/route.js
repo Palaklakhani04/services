@@ -1,7 +1,6 @@
 import dbConnect from "@/app/lib/db";
 import { NextResponse } from "next/server";
-import RegisterUser from "../model/RegisterModel";
-const jwt = require('jsonwebtoken');
+
 
 
 export async function POST(req) {
@@ -9,20 +8,14 @@ export async function POST(req) {
         await dbConnect();
         const body = await req.json(); // Read request body
         const { email, password } = body;
-        const existingUser = await RegisterUser.findOne({ email });
 
+        console.log(body.email, password, 'admin--------')
 
-        if (existingUser) {
+        if ('admin@easemate.com' == email) {
 
-            const loginStatus = await RegisterUser.findOne({ email, password });
-
-            if (loginStatus) {
-                let token;
-                console.log(loginStatus, 'login status-----')
-                token = await jwt.sign({ id: loginStatus._id, email: loginStatus.email, name: loginStatus.name, mobile: loginStatus.mobile }, process.env.NEXT_PUBLIC_TOKEN_SCRET, { expiresIn: '30m' });
-                console.log(token, 'token -----------------')
+            if ('admin1111' == password) {
                 return NextResponse.json(
-                    { status: 200, token: token, message: 'User login sucessfully' },
+                    { status: 200, message: 'admin login sucessfully' },
                 );
             } else {
                 return NextResponse.json(
@@ -33,7 +26,7 @@ export async function POST(req) {
 
         } else {
             return NextResponse.json(
-                { message: "User not found. Please register first." },
+                { message: "admin not found." },
                 { status: 404 }
             );
         }

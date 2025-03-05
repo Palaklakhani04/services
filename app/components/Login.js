@@ -24,11 +24,7 @@ export default function Login() {
         setValidations({...validations, [e.target.name]:false});
     }
 
-
-
-
     const router = useRouter()
-
 
     const handleLogin = async () => {
 
