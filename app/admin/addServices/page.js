@@ -34,7 +34,7 @@
     const router = useRouter()
 
 
-    const handelAdd = async () => {
+    const handleAdd = async () => {
 
         if (!input.title) {
             setValidations({ ...validations, title: true });
@@ -60,19 +60,17 @@
             return;
           }
 
-        const data = JSON.stringify(
-            {
-                title: input.title,
-                myfile: input.myfile,
-                description: input.description,
-                price: input.price,
-            });
+          const formData = new FormData();
+          formData.append("title", input.title);
+          formData.append("myfile", input.myfile);
+          formData.append("description", input.description);
+          formData.append("price", input.price);
 
         try {
-            const response = await axios.post('/api/addservices', data)
+            const response = await axios.post('/api/addservices', formData)
             if (response.status === 200) {
                 router.push('/service');
-                console.log("Login Successful:", response.data);
+                console.log("Service Added Successfully:", response.data);
             } else {
                 alert('Something went wrong')
             }
@@ -91,7 +89,7 @@
               <img src="/assets/img/logo/black-logo.svg" alt="logo-img" />
             </a>
           </div>
-    <form action="action_page.php">
+    <div>
       <div className="container">
         <h2>Add Service</h2>
         {message &&
@@ -102,15 +100,15 @@
         <input type="text" placeholder="Enter Title" name="title" value={input.title} onChange={handelInputs} required />
         
           <label htmlFor="myfile"><b>Select a file</b></label>
-          <input type="file" id="myfile" name="myfile" value={input.myfile} onChange={handelInputs}/>
+          <input type="file" id="myfile" name="myfile"   onChange={handelInputs}/>
 
         <label htmlFor="description"><b>Description</b></label>
         <textarea name="description" placeholder="Enter Service Description " value={input.description} onChange={handelInputs} defaultValue={""} />
         <label htmlFor="price"><b>Price</b></label>
         <input type="number" placeholder="Enter Price" name="price" value={input.price} onChange={handelInputs} required />
-        <button  onClick={()=>handelAdd()} className="registerbtn">Add</button>
+        <button  onClick={()=>handleAdd()} className="registerbtn">Add</button>
       </div>  
-    </form>
+    </div>
   </div>
 
           </div>

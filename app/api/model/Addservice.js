@@ -5,10 +5,11 @@ import mongoose from "mongoose";
 const AddServicesSchema = new mongoose.Schema({
     title: {
         type: String,
-        unique: true,
+        unique: true,  
     },
-    myfile: {
-        unique: true,
+    filePath: {
+        type: String,
+        required: true,
     },
     description: {
         type: String,
@@ -24,6 +25,6 @@ const AddServicesSchema = new mongoose.Schema({
         timestamps: true,
     });
 
-const AddServices = mongoose.models.addServices || mongoose.model('register', AddServicesSchema);
+const AddServices = mongoose.models.addServices || mongoose.model('addServices', AddServicesSchema);
 
 export default AddServices
