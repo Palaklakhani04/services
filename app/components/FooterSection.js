@@ -3,10 +3,10 @@ export default function FooterSection(){
         <div>
             <footer className="footer-section fix section-bg">
   <div className="shape-1">
-    <img src="assets/img/footer/shape-1.png" alt="img" />
+    <img src="/assets/img/footer/shape-1.png" alt="img" />
   </div>
   <div className="shape-2">
-    <img src="assets/img/footer/shape-2.png" alt="img" />
+    <img src="/assets/img/footer/shape-2.png" alt="img" />
   </div>
   <div className="container">
     <div className="footer-widgets-wrapper style-2">
@@ -15,7 +15,7 @@ export default function FooterSection(){
           <div className="single-footer-widget">
             <div className="widget-head">
               <a href="index.htm">
-                <img src="assets/img/logo/white-logo.svg" alt="logo-img" />
+                <img src="/assets/img/logo/white-logo.svg" alt="logo-img" />
               </a>
             </div>
             <div className="footer-content">
@@ -78,7 +78,7 @@ export default function FooterSection(){
             <div className="recent-post-area">
               <div className="recent-post-items">
                 <div className="thumb">
-                  <a href="news-details.html"><img src="assets/img/news/pp1.jpg" alt="post-img" /></a>
+                  <a href="news-details.html"><img src="/assets/img/news/pp1.jpg" alt="post-img" /></a>
                 </div>
                 <div className="content">
                   <ul className="post-date">
@@ -96,7 +96,7 @@ export default function FooterSection(){
               </div>
               <div className="recent-post-items mb-0">
                 <div className="thumb">
-                  <a href="news-details.html"><img src="assets/img/news/pp2.jpg" alt="post-img" /></a>
+                  <a href="news-details.html"><img src="/assets/img/news/pp2.jpg" alt="post-img" /></a>
                 </div>
                 <div className="content">
                   <ul className="post-date">
