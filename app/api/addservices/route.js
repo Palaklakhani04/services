@@ -9,11 +9,14 @@ export async function POST(req) {
     try {
         await dbConnect();
         const formData = await req.formData();// Read request body
-       
+
         const title = formData.get("title");
         const description = formData.get("description");
+        const features = formData.get("features");
         const price = formData.get("price");
         const file = formData.get("myfile"); // File upload
+
+        console.log(features, 'features-----------')
 
         if (!file) {
             return NextResponse.json({ message: "File is required" }, { status: 400 });
@@ -31,12 +34,12 @@ export async function POST(req) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
 
-         // Generate unique filename with timestamp
+        // Generate unique filename with timestamp
         //  const ext = path.extname(file.name);
         //  const baseName = path.basename(file.name, ext);
         //  const newFileName = `${baseName}-${Date.now()}${ext}`;
-         
-         // Define file path
+
+        // Define file path
         //  const filePath = path.join(uploadDir, newFileName);
 
 
@@ -53,7 +56,7 @@ export async function POST(req) {
         // Save the file
         fs.writeFileSync(filePath, buffer);
 
-        const existingService = await AddServices.findOne({ title ,filePath: `/uploads/${filename}` });
+        const existingService = await AddServices.findOne({ title, filePath: `/uploads/${filename}` });
 
 
         if (!existingService) {
@@ -61,13 +64,14 @@ export async function POST(req) {
             const newService = new AddServices({
                 title,
                 description,
+                features,
                 price,
                 filePath: `/uploads/${filename}`, // ✅ Ensure this is saved
             });
 
             console.log("Data to be stored in MongoDB:", newService);
             await newService.save();
-            
+
             return NextResponse.json(
                 { message: 'Add Service successfully' },
                 { status: 200 }
