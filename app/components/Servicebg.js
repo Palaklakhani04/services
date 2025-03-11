@@ -7,7 +7,7 @@ export default function Servicebg(){
       <h1 className="wow fadeInUp" data-wow-delay=".3s">Services</h1>
       <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
         <li>
-          <a href="index.htm">
+          <a href="/">
             Home
           </a>
         </li>

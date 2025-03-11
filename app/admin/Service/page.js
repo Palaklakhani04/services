@@ -6,7 +6,7 @@ import { useState,useEffect } from "react";
 export default function ServiceSection() {
     const [services, setServices] = useState([]);
     const [error, setError] = useState("");
-    const [showActiveOnly, setShowActiveOnly] = useState(false);
+    const [filterStatus, setFilterStatus] = useState("all"); 
     const router = useRouter();
   
     useEffect(() => {
@@ -52,10 +52,12 @@ export default function ServiceSection() {
       }
     };
   
-    // ✅ Add Filtering Logic Before JSX Rendering
-    const filteredServices = services.filter((service) =>
-      showActiveOnly ? service.active : true
-    );
+   // ✅ Filtering Logic
+const filteredServices = services.filter((service) => {
+  if (filterStatus === "active") return service.active;
+  if (filterStatus === "inactive") return !service.active;
+  return true; // 'all' case
+});
   
     return (
       <div>
@@ -64,14 +66,34 @@ export default function ServiceSection() {
         </h1>
         {error && <p className="text-red-500 text-center">{error}</p>}
   
-        <div className="text-center mb-5">
-          <button
-            onClick={() => setShowActiveOnly(!showActiveOnly)}
-            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-200"
-          >
-            {showActiveOnly ? "Show Only Active Services" : "Show All Services"}
-          </button>
-        </div>
+        <div className="flex justify-center space-x-4 mb-5">
+      <button
+        onClick={() => setFilterStatus("all")}
+        className={`px-6 py-2 font-semibold rounded-lg transition duration-200 ${
+          filterStatus === "all" ? "bg-blue-600 text-white" : "bg-gray-300 text-gray-800 hover:bg-gray-400"
+        }`}
+      >
+        All Services
+      </button>
+
+      <button
+        onClick={() => setFilterStatus("active")}
+        className={`px-6 py-2 font-semibold rounded-lg transition duration-200 ${
+          filterStatus === "active" ? "bg-green-600 text-white" : "bg-gray-300 text-gray-800 hover:bg-gray-400"
+        }`}
+      >
+        Active Services
+      </button>
+
+      <button
+        onClick={() => setFilterStatus("inactive")}
+        className={`px-6 py-2 font-semibold rounded-lg transition duration-200 ${
+          filterStatus === "inactive" ? "bg-red-600 text-white" : "bg-gray-300 text-gray-800 hover:bg-gray-400"
+        }`}
+      >
+        Inactive Services
+      </button>
+    </div>
   
         <div className="grid m-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {filteredServices.map((service) => (
@@ -107,7 +129,7 @@ export default function ServiceSection() {
                 <div className="flex justify-between items-center mt-4">
                   <span className="font-bold text-green-600 text-xl">₹{service.price}</span>
                   <button className="px-4 py-2 bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold rounded-lg shadow-md hover:scale-105 transition duration-300">
-                    🛍️ Book Now
+                    🛍️ Menu Book Now
                   </button>
                 </div>
   

@@ -18,34 +18,7 @@ export default function EditService() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // const fetchService = async () => {
-  //   try {
-  //     const response = await axios.get(`/api/services/${id}`);
-  //     console.log("Fetched Service:", response.data.services);
-      
-  //     const fetchedService = response.data.services;
-  //     // Debug features field
-  //   console.log("Raw Features from API:", fetchedService.features);
-  
-  //     // Ensure features is always an array
-  //     let formattedFeatures = [];
-  //     try {
-  //       formattedFeatures = JSON.parse(fetchedService.features);
-  //     } catch (error) {
-  //       console.error("Error parsing features:", error);
-  //       formattedFeatures = [];
-  //     }
-  //     setService({
-  //       ...fetchedService,
-  //       features: formattedFeatures,
-  //     });
-  //   } catch (err) {
-  //     console.error("Error fetching service:", err);
-  //     setError("Service not found!");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+ 
   const fetchService = async () => {
     try {
       const response = await axios.get(`/api/services/${id}`);

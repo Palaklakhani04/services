@@ -128,9 +128,7 @@ export default function addServices() {
 
             <label htmlFor="description"><b>Description</b></label>
             <input type="text" placeholder="Enter description" name="description" value={input.description} onChange={handelInputs} required />
-            {/* 
-        <label htmlFor="detail"><b>Detail</b></label>
-        <input type="text" placeholder="Enter detail" name="detail" value={input.detail} onChange={handelInputs} required /> */}
+            
 
 
 

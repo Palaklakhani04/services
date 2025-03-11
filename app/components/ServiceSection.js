@@ -16,14 +16,17 @@ export default function ServiceSection(){
   const fetchServices = async () => {
     try {
       const response = await axios.get("/api/getservices");
-      // const activeServices = response.data.services.filter(service => service.active); // Show only active services
-      setServices(response.data.services);
-
+  
+      // Filter out only active services
+      const activeServices = response.data.services.filter(service => service.active);
+  
+      setServices(activeServices); // Set only active services in state
     } catch (err) {
       console.error("Error fetching services:", err);
       setError("Failed to fetch services.");
     }
   };
+  
 
 
 

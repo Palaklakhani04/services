@@ -36,61 +36,80 @@ export default function ServiceDetail() {
 
         <div>
             <Header />
-            <ServiceDetailsbg />
-            <div className="max-w-full mx-auto  p-8 bg-green-50">
-                {/* Image Section */}
-                <div className="flex justify-center items-center">
+            
+            <div>
+      <div className="breadcrumb-wrapper bg-cover" style={{ backgroundImage: 'url("/assets/img/breadcrumb/project-breadcrumb.jpg")' }}>
+        <div className="container">
+          <div className="page-heading">
+            <h1 className="wow fadeInUp" data-wow-delay=".3s">{service.title}</h1>
+            <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
+              <li>
+                <a href="/">
+                  Home
+                </a>
+              </li>
+              <li>
+                <i className="fa-regular fa-chevrons-right" />
+              </li>
+              <li>
+                <a href="/service" >
+                  Services
+                </a>
+            </li>
+              <li>
+                <i className="fa-regular fa-chevrons-right" />
+              </li>
+              <li>
+              <a >{service.title}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+            <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-8 mb-8 mt-8">
+                {/* Service Image */}
+                <div className="relative flex justify-center">
                     <img
-                        src={service.filePath}
-                        alt={service.title}
-                        className="w-40 h-40 object-cover rounded-full border-4 border-gray-300  transition-all duration-500 hover:brightness-90 hover:scale-105"
+                    src={service.filePath}
+                    alt={service.title}
+                    className="w-52 h-52 object-cover rounded-full border-4 border-green-500 shadow-lg transition-transform duration-300 hover:scale-110"
                     />
-
                 </div>
-
 
                 {/* Service Info */}
-                <div className="p-6 text-center">
-                    <h1 className="text-4xl font-extrabold text-gray-900">{service.title}</h1>
-                    <p className="text-gray-600 mt-4 text-lg leading-relaxed">{service.description}</p>
+                <div className="text-center mt-6">
+                    <h1 className="text-4xl font-bold text-gray-900">{service.title}</h1>
+                    <p className="text-gray-600 mt-3 text-lg leading-relaxed">{service.description}</p>
+                </div>
 
+                {/* Features Section */}
+                <div className="bg-gray-100 p-6 rounded-lg shadow-md mt-6">
+                    <h2 className="text-2xl font-bold text-gray-700 text-center mb-4">🔥 Service Features</h2>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {service?.features?.map((feature, index) => (
+                        <li key={index} className="flex items-center space-x-3 bg-white p-4 rounded-md shadow-sm border-l-4 border-green-500">
+                        <span className="text-green-600 text-xl">✔</span>
+                        <span><strong>{feature.name}</strong> {feature.description}</span>
+                        </li>
+                    ))}
+                    </ul>
+                </div>
 
-                    <section className="mt-10 px-6 py-8 bg-green-50 rounded-lg border-l-4 border-green-500 shadow-sm">
-                        <h2 className="text-2xl font-semibold text-green-700 mb-4">
-                            📝 Service Include
-                        </h2>
-                        <p
-                            className="text-gray-700 text-lg leading-7"
-                            style={{ whiteSpace: "pre-line" }}
-                        >
-                            {service.detail || "No additional details provided."}
-                        </p>
-                    </section>
-
-                    <div className="bg-white p-5 rounded-lg shadow-md">
-                        <h2 className="text-xl font-bold text-gray-700">Service Features</h2>
-                        <ul className="mt-3 space-y-2">
-                            {service?.features?.map((feature, index) => 
-                                <li key={index} className="bg-green-100 p-3 rounded-md shadow-sm">
-                                    <strong>{feature.name}:</strong> {feature.description}
-                                </li>
-                            )}
-                        </ul>
-                    </div>
-
-
-
-                    {/* Price & Booking Button */}
-                    <div className="flex flex-col sm:flex-row justify-between items-center mt-6">
-                        <span className="text-3xl font-extrabold text-green-600 bg-green-100 px-6 py-2 rounded-full shadow-md">
-                            ₹{service.price}
-                        </span>
-                        <button className="mt-4 sm:mt-0 px-8 py-3 bg-green-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105">
-                            ✅ Book Now
-                        </button>
-                    </div>
+                {/* Price & Booking */}
+                <div className="flex flex-col sm:flex-row justify-between items-center mt-8">
+                    <span className="text-4xl font-bold text-green-600 bg-green-100 px-6 py-2 rounded-lg shadow-md">
+                    ₹{service.price}
+                    </span>
+                    <button className="mt-4 sm:mt-0 px-10 py-3 bg-gradient-to-r from-green-500 to-green-700 text-white text-lg font-semibold rounded-lg shadow-lg hover:scale-105 transition-all duration-300">
+                    ✅ Book Now
+                    </button>
                 </div>
             </div>
+
             <FooterSection />
         </div>
     );

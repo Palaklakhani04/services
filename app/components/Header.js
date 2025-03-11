@@ -99,7 +99,7 @@ export default function Header(){
                                       </ul>
                                   </li> */}
                   <li>
-                    <a href="/serviceDetails">
+                    <a href="/service">
                       Services
                     </a>
                     <ul className="submenu">

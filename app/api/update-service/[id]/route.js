@@ -54,45 +54,6 @@ export async function PUT(req, { params }) {
 
 
 
-// export async function PUT(req, { params }) {
-//   try {
-//     await dbConnect();
-//     const { id } = params;
 
-//     if (!id) {
-//       return NextResponse.json({ message: "Invalid request: ID missing" }, { status: 400 });
-//     }
-
-//     let data = await req.json();
-//     console.log("📩 Received update data:", data);
-
-//     // Ensure features is properly formatted
-//     if (typeof data.features === "string") {
-//       try {
-//         data.features = JSON.parse(data.features);
-//         console.log("✅ Parsed Features:", data.features);
-//       } catch (error) {
-//         console.error("❌ Error parsing features:", error);
-//         return NextResponse.json({ message: "Invalid format for features" }, { status: 400 });
-//       }
-//     }
-
-//     // Log before updating
-//     const oldService = await AddServices.findById(id);
-//     console.log("🔍 Old Service Features:", oldService?.features);
-
-//     const updatedService = await AddServices.findByIdAndUpdate(id, data, { new: true });
-
-//     if (!updatedService) {
-//       return NextResponse.json({ message: "Service not found" }, { status: 404 });
-//     }
-
-//     console.log("✅ Successfully updated service:", updatedService);
-//     return NextResponse.json({ message: "Service updated successfully", updatedService }, { status: 200 });
-//   } catch (error) {
-//     console.error("❌ Error updating service:", error);
-//     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
-//   }
-// }
 
 
