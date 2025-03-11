@@ -11,8 +11,6 @@ export default function addServices() {
 
   const [message, setMessage] = useState()
 
-  const [showActiveOnly, setShowActiveOnly] = useState(false);
-
   const [input, setInput] = useState({
     title: '',
     myfile: null,
@@ -89,7 +87,7 @@ export default function addServices() {
     formData.append("title", input.title);
     formData.append("myfile", input.myfile);
     formData.append("description", input.description);
-    formData.append("features", JSON?.stringify(features));
+    formData.append("features", JSON.stringify(features)); // ✅ Convert features to a JSON string before sending
     formData.append("price", input.price);
 
     try {

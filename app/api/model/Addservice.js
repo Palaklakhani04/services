@@ -16,9 +16,9 @@ const AddServicesSchema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    features: {
-        type: Object,
-        require: false,
+    features: { 
+        type: [{ name: String, description: String }], 
+        default: [] 
     },
     price: {
         type: Number,

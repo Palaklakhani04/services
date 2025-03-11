@@ -12,7 +12,7 @@ export async function POST(req) {
 
         const title = formData.get("title");
         const description = formData.get("description");
-        const features = formData.get("features");
+        const features = JSON.parse(formData.get("features")); // Convert features string to an array
         const price = formData.get("price");
         const file = formData.get("myfile"); // File upload
 

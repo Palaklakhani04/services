@@ -13,23 +13,83 @@ export default function EditService() {
     filePath: "",
     features: [], // Added Features Array
   });
+
+  const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    if (id) fetchService();
-  }, [id]);
-
+  // const fetchService = async () => {
+  //   try {
+  //     const response = await axios.get(`/api/services/${id}`);
+  //     console.log("Fetched Service:", response.data.services);
+      
+  //     const fetchedService = response.data.services;
+  //     // Debug features field
+  //   console.log("Raw Features from API:", fetchedService.features);
+  
+  //     // Ensure features is always an array
+  //     let formattedFeatures = [];
+  //     try {
+  //       formattedFeatures = JSON.parse(fetchedService.features);
+  //     } catch (error) {
+  //       console.error("Error parsing features:", error);
+  //       formattedFeatures = [];
+  //     }
+  //     setService({
+  //       ...fetchedService,
+  //       features: formattedFeatures,
+  //     });
+  //   } catch (err) {
+  //     console.error("Error fetching service:", err);
+  //     setError("Service not found!");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const fetchService = async () => {
     try {
       const response = await axios.get(`/api/services/${id}`);
-      setService(response.data.services);
+      console.log("Fetched Service:", response.data.services);
+  
+      const fetchedService = response.data.services;
+  
+      // Ensure features is always an array
+      let formattedFeatures = [];
+      if (fetchedService.features) {
+        try {
+          formattedFeatures = Array.isArray(fetchedService.features)
+            ? fetchedService.features
+            : JSON.parse(fetchedService.features);
+        } catch (error) {
+          console.error("Error parsing features:", error);
+          formattedFeatures = [];
+        }
+      }
+  
+      setService({
+        ...fetchedService,
+        features: formattedFeatures, // Ensuring it's always an array
+      });
     } catch (err) {
+      console.error("Error fetching service:", err);
       setError("Service not found!");
     } finally {
       setLoading(false);
     }
   };
+  
+  
+  
+  
+  
+  
+  
+  
+  // Make sure it runs inside useEffect
+  useEffect(() => {
+    if (id) fetchService();
+  }, [id]);
+  
 
   const setFeature = (index, field, value) => {
     const updatedFeatures = [...service.features];
@@ -51,16 +111,58 @@ export default function EditService() {
     });
   };
 
+  // Handle Image Selection
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file); // Read file as Base64
+      reader.onloadend = () => {
+        setSelectedFile(reader.result); // Store Base64 string in state
+      };
+    }
+  };
+  
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    const updatedService = {
+      ...service,
+      features: JSON.stringify(service.features), // Convert features to JSON
+      file: selectedFile || service.filePath, // Send Base64 string OR keep old file path
+    };
+  
+    console.log("🚀 Sending Data to API:", updatedService);
+  
     try {
-      await axios.put(`/api/update-service/${id}`, service);
+      const response = await axios.put(`/api/update-service/${id}`, updatedService, {
+        headers: { "Content-Type": "application/json" }, // JSON headers
+      });
+  
+      console.log("✅ API Update Response:", response.data);
       alert("Service updated successfully!");
       router.push("/admin/Service");
     } catch (err) {
+      console.error("❌ Error updating service:", err.response?.data || err.message);
       alert("Failed to update service.");
     }
   };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
@@ -92,13 +194,10 @@ export default function EditService() {
           className="w-full p-2 border text-black rounded-lg"
           required
         />
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={service.filePath}
-          onChange={(e) => setService({ ...service, filePath: e.target.value })}
-          className="w-full p-2 border text-black rounded-lg"
-        />
+        {/* Image Upload */}
+        <input type="file" 
+        onChange={handleFileChange} 
+        className="w-full p-2 border text-black rounded-lg" />
 
         {/* Features Section */}
         <h3 className="text-base mt-2 font-semibold">Service Features</h3>
@@ -148,3 +247,6 @@ export default function EditService() {
     </div>
   );
 }
+
+
+
