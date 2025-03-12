@@ -18,7 +18,7 @@ export default function EditService() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
- 
+  
   const fetchService = async () => {
     try {
       const response = await axios.get(`/api/services/${id}`);
@@ -124,18 +124,7 @@ export default function EditService() {
     }
   };
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;

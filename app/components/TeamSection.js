@@ -11,7 +11,7 @@ export default function TeamSection(){
       <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
         <div className="team-box-items-2">
           <div className="team-image">
-            <img src="assets/img/team/05.jpg" alt="img" />
+            <img src="/assets/img/team/05.jpg" alt="img" />
           </div>
           <div className="team-content">
             <h3><a href="team-details.html">Michael Dean</a></h3>
@@ -45,7 +45,7 @@ export default function TeamSection(){
       <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
         <div className="team-box-items-2">
           <div className="team-image">
-            <img src="assets/img/team/07.jpg" alt="img" />
+            <img src="/assets/img/team/07.jpg" alt="img" />
           </div>
           <div className="team-content">
             <h3><a href="team-details.html">Esther Howard</a></h3>

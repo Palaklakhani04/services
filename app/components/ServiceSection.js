@@ -59,9 +59,19 @@ export default function ServiceSection(){
 
                   <div className="flex justify-between items-center mt-4">
                     <span className="font-bold text-green-500 text-xl">₹{service.price}</span>
-                    <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-200">
-                      Book Now
-                    </button>
+                    <button
+                      onClick={(event) => {
+                        event.stopPropagation();
+                          if (service?._id) {
+                              router.push(`/booking/${service._id}`);
+                          } else {
+                              console.error("Service ID is undefined");
+                          }
+                      }}
+                      className="mt-4 sm:mt-0 px-10 py-3 bg-gradient-to-r from-green-500 to-green-700 text-white text-lg font-semibold rounded-lg shadow-lg hover:scale-105 transition-all duration-300"
+                  >
+                      ✅ Book Now
+                  </button>
                   </div>
                 </div>
               </div>

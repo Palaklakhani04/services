@@ -11,6 +11,7 @@ export default function ServiceDetail() {
     const [service, setService] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const router = useRouter();
 
     useEffect(() => {
         const fetchService = async () => {
@@ -104,9 +105,20 @@ export default function ServiceDetail() {
                     <span className="text-4xl font-bold text-green-600 bg-green-100 px-6 py-2 rounded-lg shadow-md">
                     ₹{service.price}
                     </span>
-                    <button className="mt-4 sm:mt-0 px-10 py-3 bg-gradient-to-r from-green-500 to-green-700 text-white text-lg font-semibold rounded-lg shadow-lg hover:scale-105 transition-all duration-300">
-                    ✅ Book Now
-                    </button>
+                    
+                    <button
+                      onClick={() => {
+                          if (service?._id) {
+                              router.push(`/booking/${service._id}`);
+                          } else {
+                              console.error("Service ID is undefined");
+                          }
+                      }}
+                      className="mt-4 sm:mt-0 px-10 py-3 bg-gradient-to-r from-green-500 to-green-700 text-white text-lg font-semibold rounded-lg shadow-lg hover:scale-105 transition-all duration-300"
+                  >
+                      ✅ Book Now
+                  </button>
+
                 </div>
             </div>
 
@@ -114,3 +126,4 @@ export default function ServiceDetail() {
         </div>
     );
 }
+  
