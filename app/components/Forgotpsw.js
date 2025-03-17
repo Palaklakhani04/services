@@ -71,64 +71,66 @@ export default function Forgotpsw() {
 //     </div>
 //   );
 // }
-<div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+
+<div className="flex items-center justify-center min-h-screen p-6">
+<div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg">
+    {/* Header */}
+    <div className="flex flex-col items-center mb-6">
+        <img src="/assets/img/logo/black-logo.svg" alt="logo" className="w-20" />
+        <h2 className="text-2xl font-bold text-gray-800 mt-4">Forgot Password?</h2>
+        <p className="text-gray-500 text-sm text-center mt-2">
+            Enter your email to receive an OTP.
+        </p>
+    </div>
 
 
-{/* Forget Password Card */}
-<div className="bg-white shadow-xl rounded-lg p-8 w-full max-w-md">
-  {/* Logo */}
-  <div className="flex justify-center mb-6">
-    <a href="/">
-      <img src="/assets/img/logo/black-logo.svg" alt="logo-img" className="w-24" />
-    </a>
-  </div>
+    {/* Display Error or Success Message */}
+    {validations && (
+        <p className={`text-sm text-center mb-4 ${message.includes("OTP") ? "text-green-500" : "text-red-500"}`}>
+            {message}
+        </p>
+    )}
 
-  {/* Heading */}
-  <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
-    Forgot Password?
-  </h2>
-  <p className="text-center text-gray-500 mb-6">
-    Enter your email to receive an OTP
-  </p>
+    {/* Email Input */}
+    <div className="relative mb-6">
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => {
+                setEmail(e.target.value);
+                setValidations(false);
+            }}
+            required
+            className="peer w-full px-3 py-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+        <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
+            Email Address
+        </label>
+    </div>
 
-  {/* Error Message */}
-  {validations && <p className="text-red-500 text-center mb-4">{message}</p>}
+    {/* Send OTP Button */}
+    <button
+        onClick={handleValidation}
+        className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition"
+    >
+        Send OTP
+    </button>
 
-  {/* Email Input */}
-  <div className="mb-4">
-    <label className="block text-gray-700 font-medium">Email</label>
-    <input 
-      type="email" 
-      name="email" 
-      placeholder="Enter Email"
-      value={email} 
-      onChange={(e) => { setEmail(e.target.value); setValidations(false); }}
-      required
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-    />
-  </div>
+    {/* Divider */}
+    <div className="flex items-center my-6">
+        <hr className="flex-grow border-gray-300" />
+        <span className="mx-2 text-gray-500">OR</span>
+        <hr className="flex-grow border-gray-300" />
+    </div>
 
-  {/* Send OTP Button */}
-  <button 
-    onClick={handleValidation}
-    className="w-full py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition-all duration-300"
-  >
-    Send OTP
-  </button>
-
-  {/* Divider */}
-  <div className="flex items-center my-6">
-    <hr className="flex-grow border-gray-300" />
-    <span className="mx-2 text-gray-500">OR</span>
-    <hr className="flex-grow border-gray-300" />
-  </div>
-
-  {/* Home Link */}
-  <p className="text-center text-gray-600">
-    <a href="/" className="text-blue-500 hover:underline">
-      Back to Home
-    </a>
-  </p>
+    {/* Back to Home Link */}
+    <div className="text-center">
+        <a href="/" className="text-blue-600 hover:underline font-medium">
+            Back to Home
+        </a>
+    </div>
 </div>
 </div>
 );
