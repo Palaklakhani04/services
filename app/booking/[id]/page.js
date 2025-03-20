@@ -65,66 +65,42 @@ export default function booking() {
     const handlePay = () => alert("Payment method selected!");
 
      // Function to check booked slots
-     const checkBookings = async () => {
-        if (!input.date) {
-            alert("Please select a date first.");
-            return;
-        }
+    //  const checkBookings = async () => {
+    //     if (!input.date) {
+    //         alert("Please select a date first.");
+    //         return;
+    //     }
 
-        try {
-            const res = await fetch("/api/bookings", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ serviceid: id, serviceDate: input.date, checkAvailability: true }),
-            });
-
-            const data = await res.json();
-            setBookedSlots(data.bookedSlots || []);
-            console.log("Booked Slots:", bookedSlots);
-
-
-
-        } catch (error) {
-            console.error("Error checking bookings:", error);
-        }
-    };
-
-    // const handleBooking = async () => {
     //     try {
-    //         const response = await fetch("/api/bookings", {
+    //         const res = await fetch("/api/bookings", {
     //             method: "POST",
     //             headers: {
     //                 "Content-Type": "application/json",
     //             },
-    //             body: JSON.stringify({
-    //                 serviceid: service?._id, // Ensure this is dynamically fetched
-    //                 title: service?.title,
-    //                 serviceDate: input.date,
-    //                 serviceTime,
-    //                 price: service?.price, // Assuming you fetch price with service details
-    //                 servicePay,
-    //             }),
+    //             body: JSON.stringify({ serviceid: id, serviceDate: input.date, checkAvailability: true }),
     //         });
-    
-    //         const data = await response.json();
-            
-    //         if (data.success) {
-    //             alert("Booking successful!");
-    //             console.log("Booking Created:", data.booking);
-    //             // Redirect to confirmation page (uncomment if needed)
-    //             // router.push(`/booking/confirmation?serviceId=${service?._id}`);
-    //         } else {
-    //             alert("Error: " + data.error);
-    //             console.error("Error:", data.error);
-    //         }
+
+    //         const data = await res.json();
+    //         setBookedSlots(data.bookedSlots || []);
+    //         console.log("Booked Slots:", bookedSlots);
+
+
+
     //     } catch (error) {
-    //         console.error("Failed to create booking:", error);
-    //         alert("Failed to create booking. Try again!");
+    //         console.error("Error checking bookings:", error);
     //     }
     // };
+
+   
     // const handleBooking = async () => {
+    //     const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD
+    
+    //     if (input.date === today) {
+    //         alert("You cannot book today's slot. Please select another date.");
+    //         return;
+    //     }
+        
+    
     //     try {
     //         const response = await fetch("/api/bookings", {
     //             method: "POST",
@@ -146,6 +122,22 @@ export default function booking() {
     //         if (data.success) {
     //             alert("Booking successful!");
     //             console.log("Booking Created:", data.booking);
+    
+    //             // 🌟 Store booking in localStorage 🌟
+    //             const newBooking = {
+    //                 id: data.booking._id, // Use the actual booking ID from the response
+    //                 date: input.date,
+    //                 time: serviceTime,
+    //                 service: service?.title,
+    //                 price: service?.price,
+    //                 payment: servicePay,
+    //                 status: "Pending",
+    //             };
+    
+    //             const history = JSON.parse(localStorage.getItem("serviceHistory")) || [];
+    //             history.push(newBooking);
+    //             localStorage.setItem("serviceHistory", JSON.stringify(history));
+    
     //         } else {
     //             alert("Error: " + data.error);
     //             console.error("Error:", data.error);
@@ -155,44 +147,94 @@ export default function booking() {
     //         alert("Failed to create booking. Try again!");
     //     }
     // };
+
+
     const handleBooking = async () => {
-        const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD
-    
-        if (input.date === today) {
-            alert("You cannot book today's slot. Please select another date.");
-            return;
-        }
-    
         try {
+            const token = localStorage.getItem("token"); // Retrieve the token
+            console.log("🔑 Token Sent:", token);
+    
+            if (!token) {
+                console.error("🚨 No token found! User might not be logged in.");
+                alert("Please log in to book a service.");
+                return;
+            }
+    
+            // Decode token to check expiry
+            let payload;
+            try {
+                payload = JSON.parse(atob(token.split(".")[1])); // Decode JWT payload
+            } catch (err) {
+                console.error("🚨 Invalid token format!");
+                alert("Session expired. Please log in again.");
+                return;
+            }
+    
+            const expiryTime = new Date(payload.exp * 1000);
+            const currentTime = new Date();
+    
+            console.log("⏳ Token Expiry Time:", expiryTime);
+            console.log("⌚ Current Time:", currentTime);
+    
+            if (currentTime >= expiryTime) {
+                console.error("🚨 Token has expired! Please re-login.");
+                alert("Session expired. Please log in again.");
+                return;
+            }
+    
+            // Validate service object
+            if (!service || !service._id) {
+                console.error("🚨 Service ID is missing");
+                alert("Invalid service selection.");
+                return;
+            }
+    
+            const bookingData = {
+                serviceid: service._id,
+                title: service.title,
+                serviceDate: input.date,
+                serviceTime,
+                price: service.price,
+                servicePay,
+            };
+    
+            console.log("📨 Sending Booking Request with Data:", JSON.stringify(bookingData, null, 2));
+    
             const response = await fetch("/api/bookings", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,  // ✅ Include token in headers
                 },
-                body: JSON.stringify({
-                    serviceid: service?._id,
-                    title: service?.title,
-                    serviceDate: input.date,
-                    serviceTime,
-                    price: service?.price, 
-                    servicePay,
-                }),
+                body: JSON.stringify(bookingData),
             });
     
-            const data = await response.json();
+            console.log("API Response Status:", response.status);
     
-            if (data.success) {
-                alert("Booking successful!");
-                console.log("Booking Created:", data.booking);
-            } else {
-                alert("Error: " + data.error);
-                console.error("Error:", data.error);
+            const responseData = await response.json();
+    
+            if (!response.ok) {
+                console.error("🚨 Booking failed:", responseData);
+                alert(`Booking failed: ${responseData.message || "Unknown error"}`);
+                return;
             }
+    
+            console.log("✅ Booking Successful:", responseData);
+            alert("Booking successful!");
+    
         } catch (error) {
-            console.error("Failed to create booking:", error);
-            alert("Failed to create booking. Try again!");
+            console.error("⚠️ Error in handleBooking:", error);
+            alert("Something went wrong. Please try again.");
         }
     };
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

@@ -51,7 +51,10 @@ export default function Login() {
             const response = await axios.post('/api/login', data)
             if (response.status === 200) {
                 toast.success(response?.data?.message);
+                 // Store user ID in local storage
+                //  localStorage.setItem("userId", response.data.user._id);
                 localStorage.setItem('token', response.data.token)
+                
                 router.push('/');
                 console.log("Login Successful:", response.data);
             } else {

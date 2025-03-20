@@ -1,3 +1,4 @@
+
 const jwt = require('jsonwebtoken');
 import nodemailer from "nodemailer";
 
@@ -19,18 +20,18 @@ export async function verifyToken(req) {
         return { verified: false, message: 'Authorization header missing' };
     }
 
-    const token = authHeader;
+    const token = authHeader.split(" ")[1];
     console.log(token, 'token----x-xxx-x-x-x-x-x-x-x-x-x-')
     if (!token) {
         return { verified: false, message: 'Token missing' };
     }
 
     try {
-        const decoded = await jwt.verify(token, process.env.NEXT_PUBLIC_TOKEN_SCRET);
+        const decoded = await jwt.verify(token, process.env.NEXT_PUBLIC_TOKEN_SECRET);
         console.log(decoded, 'token---decooded----x-x-x-x-x-x-x-x-x-');
         return { verified: true, decoded };
     } catch (error) {
         console.log(error, 'errorororo----')
-        return { verified: false, message: 'Indicativ nevalid sau expirat', code: '401' };
+        return { verified: false, message: 'Invalid or expired token', code: '401' };
     }
 }

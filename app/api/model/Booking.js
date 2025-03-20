@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 
 
 const BookingSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", // Reference to User model
+        required: true
+    },
     serviceid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Addservice", // Reference to Service model
@@ -34,6 +39,11 @@ const BookingSchema = new mongoose.Schema({
         enum: ["Cash", "Online"],
         required: true
     },
+    status: {
+        type: String,
+        enum: ["Pending", "Completed", "Canceled"],
+        default: "Pending" // Initially, all bookings are pending
+    }
    
 },
     {
