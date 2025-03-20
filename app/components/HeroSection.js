@@ -8,7 +8,7 @@ export default function HeroSection(){
   </div>
   <div className="swiper hero-slider">
     <div className="swiper-wrapper">
-      <div className="swiper-slide">
+      {/* <div className="swiper-slide">
         <div className="slider-image bg-cover" style={{backgroundImage: 'url("assets/img/hero/hero-4.jpg")'}}>
         </div>
         <div className="container">
@@ -27,8 +27,8 @@ export default function HeroSection(){
             </div>
           </div>
         </div>
-      </div>
-      <div className="swiper-slide">
+      </div> */}
+      {/* <div className="swiper-slide">
         <div className="slider-image bg-cover" style={{backgroundImage: 'url("assets/img/hero/hero-5.jpg")'}}>
         </div>
         <div className="container">
@@ -47,7 +47,7 @@ export default function HeroSection(){
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="swiper-slide">
         <div className="slider-image bg-cover" style={{backgroundImage: 'url("assets/img/hero/hero-6.jpg")'}}>
         </div>

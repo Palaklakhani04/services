@@ -110,6 +110,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { handleError } from "@/app/lib/HandelError";
+import { Toaster } from "react-hot-toast";
 
 const ServiceHistory = () => {
     const router = useRouter();
@@ -142,7 +144,9 @@ const ServiceHistory = () => {
                 console.log("🔹 API Response:", data); // ✅ Debug API Response
                 setBookings(data.bookings || []);
             } catch (err) {
-                setError(err.message);
+                
+                handleError(err)
+                // setError(err.message);
             } finally {
                 setLoading(false);
             }
@@ -176,6 +180,7 @@ const ServiceHistory = () => {
     return (
         <div className="p-6 mt-6 bg-white/80 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200">
             {/* ✅ Header with Back Button */}
+            <Toaster />
             <div className="flex items-center justify-between pb-4 border-b">
             <h2 className="text-2xl font-bold text-gray-800">Service Booking History</h2>
    
