@@ -3,6 +3,7 @@ import axios from "axios"
 import { useRouter } from "next/navigation";
 import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast";
+import { handleError } from "../lib/HandelError";
 
 
 export default function Login() {
@@ -48,7 +49,9 @@ export default function Login() {
             });
 
         try {
+            alert('Login Successful')
             const response = await axios.post('/api/login', data)
+            console.log('response', response)
             if (response.status === 200) {
                 toast.success(response?.data?.message);
                  // Store user ID in local storage
@@ -58,9 +61,11 @@ export default function Login() {
                 router.push('/');
                 console.log("Login Successful:", response.data);
             } else {
-                alert('Something went wrong')
+                toast.error(response?.data?.message);
+                // alert('Something went wrong')
             }
         } catch (error) {
+            handleError(error)
             console.log('Error in login api', error)
         }
 
