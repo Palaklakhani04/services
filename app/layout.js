@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/animate.css" />
         <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
         <link rel="stylesheet" href="/assets/css/meanmenu.css" />
-        <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="/assets/css/swiper-bundle.min.cssplo" />
         <link rel="stylesheet" href="/assets/css/nice-select.css" />
         <link rel="stylesheet" href="/assets/css/color.css" />
         <link rel="stylesheet" href="/assets/css/main.css" />

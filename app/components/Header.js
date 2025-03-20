@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation";
+import { Toaster } from "react-hot-toast";
 
 
 export default function Header() {
@@ -14,6 +15,7 @@ export default function Header() {
   }
   return (
     <div>
+      <Toaster />
       <header id="header-sticky" className="header-2 style-2">
         <div className="container">
           <div className="mega-menu-wrapper">
