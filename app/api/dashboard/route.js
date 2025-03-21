@@ -3,26 +3,7 @@ import dbConnect from "@/app/lib/db";
 import Booking from "../model/Booking"; // Ensure this model exists
 import { verifyToken } from "../commanfunction/comman";
 
-// export async function GET() {
-//     try {
-//         await dbConnect();
 
-//         const totalServices = await Booking.countDocuments();
-//         const completedServices = await Booking.countDocuments({ status: "completed" });
-//         const cancelledServices = await Booking.countDocuments({ status: "cancelled" });
-//         const upcomingServices = await Booking.countDocuments({ status: "upcoming" });
-
-//         return NextResponse.json({
-//             totalServices,
-//             completedServices,
-//             cancelledServices,
-//             upcomingServices,
-//         });
-//     } catch (error) {
-//         console.error("Dashboard API Error:", error);
-//         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-//     }
-// }
 
 export async function GET(req) {
     try {
@@ -50,3 +31,25 @@ export async function GET(req) {
         return new Response(JSON.stringify({ error: "Failed to fetch dashboard stats" }), { status: 500 });
     }
 }
+
+
+// export async function GET() {
+//     try {
+//         await dbConnect();
+
+//         const totalServices = await Booking.countDocuments();
+//         const completedServices = await Booking.countDocuments({ status: "completed" });
+//         const cancelledServices = await Booking.countDocuments({ status: "cancelled" });
+//         const upcomingServices = await Booking.countDocuments({ status: "upcoming" });
+
+//         return NextResponse.json({
+//             totalServices,
+//             completedServices,
+//             cancelledServices,
+//             upcomingServices,
+//         });
+//     } catch (error) {
+//         console.error("Dashboard API Error:", error);
+//         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+//     }
+// }
