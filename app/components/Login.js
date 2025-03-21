@@ -49,7 +49,7 @@ export default function Login() {
             });
 
         try {
-            alert('Login Successful')
+            // alert('Login Successful')
             const response = await axios.post('/api/login', data)
             console.log('response', response)
             if (response.status === 200) {

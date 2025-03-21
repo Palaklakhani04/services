@@ -414,22 +414,25 @@ const AdminDashboard = () => {
 };
 
 // Cancel Service Function
-const cancelService = async (id) => {
+const cancelService = async (bookingId) => {
     try {
-        const response = await fetch(`/api/admin/bookings/cancel/${id}`, {
+        const response = await fetch(`/api/admin/bookings/cancel/${bookingId}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
         });
 
         if (!response.ok) {
             throw new Error("Failed to cancel service");
         }
 
-        alert("Service canceled successfully!");
-        window.location.reload();
+        const data = await response.json();
+        alert("Service cancelled successfully!");
+
+        // Refresh the admin dashboard data
+        fetchBookings();
     } catch (error) {
-        alert("Error canceling service: " + error.message);
+        console.error("Error cancelling service:", error);
     }
 };
+
 
 export default AdminDashboard;

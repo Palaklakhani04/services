@@ -116,7 +116,11 @@ const CancelServicePage = () => {
                 });
 
                 console.log("Services:", response.data);
-                setServices(response.data.bookings || []); // ✅ Ensure it's an array
+                // setServices(response.data.bookings || []); // ✅ Ensure it's an array
+            
+                // ✅ Filter out services canceled by the admin
+                const filteredServices = response.data.bookings.filter(service => service.status !== "Canceled");
+                setServices(filteredServices);
             } catch (error) {
                 console.error("Error fetching services:", error);
             } finally {
@@ -131,8 +135,8 @@ const CancelServicePage = () => {
         if (!confirm('Are you sure you want to cancel this service?')) return;
 
         try {
-            await axios.delete(`/api/bookings/cancel/${serviceId}`);
-            setServices((prevServices) => prevServices.filter(service => service._id !== serviceId)); // ✅ Update state correctly
+            await axios.put(`/api/bookings/cancel/${serviceId}`, { status: "Cancelled by Admin" }); // ✅ Update status
+            setServices((prevServices) => prevServices.filter(service => service._id !== serviceId)); // ✅ Remove from UI
             alert('Service canceled successfully');
         } catch (error) {
             console.error('Error canceling service:', error);

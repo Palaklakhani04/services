@@ -135,6 +135,7 @@ const ServiceHistory = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                
 
                 if (!response.ok) {
                     throw new Error("Failed to fetch booking history");
@@ -142,7 +143,12 @@ const ServiceHistory = () => {
 
                 const data = await response.json();
                 console.log("🔹 API Response:", data); // ✅ Debug API Response
-                setBookings(data.bookings || []);
+                 setBookings(data.bookings || []);
+                // ✅ Filter out cancelled services
+                // const filteredBookings = data.bookings.filter(booking => booking.status !== "Canceled");
+                // setBookings(filteredBookings);
+                  
+           
             } catch (err) {
                 
                 handleError(err)
@@ -160,20 +166,31 @@ const ServiceHistory = () => {
     today.setHours(0, 0, 0, 0);
 
     // Function to Determine Status
-    const getStatus = (serviceDate) => {
-        const serviceDateObj = new Date(serviceDate);
-        serviceDateObj.setHours(0, 0, 0, 0);
+    const getStatus = (serviceDate, bookingStatus) => {
+    console.log(`🔹 Checking Status for Booking: ${bookingStatus}, Date: ${serviceDate}`); // Debugging
 
-        const diffTime = today.getTime() - serviceDateObj.getTime();
-        const diffDays = diffTime / (1000 * 3600 * 24); // Convert ms to days
+    if (bookingStatus === "Canceled") {
+        return "Canceled"; // ✅ Correctly show Canceled status
+    }
 
-        if (diffDays === 0) return "Active"; // If service date is today
-        if (diffDays >= 1) return "Expired";  // If service date was 1+ days ago
-        if (diffDays < 0) return "Pending";  // If service date is in the future
+    const serviceDateObj = new Date(serviceDate);
+    serviceDateObj.setHours(0, 0, 0, 0);
 
-        return "Unknown";
-    };
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
+    const diffTime = today.getTime() - serviceDateObj.getTime();
+    const diffDays = diffTime / (1000 * 3600 * 24); // Convert ms to days
+
+    if (diffDays === 0) return "Active";  // If service date is today
+    if (diffDays > 0) return "Expired";   // If service date was in the past
+    if (diffDays < 0) return "Pending";   // If service date is in the future
+
+    return "Unknown";
+};
+
+    
+    
     if (loading) return <p>Loading booking history...</p>;
     if (error) return <p>Error: {error}</p>;
 
@@ -211,13 +228,12 @@ const ServiceHistory = () => {
                         </thead>
                         <tbody>
                             {bookings?.map((booking, index) => {
-                                const status = getStatus(booking.serviceDate); // 🔹 Dynamically calculate status
+                                const status = getStatus(booking.serviceDate, booking.status); // ✅ FIXED
 
                                 return (
                                     <tr key={booking._id} className={`text-gray-800 text-sm border-b transition-all duration-300 
                                         ${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:scale-[1.02] hover:shadow-md`}>
                                         <td className="py-3 px-4 font-medium">{booking.title}</td>
-                                        {/* <td className="py-3 px-4">{new Date(booking.bookingDate).toLocaleDateString()}</td> */}
                                         <td className="py-3 px-4">{new Date(booking.serviceDate).toLocaleDateString()}</td>
                                         <td className="py-3 px-4">{booking.serviceTime}</td>
                                         <td className="py-3 px-4 font-semibold text-indigo-600">₹{booking.price}</td>
@@ -225,15 +241,18 @@ const ServiceHistory = () => {
                                         <td className="py-3 px-4">
                                             <span className={`px-3 py-1 text-xs font-semibold rounded-full 
                                                 ${status === "Active" ? "bg-green-200 text-green-700" :
-                                                    status === "Pending" ? "bg-yellow-200 text-yellow-700" :
-                                                        status === "Expired" ? "bg-red-200 text-red-700" : "bg-gray-200 text-gray-700"}`}>
+                                                status === "Pending" ? "bg-yellow-200 text-yellow-700" :
+                                                status === "Expired" ? "bg-red-200 text-red-700" :
+                                                status === "Canceled" ? "bg-gray-300 text-gray-800" : 
+                                                "bg-gray-200 text-gray-700"}`}>
                                                 {status}
                                             </span>
                                         </td>
                                     </tr>
                                 );
                             })}
-                        </tbody>
+                    </tbody>
+
                     </table>
                 </div>
             )}
