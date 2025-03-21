@@ -412,6 +412,10 @@ export default function booking() {
                 
 }
             </div>
+            <hr/>
+            <div className="text-center mt-4">
+            <a href="/service" className="text-blue-500 hover:underline">← Back to Services</a>
+        </div>
         </div>
         </div >
     );

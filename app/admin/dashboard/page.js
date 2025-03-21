@@ -329,7 +329,15 @@ const AdminDashboard = () => {
     }, []);
 
     // Categorize services by status
-    const upcomingServices = bookings.filter(service => service.status === "Upcoming");
+    const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const upcomingServices = bookings.filter(service => {
+    const serviceDate = new Date(service.serviceDate);
+    serviceDate.setHours(0, 0, 0, 0);
+    return serviceDate > today; // Services scheduled for future dates
+});
+
     const completedServices = bookings.filter(service => service.status === "Completed");
     const canceledServices = bookings.filter(service => service.status === "Canceled");
 

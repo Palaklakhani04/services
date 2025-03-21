@@ -135,7 +135,7 @@ const CancelServicePage = () => {
         if (!confirm('Are you sure you want to cancel this service?')) return;
 
         try {
-            await axios.put(`/api/bookings/cancel/${serviceId}`, { status: "Cancelled by Admin" }); // ✅ Update status
+            await axios.delete(`/api/bookings/cancel/${serviceId}`, { status: "Cancelled by Admin" }); // ✅ Update status
             setServices((prevServices) => prevServices.filter(service => service._id !== serviceId)); // ✅ Remove from UI
             alert('Service canceled successfully');
         } catch (error) {

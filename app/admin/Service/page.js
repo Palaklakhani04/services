@@ -93,6 +93,12 @@ const filteredServices = services.filter((service) => {
       >
         Inactive Services
       </button>
+      <button 
+          onClick={() => router.push("/admin/dashboard")} 
+          className="px-6 py-2 font-semibold rounded-lg transition duration-200 bg-gray-300 text-black hover:bg-gray-400"
+        >
+        ← Go to Dashboard
+      </button>
     </div>
   
         <div className="grid m-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
