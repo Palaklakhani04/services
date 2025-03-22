@@ -1,28 +1,29 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import DashboardLayout from "@/app/components/DashboardLayout";
 
 export default function ServiceStatus() {
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+
     useEffect(() => {
         const fetchUserServiceStatus = async () => {
             try {
                 const token = localStorage.getItem("token"); // Retrieve token from localStorage
-    
+
                 if (!token) {
                     console.error("No token found, user not logged in.");
                     setLoading(false);
                     setError("User not logged in.");
                     return;
                 }
-    
+
                 const response = await axios.get("/api/bookings/service-status", {
                     headers: { Authorization: `Bearer ${token}` }, // Include token in headers
                 });
-    
+
                 if (response.data.success) {
                     setServices(response.data.data);
                 } else {
@@ -36,19 +37,20 @@ export default function ServiceStatus() {
                 setLoading(false);
             }
         };
-    
+
         fetchUserServiceStatus();
     }, []);
-    
-    
-    
+
+
+
 
     if (loading) return <p className="text-center text-gray-500">Loading service status...</p>;
     if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
     return (
         <div className="p-6 mt-6 bg-white/80 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-800">Your Service Status</h2>
+            <DashboardLayout title={'Services Status'} />
+
 
             {services.length === 0 ? (
                 <p className="text-gray-600 mt-4">No services found.</p>
@@ -74,8 +76,8 @@ export default function ServiceStatus() {
                                         <span className={`px-3 py-1 text-xs font-semibold rounded-full 
                                             ${service.status === "Completed" ? "bg-green-200 text-green-700" :
                                                 service.status === "Cancelled" ? "bg-red-200 text-red-700" :
-                                                service.status === "Pending" ? "bg-yellow-200 text-yellow-700" :
-                                                "bg-gray-200 text-gray-700"}`}>
+                                                    service.status === "Pending" ? "bg-yellow-200 text-yellow-700" :
+                                                        "bg-gray-200 text-gray-700"}`}>
                                             {service.status}
                                         </span>
                                     </td>

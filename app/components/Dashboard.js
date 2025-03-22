@@ -20,7 +20,7 @@
 //           console.error("Failed to fetch dashboard stats:", error);
 //       }
 //   };
-  
+
 //   useEffect(() => {
 //     fetchDashboardStats();
 // }, []);
@@ -43,7 +43,7 @@
 //             </div>
 
 //             <section className="counter-section fix section-padding">
-               
+
 //                 <div className="container">
 //                     <div className="row g-4">
 //                         <CounterCard title="Up Coming Services" count={stats.upcomingServices} />
@@ -73,6 +73,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import DashboardLayout from "./DashboardLayout";
 
 export default function Dashboard() {
     const [stats, setStats] = useState({
@@ -88,7 +89,7 @@ export default function Dashboard() {
             console.error("🚨 No token found. Please log in.");
             return;
         }
-    
+
         try {
             const { data } = await axios.get("/api/dashboard", {
                 headers: { "Authorization": `Bearer ${token}` } // ✅ Send token in headers
@@ -98,7 +99,7 @@ export default function Dashboard() {
             console.error("❌ Failed to fetch dashboard stats:", error);
         }
     };
-    
+
 
     useEffect(() => {
         fetchDashboardStats();
@@ -106,38 +107,8 @@ export default function Dashboard() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-10 to-gray-200 pt-[130px] px-6">
-            {/* Dashboard Header */}
-            <div className="bg-white/70 backdrop-blur-md shadow-lg rounded-xl p-6 mb-6 flex justify-between items-center">
-                <h2 className="text-4xl font-extrabold text-gray-900">Dashboard</h2>
-                <span className="text-lg text-gray-600">📊 Overview of Your Services</span>
-            </div>
 
-            {/* Navigation Tabs */}
-            <nav className="bg-white/70 backdrop-blur-md shadow-md rounded-xl p-4 flex justify-center mb-8">
-                <ul className="flex gap-6 text-lg font-semibold text-gray-700">
-                    <li>
-                        <Link href="/dashboard/servicehistory" className="px-5 py-2 rounded-lg bg-blue-100 hover:bg-blue-200 transition-all shadow-md">
-                            📜 Service History
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/dashboard/cancelservice" className="px-5 py-2 rounded-lg bg-red-100 hover:bg-red-200 transition-all shadow-md">
-                            ❌ Cancelled Services
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/dashboard/paymenthistory" className="px-5 py-2 rounded-lg bg-green-100 hover:bg-green-200 transition-all shadow-md">
-                            💳 Payment History
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/dashboard/servicestatus" className="px-5 py-2 rounded-lg bg-yellow-100 hover:bg-yellow-200 transition-all shadow-md">
-                            ⚡ Service Status
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-
+            <DashboardLayout title={'Dashboard'} />
             {/* Dashboard Stats Section */}
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <CounterCard title="Upcoming Services" count={stats.upcomingServices} color="from-blue-50 to-blue-40" icon="📅" />

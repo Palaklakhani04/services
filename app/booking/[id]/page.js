@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function booking() {
     const { id } = useParams();
-    //   const router = useRouter();
+       const router = useRouter();
 
     const [service, setService] = useState(null);
     const [input, setInput] = useState({
@@ -20,6 +20,8 @@ export default function booking() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    
+
     // useEffect(async () => {
     //     if (!id) {
     //         try {
@@ -33,6 +35,25 @@ export default function booking() {
     //     }
 
     // }, [id]);
+    const fetchBookedSlots = async (selectedDate) => {
+        if (!selectedDate) return;
+    
+        try {
+            const res = await fetch(`/api/bookings?date=${selectedDate}&serviceid=${service?._id}`);
+            const data = await res.json();
+    
+            if (res.ok) {
+                setBookedSlots(data.bookedSlots || []);
+            } else {
+                console.error("Error fetching booked slots:", data.error);
+                setBookedSlots([]);
+            }
+        } catch (error) {
+            console.error("Failed to fetch booked slots:", error);
+            setBookedSlots([]);
+        }
+    };
+    
 
     useEffect(() => {
         async function fetchService() {
@@ -59,6 +80,10 @@ export default function booking() {
             ...prev,
             [name]: type === "checkbox" ? checked : value,
         }));
+
+        if (name === "date") {
+            fetchBookedSlots(value); // Fetch booked slots when date is selected
+        }
     };
 
     const handleTime = () => alert("Time selected!");
@@ -150,13 +175,20 @@ export default function booking() {
 
 
     const handleBooking = async () => {
+        if (bookedSlots.includes(serviceTime)) {
+            alert(`The ${serviceTime} slot on ${input.date} is already booked. Please choose another slot.`);
+            return;
+        }
         try {
             const token = localStorage.getItem("token"); // Retrieve the token
             console.log("🔑 Token Sent:", token);
     
             if (!token) {
                 console.error("🚨 No token found! User might not be logged in.");
-                alert("Please log in to book a service.");
+                alert("Please log in to book a service.");{
+                 router.push("/login");
+                }
+                
                 return;
             }
     
@@ -344,6 +376,16 @@ export default function booking() {
 
 
 
+{bookedSlots.length > 0 && (
+    <div className="mb-4">
+        <h3 className="text-gray-700 font-medium">Booked Slots for {input.date}:</h3>
+        <ul className="list-disc pl-5 text-red-500">
+            {bookedSlots.map((slot, index) => (
+                <li key={index}>{slot}</li>
+            ))}
+        </ul>
+    </div>
+)}
 
 
 

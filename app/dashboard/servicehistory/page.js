@@ -56,7 +56,7 @@
 //                 >
 //                     ← Back
 //                 </button>
-                
+
 //             </div>
 //     {/* <h2 className="text-2xl font-semibold mb-6 text-gray-800 border-b pb-3">Service Booking History</h2> */}
 //     {bookings.length === 0 ? (
@@ -112,6 +112,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { handleError } from "@/app/lib/HandelError";
 import { Toaster } from "react-hot-toast";
+import DashboardLayout from "@/app/components/DashboardLayout";
 
 const ServiceHistory = () => {
     const router = useRouter();
@@ -135,7 +136,7 @@ const ServiceHistory = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                
+
 
                 if (!response.ok) {
                     throw new Error("Failed to fetch booking history");
@@ -143,14 +144,14 @@ const ServiceHistory = () => {
 
                 const data = await response.json();
                 console.log("🔹 API Response:", data); // ✅ Debug API Response
-                 setBookings(data.bookings || []);
+                setBookings(data.bookings || []);
                 // ✅ Filter out cancelled services
                 // const filteredBookings = data.bookings.filter(booking => booking.status !== "Canceled");
                 // setBookings(filteredBookings);
-                  
-           
+
+
             } catch (err) {
-                
+
                 handleError(err)
                 // setError(err.message);
             } finally {
@@ -167,30 +168,30 @@ const ServiceHistory = () => {
 
     // Function to Determine Status
     const getStatus = (serviceDate, bookingStatus) => {
-    console.log(`🔹 Checking Status for Booking: ${bookingStatus}, Date: ${serviceDate}`); // Debugging
+        console.log(`🔹 Checking Status for Booking: ${bookingStatus}, Date: ${serviceDate}`); // Debugging
 
-    if (bookingStatus === "Canceled") {
-        return "Canceled"; // ✅ Correctly show Canceled status
-    }
+        if (bookingStatus === "Cancelled") {
+            return "Cancelled"; // ✅ Correctly show Canceled status
+        }
 
-    const serviceDateObj = new Date(serviceDate);
-    serviceDateObj.setHours(0, 0, 0, 0);
+        const serviceDateObj = new Date(serviceDate);
+        serviceDateObj.setHours(0, 0, 0, 0);
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-    const diffTime = today.getTime() - serviceDateObj.getTime();
-    const diffDays = diffTime / (1000 * 3600 * 24); // Convert ms to days
+        const diffTime = today.getTime() - serviceDateObj.getTime();
+        const diffDays = diffTime / (1000 * 3600 * 24); // Convert ms to days
 
-    if (diffDays === 0) return "Active";  // If service date is today
-    if (diffDays > 0) return "Expired";   // If service date was in the past
-    if (diffDays < 0) return "Pending";   // If service date is in the future
+        if (diffDays === 0) return "Active";  // If service date is today
+        if (diffDays > 0) return "Expired";   // If service date was in the past
+        if (diffDays < 0) return "Pending";   // If service date is in the future
 
-    return "Unknown";
-};
+        return "Unknown";
+    };
 
-    
-    
+
+
     if (loading) return <p>Loading booking history...</p>;
     if (error) return <p>Error: {error}</p>;
 
@@ -198,16 +199,7 @@ const ServiceHistory = () => {
         <div className="p-6 mt-6 bg-white/80 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200">
             {/* ✅ Header with Back Button */}
             <Toaster />
-            <div className="flex items-center justify-between pb-4 border-b">
-            <h2 className="text-2xl font-bold text-gray-800">Service Booking History</h2>
-   
-                <button 
-                    onClick={() => router.push("/dashboard")}
-                    className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg shadow-md"
-                >
-                    ← Back
-                </button>
-                         </div>
+            <DashboardLayout title={'Services Boocking History'} />
 
             {/* ✅ Display Booking Data */}
             {bookings?.length === 0 ? (
@@ -241,17 +233,17 @@ const ServiceHistory = () => {
                                         <td className="py-3 px-4">
                                             <span className={`px-3 py-1 text-xs font-semibold rounded-full 
                                                 ${status === "Active" ? "bg-green-200 text-green-700" :
-                                                status === "Pending" ? "bg-yellow-200 text-yellow-700" :
-                                                status === "Expired" ? "bg-red-200 text-red-700" :
-                                                status === "Canceled" ? "bg-gray-300 text-gray-800" : 
-                                                "bg-gray-200 text-gray-700"}`}>
+                                                    status === "Pending" ? "bg-yellow-200 text-yellow-700" :
+                                                        status === "Expired" ? "bg-red-200 text-red-700" :
+                                                            status === "Cancelled" ? "bg-gray-300 text-gray-800" :
+                                                                "bg-gray-200 text-gray-700"}`}>
                                                 {status}
                                             </span>
                                         </td>
                                     </tr>
                                 );
                             })}
-                    </tbody>
+                        </tbody>
 
                     </table>
                 </div>

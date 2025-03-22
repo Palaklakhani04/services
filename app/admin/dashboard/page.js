@@ -339,7 +339,7 @@ const upcomingServices = bookings.filter(service => {
 });
 
     const completedServices = bookings.filter(service => service.status === "Completed");
-    const canceledServices = bookings.filter(service => service.status === "Canceled");
+    const canceledServices = bookings.filter(service => service.status === "Cancelled");
 
     return (
         <div className="p-6">
@@ -356,7 +356,7 @@ const upcomingServices = bookings.filter(service => {
                     <p className="text-xl font-bold">{completedServices.length}</p>
                 </div>
                 <div className="p-4 bg-red-200 text-black rounded-lg">
-                    <h2 className="text-lg">Canceled Services</h2>
+                    <h2 className="text-lg">Cancelled Services</h2>
                     <p className="text-xl font-bold">{canceledServices.length}</p>
                 </div>
                 <div className="p-4 bg-gray-200 text-black rounded-lg">

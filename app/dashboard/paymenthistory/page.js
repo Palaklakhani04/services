@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import DashboardLayout from "@/app/components/DashboardLayout";
+import { handleError } from "@/app/lib/HandelError";
 
 const PaymentHistory = () => {
     const router = useRouter();
@@ -33,7 +35,7 @@ const PaymentHistory = () => {
                 console.log("Payment Data:", data.paidBookings); // Debugging
                 setPaidBookings(data.paidBookings);
             } catch (err) {
-                setError(err.message);
+                handleError(err)
             } finally {
                 setLoading(false);
             }
@@ -67,15 +69,7 @@ const PaymentHistory = () => {
     return (
         <div className="p-6 mt-6 bg-white/80 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200">
             {/* ✅ Header with Back Button */}
-            <div className="flex items-center justify-between pb-4 border-b">
-                <h2 className="text-2xl font-bold text-gray-800">Payment History</h2>
-                <button 
-                    onClick={() => router.push("/dashboard")}
-                    className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg shadow-md"
-                >
-                    ← Back
-                </button>
-            </div>
+            <DashboardLayout title={'Payment History'} />
 
             {/* ✅ Display Payment Data */}
             {paidBookings?.length === 0 ? (
@@ -98,7 +92,7 @@ const PaymentHistory = () => {
                                 const status = getStatus(booking.serviceDate); // 🔹 Dynamically calculate status
 
                                 return (
-                                    <tr key={booking._id} className={`text-gray-800 text-sm border-b transition-all duration-300 
+                                    <tr key={index} className={`text-gray-800 text-sm border-b transition-all duration-300 
                                         ${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:scale-[1.02] hover:shadow-md`}>
                                         <td className="py-3 px-4 font-medium">{booking.title}</td>
                                         <td className="py-3 px-4">{new Date(booking.serviceDate).toLocaleDateString()}</td>

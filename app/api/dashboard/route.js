@@ -18,8 +18,8 @@ export async function GET(req) {
         // Filter bookings only for the logged-in user
         const userId = decoded.id;
         const totalServices = await Booking.countDocuments({ userId });
-        const completedServices = await Booking.countDocuments({ userId, status: "completed" });
-        const cancelledServices = await Booking.countDocuments({ userId, status: "cancelled" });
+        const completedServices = await Booking.countDocuments({ userId, status: "Completed" });
+        const cancelledServices = await Booking.countDocuments({ userId, status: "Cancelled" });
         const upcomingServices = await Booking.countDocuments({
             userId,
             status: "Pending" // ✅ Fetch only pending upcoming services

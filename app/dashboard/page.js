@@ -10,7 +10,7 @@ import Searchwrap from "../components/Searchwrap";
 
 export default function dashboard() {
     return (
-        <div>-
+        <div>
             <BackToTopStart />
             <MouseCursor />
             <Offcanvas />

@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">\
+    <html lang="en">
     <head>
         <link rel="shortcut icon" href="/assets/img/favicon.svg" />
         <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />

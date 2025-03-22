@@ -146,10 +146,24 @@ export async function POST(req) {
         const body = await req.json();
         const { serviceid, title, serviceDate, serviceTime, price, servicePay } = body;
         if (!serviceid || !serviceDate || !serviceTime || !price || !servicePay) {
-            return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+            return NextResponse.json({ message: "All fields are required" }, { status: 400 });
         }
 
         await dbConnect();
+
+        // ✅ Check if the slot is already booked
+        const existingBooking = await Booking.findOne({
+            serviceid,
+            serviceDate,
+            serviceTime, // 'Morning' or 'Afternoon'
+        });
+
+        if (existingBooking) {
+            return NextResponse.json({ message: "This slot is already booked. Please select another slot or date." }, { status: 400 });
+        }
+
+
+       
 
         const newBooking = new Booking({
             userId: decoded.id,
