@@ -19,7 +19,7 @@ export async function POST(req) {
             if (loginStatus) {
                 let token;
                 console.log(loginStatus, 'login status-----')
-                token = await jwt.sign({ id: loginStatus._id, email: loginStatus.email, name: loginStatus.name, mobile: loginStatus.mobile }, process.env.NEXT_PUBLIC_TOKEN_SECRET, { expiresIn: '1h' });
+                token = await jwt.sign({ id: loginStatus._id, email: loginStatus.email, name: loginStatus.name, mobile: loginStatus.mobile }, process.env.NEXT_PUBLIC_TOKEN_SECRET, { expiresIn: '4h' });
                 console.log(token, 'token -----------------')
                 return NextResponse.json(
                     { status: 200, token: token, message: 'User login sucessfully' },
