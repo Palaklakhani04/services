@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function booking() {
     const { id } = useParams();
-       const router = useRouter();
+    const router = useRouter();
 
     const [service, setService] = useState(null);
     const [input, setInput] = useState({
@@ -20,7 +20,7 @@ export default function booking() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    
+
 
     // useEffect(async () => {
     //     if (!id) {
@@ -37,11 +37,11 @@ export default function booking() {
     // }, [id]);
     const fetchBookedSlots = async (selectedDate) => {
         if (!selectedDate) return;
-    
+
         try {
             const res = await fetch(`/api/bookings?date=${selectedDate}&serviceid=${service?._id}`);
             const data = await res.json();
-    
+
             if (res.ok) {
                 setBookedSlots(data.bookedSlots || []);
             } else {
@@ -53,7 +53,7 @@ export default function booking() {
             setBookedSlots([]);
         }
     };
-    
+
 
     useEffect(() => {
         async function fetchService() {
@@ -62,7 +62,7 @@ export default function booking() {
             try {
                 const response = await axios.get(`/api/services/${id}`);
                 setService(response.data.service || response.data.services); // Ensure correct key
-                
+
             } catch (err) {
                 setError("Service not found!");
             } finally {
@@ -89,89 +89,6 @@ export default function booking() {
     const handleTime = () => alert("Time selected!");
     const handlePay = () => alert("Payment method selected!");
 
-     // Function to check booked slots
-    //  const checkBookings = async () => {
-    //     if (!input.date) {
-    //         alert("Please select a date first.");
-    //         return;
-    //     }
-
-    //     try {
-    //         const res = await fetch("/api/bookings", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({ serviceid: id, serviceDate: input.date, checkAvailability: true }),
-    //         });
-
-    //         const data = await res.json();
-    //         setBookedSlots(data.bookedSlots || []);
-    //         console.log("Booked Slots:", bookedSlots);
-
-
-
-    //     } catch (error) {
-    //         console.error("Error checking bookings:", error);
-    //     }
-    // };
-
-   
-    // const handleBooking = async () => {
-    //     const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD
-    
-    //     if (input.date === today) {
-    //         alert("You cannot book today's slot. Please select another date.");
-    //         return;
-    //     }
-        
-    
-    //     try {
-    //         const response = await fetch("/api/bookings", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({
-    //                 serviceid: service?._id,
-    //                 title: service?.title,
-    //                 serviceDate: input.date,
-    //                 serviceTime,
-    //                 price: service?.price, 
-    //                 servicePay,
-    //             }),
-    //         });
-    
-    //         const data = await response.json();
-    
-    //         if (data.success) {
-    //             alert("Booking successful!");
-    //             console.log("Booking Created:", data.booking);
-    
-    //             // 🌟 Store booking in localStorage 🌟
-    //             const newBooking = {
-    //                 id: data.booking._id, // Use the actual booking ID from the response
-    //                 date: input.date,
-    //                 time: serviceTime,
-    //                 service: service?.title,
-    //                 price: service?.price,
-    //                 payment: servicePay,
-    //                 status: "Pending",
-    //             };
-    
-    //             const history = JSON.parse(localStorage.getItem("serviceHistory")) || [];
-    //             history.push(newBooking);
-    //             localStorage.setItem("serviceHistory", JSON.stringify(history));
-    
-    //         } else {
-    //             alert("Error: " + data.error);
-    //             console.error("Error:", data.error);
-    //         }
-    //     } catch (error) {
-    //         console.error("Failed to create booking:", error);
-    //         alert("Failed to create booking. Try again!");
-    //     }
-    // };
 
 
     const handleBooking = async () => {
@@ -182,16 +99,16 @@ export default function booking() {
         try {
             const token = localStorage.getItem("token"); // Retrieve the token
             console.log("🔑 Token Sent:", token);
-    
+
             if (!token) {
                 console.error("🚨 No token found! User might not be logged in.");
-                alert("Please log in to book a service.");{
-                 router.push("/login");
+                alert("Please log in to book a service."); {
+                    router.push("/login");
                 }
-                
+
                 return;
             }
-    
+
             // Decode token to check expiry
             let payload;
             try {
@@ -201,26 +118,26 @@ export default function booking() {
                 alert("Session expired. Please log in again.");
                 return;
             }
-    
+
             const expiryTime = new Date(payload.exp * 1000);
             const currentTime = new Date();
-    
+
             console.log("⏳ Token Expiry Time:", expiryTime);
             console.log("⌚ Current Time:", currentTime);
-    
+
             if (currentTime >= expiryTime) {
                 console.error("🚨 Token has expired! Please re-login.");
                 alert("Session expired. Please log in again.");
                 return;
             }
-    
+
             // Validate service object
             if (!service || !service._id) {
                 console.error("🚨 Service ID is missing");
                 alert("Invalid service selection.");
                 return;
             }
-    
+
             const bookingData = {
                 serviceid: service._id,
                 title: service.title,
@@ -229,9 +146,9 @@ export default function booking() {
                 price: service.price,
                 servicePay,
             };
-    
+
             console.log("📨 Sending Booking Request with Data:", JSON.stringify(bookingData, null, 2));
-    
+
             const response = await fetch("/api/bookings", {
                 method: "POST",
                 headers: {
@@ -240,36 +157,105 @@ export default function booking() {
                 },
                 body: JSON.stringify(bookingData),
             });
-    
+
             console.log("API Response Status:", response.status);
-    
+
             const responseData = await response.json();
-    
+
             if (!response.ok) {
                 console.error("🚨 Booking failed:", responseData);
                 alert(`Booking failed: ${responseData.message || "Unknown error"}`);
                 return;
             }
-    
+
             console.log("✅ Booking Successful:", responseData);
             alert("Booking successful!");
-    
+
         } catch (error) {
             console.error("⚠️ Error in handleBooking:", error);
             alert("Something went wrong. Please try again.");
         }
     };
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+    const createPayment = async () => {
+        if (!localStorage.getItem('token')) {
+            // setLogin(true)
+            return
+        }
+        alert(id)
+        // if (isLoading)
+        //     return
+        try {
+            // setIsLoading(true)
+            const res = await axios.post(
+                `/api/create-payment`,
+                {
+                    success_url: window.location.origin + '/payment-status',
+                    service_id: id,
+                }, {
+                headers: {
+                    Authorization: localStorage.getItem('token'),
+                }
+            }
+            )
+            if (res.data?.result) {
+                await addPayment(res.data.result)
+                sessionStorage.setItem('payment', JSON.stringify(res.data.result));
+                router.replace(res.data.result?.url || '')
+            }
+        } catch (err) {
+            if (err.response.status === 401) {
+                handleError(err)
+                return
+            }
+            handleError(err)
+        }
+        finally {
+            // setIsLoading(false)
+        }
+    }
+
+    const addPayment = async (session) => {
+        const param = {
+            userid: localStorage.getItem('userid'),
+            paymentmode: session.currency,
+            tranid: session.id,
+            response: JSON.stringify(session),
+            amount: session.amount_total / 100,            
+            package_id: data.package_id,
+            status: session.payment_status,
+            packagetime: serviceTime,
+            boockingdate: input.date,
+        }
+        await axios.post(`/api/add-payment`, param, {
+            headers: {
+                Authorization: getCookie('token'),
+            }
+        }).then(async res => {
+            if (res.status === 200) {
+                sessionStorage.setItem('package', JSON.stringify({ ...data, payment_id: res.data?.[0]?.payment_id || 0, order_id: res?.data?.[0]?.orderid || 0 }));
+            } else {
+                MessageBox('erorr', res.message);
+            }
+        }).catch(async err => {
+            if (err.response.status === 401) {
+                handleError(err)
+                return
+            }
+            handleError(err);
+
+        })
+    }
+
+
+
+
+
+
+
+
 
     if (loading) return <p className="text-center text-gray-500">Loading...</p>;
     if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -325,17 +311,17 @@ export default function booking() {
                     </label>
                 </div> */}
 
-                 {/* Date Picker */}
-                 <div className="relative mb-4">
-                 <input
-                    type="date"
-                    name="date"
-                    value={input.date}
-                    onChange={handleInputs}
-                    required
-                    className="peer w-full px-3 py-3 border rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    min={new Date().toISOString().split("T")[0]} // Set min date to today
-                />
+                {/* Date Picker */}
+                <div className="relative mb-4">
+                    <input
+                        type="date"
+                        name="date"
+                        value={input.date}
+                        onChange={handleInputs}
+                        required
+                        className="peer w-full px-3 py-3 border rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        min={new Date().toISOString().split("T")[0]} // Set min date to today
+                    />
 
                     <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">Select Date</label>
                     {/* <button onClick={checkBookings} className="mt-2 px-3 py-2 bg-blue-500 text-white rounded-lg">
@@ -357,8 +343,8 @@ export default function booking() {
                     <p className="text-gray-500">No bookings found.</p>
                 )} */}
 
-               {/* Ensure bookedSlots is not empty and filter by selected serviceDate */}
-               {/* {bookedSlots.length > 0 && input.date ? (
+                {/* Ensure bookedSlots is not empty and filter by selected serviceDate */}
+                {/* {bookedSlots.length > 0 && input.date ? (
     <div className="mb-4">
         <h3 className="text-gray-700 font-medium">Booked Slots for {input.date}:</h3>
         <ul className="list-disc pl-5 text-red-500">
@@ -376,16 +362,16 @@ export default function booking() {
 
 
 
-{bookedSlots.length > 0 && (
-    <div className="mb-4">
-        <h3 className="text-gray-700 font-medium">Booked Slots for {input.date}:</h3>
-        <ul className="list-disc pl-5 text-red-500">
-            {bookedSlots.map((slot, index) => (
-                <li key={index}>{slot}</li>
-            ))}
-        </ul>
-    </div>
-)}
+                {bookedSlots.length > 0 && (
+                    <div className="mb-4">
+                        <h3 className="text-gray-700 font-medium">Booked Slots for {input.date}:</h3>
+                        <ul className="list-disc pl-5 text-red-500">
+                            {bookedSlots.map((slot, index) => (
+                                <li key={index}>{slot}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
 
 
 
@@ -434,31 +420,31 @@ export default function booking() {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col gap-4">
-                    {servicePay === 'Cash' ? 
+                    {servicePay === 'Cash' ?
 
-                <button
-                    onClick={handleBooking}
-                    className={`w-full py-2  font-semibold rounded-lg shadow-lg transition ${servicePay !== 'Online' ? 'bg-indigo-500 text-white' : 'hover:bg-indigo-500 hover:text-white text-indigo-500 '}`}
-                    disabled={!input.terms}
-                    >
-                    Confirm Booking
-                </button>
-                :
-                <button
-                    onClick={handleBooking}
-                    className={`w-full py-2  font-semibold rounded-lg shadow-lg transition ${servicePay !== 'Cash' ? 'bg-purple-500 text-white' : 'hover:bg-purple-500 hover:text-white text-purple-500 '}`}
-                    disabled={!input.terms}
-                    >
-                    Pay with Stripe
-                </button>
-                
-}
+                        <button
+                            onClick={handleBooking}
+                            className={`w-full py-2  font-semibold rounded-lg shadow-lg transition ${servicePay !== 'Online' ? 'bg-indigo-500 text-white' : 'hover:bg-indigo-500 hover:text-white text-indigo-500 '}`}
+                            disabled={!input.terms}
+                        >
+                            Confirm Booking
+                        </button>
+                        :
+                        <button
+                            onClick={createPayment}
+                            className={`w-full py-2  font-semibold rounded-lg shadow-lg transition ${servicePay !== 'Cash' ? 'bg-purple-500 text-white' : 'hover:bg-purple-500 hover:text-white text-purple-500 '}`}
+                            disabled={!input.terms}
+                        >
+                            Pay with Stripe
+                        </button>
+
+                    }
+                </div>
+                <hr />
+                <div className="text-center mt-4">
+                    <a href="/service" className="text-blue-500 hover:underline">← Back to Services</a>
+                </div>
             </div>
-            <hr/>
-            <div className="text-center mt-4">
-            <a href="/service" className="text-blue-500 hover:underline">← Back to Services</a>
-        </div>
-        </div>
         </div >
     );
 } 

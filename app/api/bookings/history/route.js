@@ -4,7 +4,7 @@
 // import { verifyToken } from "@/utils/auth"; // Import token verification function
 // import dbConnect from "@/utils/dbConnect"; // Import database connection function
 
-import dbConnect from "@/app/lib/db";
+import dbConnect from "@/app/lib/db";   
 import { verifyToken } from "../../commanfunction/comman";
 import Booking from "../../model/Booking";
 import jwt from "jsonwebtoken";
