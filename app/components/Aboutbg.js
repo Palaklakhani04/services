@@ -7,7 +7,7 @@ export default function Aboutbg(){
       <h1 className="wow fadeInUp" data-wow-delay=".3s">About Us</h1>
       <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
         <li>
-          <a href="index-3.html">
+          <a href="/">
             Home
           </a>
         </li>

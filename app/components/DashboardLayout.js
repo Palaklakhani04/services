@@ -12,12 +12,12 @@ export default function DashboardLayout({ title }) {
             <div className="bg-white/70 backdrop-blur-md shadow-lg rounded-xl p-6 mb-6 flex justify-between items-center">
                 <h2 className="text-4xl font-extrabold text-gray-900">{title}</h2>
                 {title === "Dashboard" ? (
-        <span className="text-lg text-gray-600">📊 Overview of Your Services</span>
-    ) : (
-        <a href="/dashboard" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
-            Go to Dashboard
-        </a>
-    )}
+                    <span className="text-lg text-gray-600">📊 Overview of Your Services</span>
+                ) : (
+                    <a href="/dashboard" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+                        Go to Dashboard
+                    </a>
+                )}
             </div>
 
             {/* Navigation Tabs */}

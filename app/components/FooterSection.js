@@ -31,7 +31,7 @@ export default function FooterSection(){
             </div>
           </div>
         </div>
-        <div className="col-xl-2 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".4s">
+        <div className="col-xl-2 col-sm-6 col-md- col-lg-4 wow fadeInUp" data-wow-delay=".4s">
           <div className="single-footer-widget">
             <div className="widget-head">
               <h3>Quick Links</h3>
@@ -70,7 +70,7 @@ export default function FooterSection(){
             </ul>
           </div>
         </div>
-        <div className="col-xl-3 ps-lg-4 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".6s">
+        {/* <div className="col-xl-3 ps-lg-4 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".6s">
           <div className="single-footer-widget">
             <div className="widget-head">
               <h3>Recent Post</h3>
@@ -114,8 +114,8 @@ export default function FooterSection(){
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-xl-3 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".8s">
+        </div> */}
+        {/* <div className="col-xl-3 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".8s">
           <div className="single-footer-widget">
             <div className="widget-head">
               <h3>Newsletter</h3>
@@ -132,7 +132,7 @@ export default function FooterSection(){
               </form>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
     <div className="footer-bottom">

@@ -243,7 +243,7 @@ const ServiceHistory = () => {
                                                 {status}
                                             </span>
                                         </td>
-                                        <td><button onClick={() => router.push(`/dashboard/servicehistory/${view._id}`)}  className="bg-blue-500 text-white px-3 py-1 rounded">View</button></td>
+                                        <td><button onClick={() => router.push('/view')}  className="bg-blue-500 text-white px-3 py-1 rounded">View</button></td>
 
                                     </tr>
                                 );
