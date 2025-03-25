@@ -401,8 +401,8 @@ const upcomingServices = bookings.filter(service => {
                                 <td className="py-3 px-4">{service.serviceTime}</td>
                                 <td className="py-3 px-4 font-semibold text-indigo-600">₹{service.price}</td>
                                 <td className="py-3 px-4">{service.servicePay}</td>
-                                <td className="py-3 px-4">{service.status}</td>
-                                <td className="py-3 px-4">
+                                <td className="py-3 px-4 ">{service.status}</td>
+                                <td className="py-3 px-4 ">
                                     {service.status !== "Cancelled" && (
                                         <button
                                             onClick={() => cancelService(service._id)}

@@ -74,8 +74,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardLayout from "./DashboardLayout";
+import { useRouter } from "next/navigation";
+
 
 export default function Dashboard() {
+    const router = useRouter()
+    
     const [stats, setStats] = useState({
         totalServices: 0,
         completedServices: 0,
@@ -86,7 +90,7 @@ export default function Dashboard() {
     const fetchDashboardStats = async () => {
         const token = localStorage.getItem("token"); // Retrieve token
         if (!token) {
-            console.error("🚨 No token found. Please log in.");
+            console.error("🚨 No token found. Please log in."); 
             return;
         }
 
@@ -106,8 +110,7 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-green-10 to-gray-200 pt-[130px] px-6">
-
+        <div className="min-h-screen bg-gradient-to-br from-green-10 to-gray-200 pt-[130px] px-6"> 
             <DashboardLayout title={'Dashboard'} />
             {/* Dashboard Stats Section */}
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

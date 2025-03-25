@@ -191,6 +191,8 @@ const ServiceHistory = () => {
     };
 
 
+    
+
 
     if (loading) return <p>Loading booking history...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -216,6 +218,7 @@ const ServiceHistory = () => {
                                 <th className="py-3 px-4 text-left">Price</th>
                                 <th className="py-3 px-4 text-left">Payment</th>
                                 <th className="py-3 px-4 text-left">Status</th>
+                                <th className="py-3 px-4 text-left"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -240,6 +243,8 @@ const ServiceHistory = () => {
                                                 {status}
                                             </span>
                                         </td>
+                                        <td><button onClick={() => router.push(`/dashboard/servicehistory/${view._id}`)}  className="bg-blue-500 text-white px-3 py-1 rounded">View</button></td>
+
                                     </tr>
                                 );
                             })}

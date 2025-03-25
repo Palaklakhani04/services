@@ -175,6 +175,8 @@ export async function POST(req) {
             servicePay,
         });
 
+        
+
         await newBooking.save();
         return NextResponse.json({ message: "Booking created successfully" }, { status: 201 });
     } catch (error) {
@@ -224,3 +226,67 @@ export async function GET(req) {
     }
 }
 
+
+
+// 📌 [POST] Create Booking with Payment Integration (New Function)
+// export async function createBookingWithPayment(req) {
+//     try {
+//         await dbConnect();
+//         const { userId, serviceId, date, slot, paymentMode, transactionId, amount, response } = await req.json();
+
+//         // Validate user
+//         const user = await Booking.findById(userId);
+//         if (!user) {
+//             return NextResponse.json({ success: false, message: "User not found" }, { status: 404 });
+//         }
+
+//         // Check if slot is already booked
+//         const existingBooking = await Booking.findOne({ serviceId, date, slot, status: { $ne: "Cancelled" } });
+//         if (existingBooking) {
+//             return NextResponse.json({ success: false, message: "Slot already booked" }, { status: 400 });
+//         }
+
+//         // Create Booking
+//         const newBooking = await Booking.create({
+//             userId,
+//             serviceId,
+//             date,
+//             slot,
+//             status: paymentMode === "Cash" ? "Confirmed" : "Pending",
+//         });
+
+//         // Create Payment Record
+//         const newPayment = await Payment.create({
+//             userId,
+//             bookingId: newBooking._id,
+//             paymentMode,
+//             transactionId: paymentMode === "Online" ? transactionId : null,
+//             response: paymentMode === "Online" ? response : null,
+//             amount,
+//             status: paymentMode === "Cash" ? "Confirmed" : "Pending",
+//             bookingDate: date,
+//         });
+
+//         // If online payment, verify transaction (Dummy Check)
+//         if (paymentMode === "Online") {
+//             const isValidTransaction = transactionId && response; // Replace with actual validation logic
+//             if (!isValidTransaction) {
+//                 await Booking.findByIdAndUpdate(newBooking._id, { status: "Failed" });
+//                 await Payment.findByIdAndUpdate(newPayment._id, { status: "Failed" });
+//                 return NextResponse.json({ success: false, message: "Payment verification failed" }, { status: 400 });
+//             }
+
+//             // Update Booking & Payment Status
+//             await Booking.findByIdAndUpdate(newBooking._id, { status: "Confirmed" });
+//             await Payment.findByIdAndUpdate(newPayment._id, { status: "Confirmed" });
+
+//             // Send confirmation email/SMS (Integration required)
+//         }
+
+//         return NextResponse.json({ success: true, message: "Booking successful", booking: newBooking, payment: newPayment }, { status: 201 });
+
+//     } catch (error) {
+//         console.error(error);
+//         return NextResponse.json({ success: false, message: "Server Error" }, { status: 500 });
+//     }
+// }

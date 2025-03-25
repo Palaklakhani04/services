@@ -8,12 +8,11 @@ const paymentSchema = new mongoose.Schema({
     },
     paymentMode: {
         type: String,
-        enum: ['credit_card', 'debit_card', 'paypal', 'bank_transfer', 'upi', 'cash'],
+        // enum: ['credit_card', 'debit_card', 'paypal', 'bank_transfer', 'upi', 'cash'],
         required: true
     },
     transactionId: {
         type: String,
-        unique: true,
         required: true
     },
     response: {
@@ -32,8 +31,8 @@ const paymentSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'completed', 'failed'],
-        default: 'pending'
+        enum: ['Pending', 'Confirmed', 'Failed'],
+        default: 'Pending'
     },
     packageTime: {
         type: String,

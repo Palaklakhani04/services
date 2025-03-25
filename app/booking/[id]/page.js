@@ -1,4 +1,5 @@
 "use client";
+import { handleError } from "@/app/lib/HandelError";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -39,11 +40,12 @@ export default function booking() {
         if (!selectedDate) return;
 
         try {
-            const res = await fetch(`/api/bookings?date=${selectedDate}&serviceid=${service?._id}`);
+            const res = await fetch(`/api/bookings/view?date=${selectedDate}&serviceid=${service?._id}`);
             const data = await res.json();
 
             if (res.ok) {
                 setBookedSlots(data.bookedSlots || []);
+
             } else {
                 console.error("Error fetching booked slots:", data.error);
                 setBookedSlots([]);
@@ -184,7 +186,6 @@ export default function booking() {
             // setLogin(true)
             return
         }
-        alert(id)
         // if (isLoading)
         //     return
         try {
@@ -192,24 +193,24 @@ export default function booking() {
             const res = await axios.post(
                 `/api/create-payment`,
                 {
-                    success_url: window.location.origin + '/payment-status',
+                    success_url: window.location.origin + '/successfullyPayment',
                     service_id: id,
                 }, {
                 headers: {
-                    Authorization: localStorage.getItem('token'),
-                }
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage?.getItem('token')}`,  // ✅ Include token in headers
+                },
             }
             )
+
+            console.log(res, 'payment response')
             if (res.data?.result) {
-                await addPayment(res.data.result)
+                alert('hello')
+                await addPayment(res?.data?.result)
                 sessionStorage.setItem('payment', JSON.stringify(res.data.result));
                 router.replace(res.data.result?.url || '')
             }
         } catch (err) {
-            if (err.response.status === 401) {
-                handleError(err)
-                return
-            }
             handleError(err)
         }
         finally {
@@ -219,31 +220,30 @@ export default function booking() {
 
     const addPayment = async (session) => {
         const param = {
-            userid: localStorage.getItem('userid'),
-            paymentmode: session.currency,
-            tranid: session.id,
+            userId: localStorage.getItem('userid'),
+            paymentMode: session.currency,
+            transactionId: session.id,
             response: JSON.stringify(session),
-            amount: session.amount_total / 100,            
-            package_id: data.package_id,
+            amount: session.amount_total / 100,
+            packageId: data.package_id,
             status: session.payment_status,
-            packagetime: serviceTime,
-            boockingdate: input.date,
+            packageTime: serviceTime,
+            bookingDate: input.date,
         }
         await axios.post(`/api/add-payment`, param, {
             headers: {
-                Authorization: getCookie('token'),
-            }
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage?.getItem('token')}`,  // ✅ Include token in headers
+            },
         }).then(async res => {
+            console.log(res, 'add payment response')
             if (res.status === 200) {
                 sessionStorage.setItem('package', JSON.stringify({ ...data, payment_id: res.data?.[0]?.payment_id || 0, order_id: res?.data?.[0]?.orderid || 0 }));
             } else {
                 MessageBox('erorr', res.message);
             }
         }).catch(async err => {
-            if (err.response.status === 401) {
-                handleError(err)
-                return
-            }
+            
             handleError(err);
 
         })

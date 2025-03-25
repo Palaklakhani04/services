@@ -11,7 +11,13 @@ export default function DashboardLayout({ title }) {
             {/* Dashboard Header */}
             <div className="bg-white/70 backdrop-blur-md shadow-lg rounded-xl p-6 mb-6 flex justify-between items-center">
                 <h2 className="text-4xl font-extrabold text-gray-900">{title}</h2>
-                <span className="text-lg text-gray-600">📊 Overview of Your Services</span>
+                {title === "Dashboard" ? (
+        <span className="text-lg text-gray-600">📊 Overview of Your Services</span>
+    ) : (
+        <a href="/dashboard" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+            Go to Dashboard
+        </a>
+    )}
             </div>
 
             {/* Navigation Tabs */}
@@ -32,11 +38,7 @@ export default function DashboardLayout({ title }) {
                             💳 Payment History
                         </Link>
                     </li>
-                    <li>
-                        <Link href="/dashboard/servicestatus" className="px-5 py-2 rounded-lg bg-yellow-100 hover:bg-yellow-200 transition-all shadow-md">
-                            ⚡ Service Status
-                        </Link>
-                    </li>
+                   
                 </ul>
             </nav>
         </>
