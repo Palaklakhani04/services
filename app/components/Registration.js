@@ -3,6 +3,7 @@ import axios from "axios"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { EMAIL_REGEX } from "../utils/constants";
+import toast, { Toaster } from "react-hot-toast";
 
 
 export default function Registration() {
@@ -101,6 +102,7 @@ export default function Registration() {
       const response = await axios.post('/api/register', data)
       if (response.status === 200) {
         // navigate('/dashboard')
+        toast.success(response?.data?.message);
         console.log(response, 'register-response')
         router.push('/login');
       } else {
@@ -127,6 +129,7 @@ export default function Registration() {
                     <h2 className="text-2xl font-bold text-gray-800 mt-4">Register</h2>
                     <p className="text-gray-500 text-sm">Create an account to continue.</p>
                 </div>
+                <Toaster />
 
                 {/* Display Error Message */}
                 {message && <p className="text-red-500 text-sm text-center mb-3">{message}</p>}

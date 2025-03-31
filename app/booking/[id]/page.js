@@ -37,7 +37,11 @@ export default function booking() {
 
     // }, [id]);
     const fetchBookedSlots = async (selectedDate) => {
-        if (!selectedDate) return;
+        setLoading(true)
+        if (!selectedDate) {
+            setLoading(false)
+            return;
+        }
 
         try {
             const res = await fetch(`/api/bookings/view?date=${selectedDate}&serviceid=${service?._id}`);
@@ -53,6 +57,9 @@ export default function booking() {
         } catch (error) {
             console.error("Failed to fetch booked slots:", error);
             setBookedSlots([]);
+        } finally {
+            setLoading(false)
+
         }
     };
 
@@ -104,6 +111,7 @@ export default function booking() {
 
             if (!token) {
                 console.error("🚨 No token found! User might not be logged in.");
+                
                 alert("Please log in to book a service."); {
                     router.push("/login");
                 }
@@ -243,7 +251,7 @@ export default function booking() {
                 MessageBox('erorr', res.message);
             }
         }).catch(async err => {
-            
+
             handleError(err);
 
         })
@@ -425,7 +433,7 @@ export default function booking() {
                         <button
                             onClick={handleBooking}
                             className={`w-full py-2  font-semibold rounded-lg shadow-lg transition ${servicePay !== 'Online' ? 'bg-indigo-500 text-white' : 'hover:bg-indigo-500 hover:text-white text-indigo-500 '}`}
-                            disabled={!input.terms}
+                            disabled={!input.terms || loading}
                         >
                             Confirm Booking
                         </button>

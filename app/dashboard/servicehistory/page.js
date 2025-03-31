@@ -173,6 +173,10 @@ const ServiceHistory = () => {
         if (bookingStatus === "Cancelled") {
             return "Cancelled"; // ✅ Correctly show Canceled status
         }
+        if (bookingStatus === "Completed") {
+            return "Completed"; // ✅ Correctly show Canceled status
+        }
+
 
         const serviceDateObj = new Date(serviceDate);
         serviceDateObj.setHours(0, 0, 0, 0);
@@ -238,6 +242,7 @@ const ServiceHistory = () => {
                                                 ${status === "Active" ? "bg-green-200 text-green-700" :
                                                     status === "Pending" ? "bg-yellow-200 text-yellow-700" :
                                                         status === "Expired" ? "bg-red-200 text-red-700" :
+                                                        status === "Completed" ? "bg-blue-200 text-blue-700" :
                                                             status === "Cancelled" ? "bg-gray-300 text-gray-800" :
                                                                 "bg-gray-200 text-gray-700"}`}>
                                                 {status}

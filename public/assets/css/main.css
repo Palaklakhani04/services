@@ -2206,7 +2206,7 @@ span {
 .header-2.style-2 .header-main {
   background-color: var(--white);
   border-radius: 5px;
-  padding: 20px 50px;
+  padding: 1px 50px;
 }
 .header-2.style-2 .header-main .main-menu ul li .has-homemenu {
   top: 130%;
@@ -2680,7 +2680,7 @@ span {
 }
 .page-heading h1 {
   color: var(--white);
-  font-size: 70px;
+  font-size: 50px;
   position: relative;
   z-index: 9;
   font-weight: 600;
@@ -3635,25 +3635,25 @@ span {
   }
 }
 .hero-3 .hero-content h1 {
-  font-size: 110px;
+  font-size: 50px;
   color: var(--white);
   font-weight: 600;
   margin-bottom: 40px;
 }
 @media (max-width: 1199px) {
   .hero-3 .hero-content h1 {
-    font-size: 70px;
+    font-size: 40px;
   }
 }
 @media (max-width: 767px) {
   .hero-3 .hero-content h1 {
-    font-size: 56px;
+    font-size: 30px;
     margin-bottom: 30px;
   }
 }
 @media (max-width: 575px) {
   .hero-3 .hero-content h1 {
-    font-size: 44px;
+    font-size: 20px;
   }
 }
 

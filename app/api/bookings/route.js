@@ -215,7 +215,7 @@ export async function GET(req) {
             return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
         }
 
-        await connectToDB(); // Connect to DB
+        await dbConnect(); // Connect to DB
 
         // Fetch bookings only for the logged-in user
         const userBookings = await Booking.find({ userId: decoded.id });

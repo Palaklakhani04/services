@@ -8,6 +8,10 @@ const BookingSchema = new mongoose.Schema({
         ref: "User", // Reference to User model
         required: true
     },
+    name: {
+        type: String,
+        ref: "RegisterModel",
+    },
     serviceid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Addservice", // Reference to Service model

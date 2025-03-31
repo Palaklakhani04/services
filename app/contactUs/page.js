@@ -1,6 +1,6 @@
 import BackToTopStart from "../components/BackToTopStart";
 import Contactbg from "../components/Contactbg";
-import ContactInfo from "../components/ContactInfo";
+// import ContactInfo from "../components/ContactInfo";
 import ContactSec from "../components/ContactSec";
 import FooterSection from "../components/FooterSection";
 import Header from "../components/Header";
@@ -18,7 +18,6 @@ export default function ContactUs(){
         <Header />
         <Searchwrap />
         <Contactbg />
-        <ContactInfo />
         <ContactSec />
         <FooterSection />
     </div>

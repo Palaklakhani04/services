@@ -15,7 +15,7 @@
 
 //   }
 //   return (
-//     <div>
+//     <div >
 //       <Toaster />
 //       <header id="header-sticky" className="header-2 style-2">
 //         <div className="container">
@@ -141,7 +141,7 @@
 // }
 
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import { 
@@ -153,6 +153,22 @@ export default function Header() {
   const [hovered, setHovered] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const Logout = () => {
     localStorage?.clear();
@@ -160,11 +176,13 @@ export default function Header() {
   };
 
   return (
-    <div>
+    <div >
       <Toaster />
-      <header className="bg-white shadow-md fixed w-full z-50">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between py-4">
+      {/* <div id="_rht_toaster" style={{position: 'fixed', zIndex: 9999, inset: '16px'}} > */}
+      <header id="header-sticky" className={`header-2 ${isScrolled ? "style-2 sticky": "style-2 "}`}>
+       <div className="container">
+         <div className="mega-menu-wrapper">
+              <div className="header-main">
             
             {/* Logo */}
             <div className="logo">
@@ -314,8 +332,10 @@ export default function Header() {
               )}
             </div>
           </div>
+          </div>
         </div>
       </header>
+      {/* </div> */}
     </div>
   );
 }
