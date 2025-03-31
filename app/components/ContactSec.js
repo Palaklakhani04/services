@@ -162,6 +162,7 @@
 "use client";
 
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ContactPage() {
   const [name, setName] = useState("");
@@ -173,7 +174,7 @@ export default function ContactPage() {
 
   const handleSendMessage = async () => {
     if (!name || !email || !mobile || !message) {
-      setError("All fields are required.");
+      toast.error("All fields are required.");
       return;
     }
 
@@ -186,17 +187,17 @@ export default function ContactPage() {
 
       const data = await res.json();
       if (data.success) {
-        setSuccess("Your message has been sent successfully!");
+        toast.success("Your message has been sent successfully!");
         setName("");
         setEmail("");
         setMobile("");
         setMessage("");
-        setError("");
+        
       } else {
-        setError(data.message || "Failed to send message.");
+        toast.error(data.message || "Failed to send message.");
       }
-    } catch (err) {
-      setError("Something went wrong. Try again!");
+    } catch (error) {
+      toast.error("Something went wrong. Try again!");
     }
   };
 
@@ -204,6 +205,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-12 px-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-10">📩 Contact Us</h1>
       <div className="max-w-5xl w-full bg-white shadow-lg rounded-xl p-10 grid lg:grid-cols-2 gap-10">
+      <Toaster />
         
         {/* Contact Information */}
         <div className="space-y-6">

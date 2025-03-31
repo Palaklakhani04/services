@@ -85,6 +85,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import DashboardLayout from '@/app/components/DashboardLayout';
 import { Trash2, Calendar, DollarSign } from 'lucide-react';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CancelServicePage = () => {
     const [services, setServices] = useState(null);
@@ -125,10 +126,10 @@ const CancelServicePage = () => {
         try {
             await axios.delete(`/api/bookings/cancel/${serviceId}`, { status: "Cancelled by Admin" });
             setServices((prevServices) => prevServices.filter(service => service._id !== serviceId));
-            alert('Service canceled successfully');
+            toast.success('Service canceled successfully');
         } catch (error) {
             console.error('Error canceling service:', error);
-            alert('Failed to cancel service');
+            toast.error('Failed to cancel service');
         }
     };
 
@@ -137,6 +138,8 @@ const CancelServicePage = () => {
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
             <DashboardLayout title="Cancel Services List" />
+
+            <Toaster />
 
             {services.length === 0 ? (
                 <p className="text-center text-gray-500 mt-6 text-lg">No booked services available.</p>

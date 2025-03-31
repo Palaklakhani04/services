@@ -3,6 +3,7 @@ import { handleError } from "@/app/lib/HandelError";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function booking() {
     const { id } = useParams();
@@ -111,8 +112,8 @@ export default function booking() {
 
             if (!token) {
                 console.error("🚨 No token found! User might not be logged in.");
-                
-                alert("Please log in to book a service."); {
+    
+                toast.error("Please log in to book a service."); {
                     router.push("/login");
                 }
 
@@ -125,7 +126,7 @@ export default function booking() {
                 payload = JSON.parse(atob(token.split(".")[1])); // Decode JWT payload
             } catch (err) {
                 console.error("🚨 Invalid token format!");
-                alert("Session expired. Please log in again.");
+                toast.error("Session expired. Please log in again.");
                 return;
             }
 
@@ -137,14 +138,14 @@ export default function booking() {
 
             if (currentTime >= expiryTime) {
                 console.error("🚨 Token has expired! Please re-login.");
-                alert("Session expired. Please log in again.");
+                toast.error("Session expired. Please log in again.");
                 return;
             }
 
             // Validate service object
             if (!service || !service._id) {
                 console.error("🚨 Service ID is missing");
-                alert("Invalid service selection.");
+                toast.error("Invalid service selection.");
                 return;
             }
 
@@ -174,16 +175,16 @@ export default function booking() {
 
             if (!response.ok) {
                 console.error("🚨 Booking failed:", responseData);
-                alert(`Booking failed: ${responseData.message || "Unknown error"}`);
+                toast.error(`Booking failed: ${responseData.message || "Unknown error"}`);
                 return;
             }
 
             console.log("✅ Booking Successful:", responseData);
-            alert("Booking successful!");
+            toast.success("Booking successful!");
 
         } catch (error) {
             console.error("⚠️ Error in handleBooking:", error);
-            alert("Something went wrong. Please try again.");
+            toast.error("Something went wrong. Please try again.");
         }
     };
 
@@ -277,6 +278,8 @@ export default function booking() {
                     <h2 className="text-2xl font-bold text-gray-800 mt-4">Book a Service</h2>
                     <p className="text-gray-500 text-sm">Secure your appointment today.</p>
                 </div>
+
+                <Toaster />
 
                 {/* Service Name */}
                 <div className="relative mb-4">

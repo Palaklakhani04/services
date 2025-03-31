@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react"
 import Link from "next/link";
 import AdminDashboardLayout from "@/app/components/AdminDashboardLayout";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function addServices() {
 
@@ -95,12 +96,15 @@ export default function addServices() {
       const response = await axios.post('/api/addservices', formData)
       if (response.status === 200) {
         console.log("Service Added Successfully:", response.data);
+        toast.success("Service Added Successfully");
         router.push('/admin/Service');
       } else {
-        alert('Something went wrong')
+        toast.error('Something went wrong')
       }
     } catch (error) {
       console.log('Error in login api', error)
+      toast.error('Error in login api')
+      
     }
 
   }
@@ -176,6 +180,7 @@ export default function addServices() {
         <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mt-4">Add Service</h2>
         {message && <p className="text-red-500 text-sm mt-2">{message}</p>}
       </div>
+      <Toaster />
 
       {/* Service Title */}
       <div className="relative mb-4">

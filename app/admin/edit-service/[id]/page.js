@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import axios from "axios";
 import AdminDashboardLayout from "@/app/components/AdminDashboardLayout";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function EditService() {
   const { id } = useParams();
@@ -117,11 +118,11 @@ export default function EditService() {
       });
   
       console.log("✅ API Update Response:", response.data);
-      alert("Service updated successfully!");
+      toast.success("Service updated successfully!");
       router.push("/admin/Service");
     } catch (err) {
       console.error("❌ Error updating service:", err.response?.data || err.message);
-      alert("Failed to update service.");
+      toast.error("Failed to update service.");
     }
   };
   
@@ -218,6 +219,7 @@ export default function EditService() {
     
     <div className="max-w-xl w-full p-5 bg-white shadow-md rounded-lg sm:p-7">
       <h2 className="text-lg sm:text-2xl font-semibold mb-4 sm:mb-6 text-center">Edit Service</h2>
+      <Toaster />
       <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-5">
         <input
           type="text"

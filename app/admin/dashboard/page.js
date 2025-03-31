@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import AdminDashboardLayout from "@/app/components/AdminDashboardLayout";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const AdminDashboard = () => {
@@ -50,10 +51,10 @@ const AdminDashboard = () => {
                 throw new Error("Failed to complete service");
             }
 
-            alert("Service marked as completed!");
+            toast.success("Service marked as completed!");
             fetchBookings(); // Refresh dashboard
         } catch (error) {
-            console.error("Error completing service:", error);
+            toast.error("Error completing service:", error);
         }
     };
 
@@ -92,9 +93,9 @@ const AdminDashboard = () => {
                 service._id === bookingId ? { ...service, status: "Cancelled" } : service
             )
         );
-            alert("Service cancelled successfully!");
+        toast.success("Service cancelled successfully!");
         } catch (error) {
-            console.error("Error cancelling service:", error);
+            toast.error("Error cancelling service:", error);
         }
     };
 
@@ -195,6 +196,7 @@ return(
     <div>
   <AdminDashboardLayout title={"Admin Dashboard"} />
   <div className="p-4 sm:p-8 bg-gray-50 min-h-screen">
+    <Toaster />
     
     {/* Dashboard Summary Cards */}
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-6 sm:mb-10 mt-6 sm:mt-10">
