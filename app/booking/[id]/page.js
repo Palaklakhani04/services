@@ -1,4 +1,6 @@
 "use client";
+import FooterSection from "@/app/components/FooterSection";
+import Header from "@/app/components/Header";
 import { handleError } from "@/app/lib/HandelError";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
@@ -270,6 +272,38 @@ export default function booking() {
     if (error) return <p className="text-center text-red-500">{error}</p>;
 
     return (
+<div>
+    <Header />
+            <div className="breadcrumb-wrapper bg-cover" style={{backgroundImage: 'url("/assets/img/breadcrumb/about-breadcrumb.jpg")'}}>
+  <div className="container">
+    <div className="page-heading">
+      <h1 className="wow fadeInUp" data-wow-delay=".3s">Book A Service</h1>
+      <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
+        <li>
+          <a href="/">
+            Home
+          </a>
+        </li>
+        <li>
+          <i className="fa-regular fa-chevrons-right" />
+        </li>
+        <li>
+          Booking
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+        
+
+
+
+
+        
+
+
+
         <div className="flex items-center justify-center min-h-screen  p-6">
             <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg">
                 {/* Header */}
@@ -457,5 +491,10 @@ export default function booking() {
                 </div>
             </div>
         </div >
+        <FooterSection />
+        </div>
+        
+
+
     );
 } 

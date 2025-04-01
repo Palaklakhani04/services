@@ -235,7 +235,7 @@ return(
             .map((service) => (
               <tr key={service._id} className="border-b hover:bg-gray-100 transition text-sm sm:text-base">
                 <td className="py-2 sm:py-3 px-3 sm:px-4">{service.title}</td>
-                <td className="py-2 sm:py-3 px-3 sm:px-4">{service.userId}</td>
+                <td className="py-2 sm:py-3 px-3 sm:px-4">{service.userDetails.name}</td>
                 <td className="py-2 sm:py-3 px-3 sm:px-4">{new Date(service.serviceDate).toLocaleDateString()}</td>
                 <td className="py-2 sm:py-3 px-3 sm:px-4">{service.serviceTime}</td>
                 <td className="py-2 sm:py-3 px-3 sm:px-4 font-semibold text-indigo-500">₹{service.price}</td>

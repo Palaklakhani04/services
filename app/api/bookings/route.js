@@ -130,6 +130,7 @@
  import dbConnect from "@/app/lib/db";
 import { NextResponse } from "next/server";
 import Booking from "../model/Booking";
+import RegisterUser from "../model/RegisterModel";
 import { verifyToken } from "../commanfunction/comman";
 
 
@@ -218,7 +219,7 @@ export async function GET(req) {
         await dbConnect(); // Connect to DB
 
         // Fetch bookings only for the logged-in user
-        const userBookings = await Booking.find({ userId: decoded.id });
+        const userBookings = await Booking.find({ userId: decoded.id }); // Selecting only name & email
 
         return new Response(JSON.stringify(userBookings), { status: 200 });
     } catch (error) {

@@ -187,7 +187,7 @@ export default function Header() {
             {/* Logo */}
             <div className="logo">
               <a href="/">
-                <img src="/assets/img/logo/black-logo.svg" alt="EaseMate Logo" className="w-24 sm:w-28 md:w-36" />
+                <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 sm:w-28 md:w-36" />
               </a>
             </div>
 

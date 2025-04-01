@@ -154,7 +154,7 @@
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
-export default function Footer() {
+export default function FooterSection() {
     return (
         <footer className="bg-gray-900 text-white py-4">
             <div className="container mx-auto flex items-center justify-between px-8">
