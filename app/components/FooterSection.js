@@ -161,7 +161,7 @@ export default function FooterSection() {
                 
                 {/* Logo */}
                 <div className="flex items-center space-x-2">
-                    <img src="/logo.png" alt="EaseMate Logo" className="h-12 filter drop-shadow-lg" />
+                    <img src="/assets/img/logo/black-logo.svg" alt="EaseMate Logo" className="h-12 filter drop-shadow-lg" />
                 </div>
 
                 {/* Copyright */}

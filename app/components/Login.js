@@ -190,85 +190,166 @@ export default function Login() {
         // </div>
 
 
-        <div className="flex items-center justify-center min-h-screen p-6 bg-gray-100">
-            <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
-                {/* Logo */}
-                <div className="flex flex-col items-center mb-6">
-                    <img src="/assets/img/logo/black-logo.svg" alt="logo" className="w-20" />
-                    <h2 className="text-2xl font-bold text-gray-800 mt-4">Login</h2>
-                    <p className="text-gray-500 text-sm mt-2">Access your account securely.</p>
-                </div>
+        // <div className="flex items-center justify-center min-h-screen p-6 bg-gray-100">
+        //     <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+        //         {/* Logo */}
+        //         <div className="flex flex-col items-center mb-6">
+        //             <img src="/assets/img/logo/black-logo.svg" alt="logo" className="w-20" />
+        //             <h2 className="text-2xl font-bold text-gray-800 mt-4">Login</h2>
+        //             <p className="text-gray-500 text-sm mt-2">Access your account securely.</p>
+        //         </div>
 
-                <Toaster />
+        //         <Toaster />
 
-                {/* Display Error Message */}
-                {message && <p className="text-red-500 text-sm text-center mb-3">{message}</p>}
+        //         {/* Display Error Message */}
+        //         {message && <p className="text-red-500 text-sm text-center mb-3">{message}</p>}
 
-                {/* Email Field */}
-                <div className="relative mb-4">
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Enter Email"
-                        value={input.email}
-                        onChange={handleInputs}
-                        required
-                        className="peer w-full px-3 py-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    />
-                    <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
-                        Email Address
-                    </label>
-                </div>
+        //         {/* Email Field */}
+        //         <div className="relative mb-4">
+        //             <input
+        //                 type="email"
+        //                 name="email"
+        //                 placeholder="Enter Email"
+        //                 value={input.email}
+        //                 onChange={handleInputs}
+        //                 required
+        //                 className="peer w-full px-3 py-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        //             />
+        //             <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
+        //                 Email Address
+        //             </label>
+        //         </div>
 
-                {/* Password Field */}
-                <div className="relative mb-4">
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Enter Password"
-                        value={input.password}
-                        onChange={handleInputs}
-                        required
-                        className="peer w-full px-3 py-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    />
-                    <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
-                        Password
-                    </label>
-                </div>
+        //         {/* Password Field */}
+        //         <div className="relative mb-4">
+        //             <input
+        //                 type="password"
+        //                 name="password"
+        //                 placeholder="Enter Password"
+        //                 value={input.password}
+        //                 onChange={handleInputs}
+        //                 required
+        //                 className="peer w-full px-3 py-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        //             />
+        //             <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
+        //                 Password
+        //             </label>
+        //         </div>
 
-                {/* Forgot Password Link */}
-                <p className="text-gray-600 text-sm mb-4 text-center">
-                    Forgot password?{" "}
-                    <a href="/forgotpws" className="text-blue-500 hover:underline">
-                        Reset Password
-                    </a>
-                </p>
+        //         {/* Forgot Password Link */}
+        //         <p className="text-gray-600 text-sm mb-4 text-center">
+        //             Forgot password?{" "}
+        //             <a href="/forgotpws" className="text-blue-500 hover:underline">
+        //                 Reset Password
+        //             </a>
+        //         </p>
 
-                {/* Login Button */}
-                <button
-                    onClick={handleLogin}
-                    className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition"
-                >
-                    Login
-                </button>
+        //         {/* Login Button */}
+        //         <button
+        //             onClick={handleLogin}
+        //             className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition"
+        //         >
+        //             Login
+        //         </button>
 
-                {/* Registration Link */}
-                <p className="text-gray-600 text-sm mt-4 text-center">
-                    New user?{" "}
-                    <a href="/registration" className="text-blue-500 hover:underline">
-                        Register here
-                    </a>
-                </p>
+        //         {/* Registration Link */}
+        //         <p className="text-gray-600 text-sm mt-4 text-center">
+        //             New user?{" "}
+        //             <a href="/registration" className="text-blue-500 hover:underline">
+        //                 Register here
+        //             </a>
+        //         </p>
 
-                {/* Back to Home Link */}
-                <hr className="my-4" />
-                <div className="text-center">
-                    <a href="/" className="text-blue-600 hover:underline font-medium">
-                        Back to Home
-                    </a>
-                </div>
+        //         {/* Back to Home Link */}
+        //         <hr className="my-4" />
+        //         <div className="text-center">
+        //             <a href="/" className="text-blue-600 hover:underline font-medium">
+        //                 Back to Home
+        //             </a>
+        //         </div>
+        //     </div>
+        // </div>
+
+        <div className="flex items-center justify-center min-h-screen p-4 bg-gray-50">
+        <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm">
+            {/* Logo */}
+            <div className="flex flex-col items-center mb-4">
+                <img src="/assets/img/logo/logo1.png" alt="logo" className="w-18 h-14" />
+                <h2 className="text-xl font-semibold text-gray-800 mt-3">Login</h2>
+                <p className="text-gray-500 text-xs mt-1">Access your account securely.</p>
+            </div>
+    
+            <Toaster />
+    
+            {/* Error Message */}
+            {message && <p className="text-red-500 text-xs text-center mb-3">{message}</p>}
+    
+            {/* Email Field */}
+            <div className="relative mb-3">
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter Email"
+                    value={input.email}
+                    onChange={handleInputs}
+                    required
+                    className="peer w-full px-3 py-2 border rounded-md text-gray-700  focus:outline text-sm"
+                />
+                <label className="absolute left-3 -top-2 text-xs text-gray-500 bg-white px-1">
+                    Email Address
+                </label>
+            </div>
+    
+            {/* Password Field */}
+            <div className="relative mb-3">
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter Password"
+                    value={input.password}
+                    onChange={handleInputs}
+                    required
+                    className="peer w-full px-3 py-2 border rounded-md text-gray-700  focus:outline text-sm"
+                />
+                <label className="absolute left-3 -top-2 text-xs text-gray-500 bg-white px-1">
+                    Password
+                </label>
+            </div>
+    
+            {/* Forgot Password */}
+            <p className="text-gray-500 text-xs mb-3 text-center">
+                Forgot password?{" "}
+                <a href="/forgotpws" className="text-blue-500 hover:underline">
+                    Reset Password
+                </a>
+            </p>
+    
+            {/* Login Button */}
+            <button
+                onClick={handleLogin}
+                className="w-full py-2 bg-blue-500 text-white text-sm font-medium rounded-md shadow hover:bg-blue-600 transition"
+            >
+                Login
+            </button>
+    
+            {/* Registration Link */}
+            <p className="text-gray-500 text-xs mt-3 text-center">
+                New user?{" "}
+                <a href="/registration" className="text-blue-500 hover:underline">
+                    Register here
+                </a>
+            </p>
+    
+            {/* Back to Home */}
+            <div className="text-center mt-3">
+                <a href="/" className="text-blue-600 hover:underline text-xs font-medium">
+                    Back to Home
+                </a>
             </div>
         </div>
+    </div>
+    
+
 
     );
 }

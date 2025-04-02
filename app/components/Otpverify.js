@@ -2,6 +2,7 @@
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import { useState } from "react"
+import toast, { Toaster } from "react-hot-toast";
 
 
 export default function Otpverify() {
@@ -31,10 +32,11 @@ export default function Otpverify() {
     try {
       const response = await axios.post("/api/otpverify", data);
       if (response.data.status === 200) {
+        toast.success(response?.data?.message)
         console.log("Otp is correct", response);
         router.push('/setpsw');
       } else {
-        alert('Something went wrong')
+        toast.error('Something went wrong')
       }
     } catch (error) {
       console.log('Error in sending otp', error)
@@ -74,16 +76,17 @@ export default function Otpverify() {
     // </div>
 
     <div className="flex items-center justify-center min-h-screen p-6">
-            <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg">
+            <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm">
                 {/* Header */}
                 <div className="flex flex-col items-center mb-6">
-                    <img src="/assets/img/logo/black-logo.svg" alt="logo" className="w-20" />
-                    <h2 className="text-2xl font-bold text-gray-800 mt-4">OTP Verification</h2>
+                    <img src="/assets/img/logo/logo1.png" alt="logo" className="w-18 h-14" />
+                    <h2 className="text-xl font-bold text-gray-800">OTP Verification</h2>
                     <p className="text-gray-500 text-sm text-center mt-2">
                         Enter the OTP sent to your email.
                     </p>
                 </div>
 
+                <Toaster />
             
 
                 {/* Display Error or Success Message */}
@@ -101,7 +104,7 @@ export default function Otpverify() {
                         value={localStorage?.getItem('email')} 
                         onChange={(e) => setEmail(e.target.value)}
                         disabled
-                        className="peer w-full px-3 py-3 border rounded-lg text-gray-700 bg-gray-100 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        className="peer w-full px-3 py-2 border rounded-lg text-gray-700 bg-gray-100 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     />
                     <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
                         Email Address
@@ -121,7 +124,7 @@ export default function Otpverify() {
                         }}
                         maxLength={6}
                         required
-                        className="peer w-full px-3 py-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        className="peer w-full px-3 py-2 border rounded-lg text-black  focus:outline-none"
                     />
                     <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
                         OTP Code
@@ -131,7 +134,7 @@ export default function Otpverify() {
                 {/* Submit Button */}
                 <button
                     onClick={handleValidation}
-                    className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition"
+                    className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition"
                 >
                     Submit
                 </button>

@@ -2,6 +2,7 @@
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import { useState } from "react"
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Setpsw(){
 
@@ -57,10 +58,12 @@ export default function Setpsw(){
       const response = await axios.post('/api/setpsw', data)
       if (response.status === 200) {
         // navigate('/dashboard')
+        toast.success('Password created sucessfully')
         console.log(response, 'new password created sucessfully')
         router.push('/login');
       } else {
         console.log ('Something went wrong')
+        toast.error('Something went wrong')
       }
     } catch (error) {
       console.log('Error in creating password', error)
@@ -98,15 +101,16 @@ export default function Setpsw(){
 //         </div>
 
 <div className="flex items-center justify-center min-h-screen p-6">
-<div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg">
+<div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm">
     {/* Header */}
     <div className="flex flex-col items-center mb-6">
-        <img src="/assets/img/logo/black-logo.svg" alt="logo" className="w-20" />
-        <h2 className="text-2xl font-bold text-gray-800 mt-4">Set Password</h2>
+        <img src="/assets/img/logo/logo1.png" alt="logo" className="w-18 h-12" />
+        <h2 className="text-xl font-bold text-gray-800">Set Password</h2>
         <p className="text-gray-500 text-sm text-center mt-2">
             Create a new password for your account.
         </p>
     </div>
+    <Toaster />
 
 
     {/* Display Error or Success Message */}
@@ -125,7 +129,7 @@ export default function Setpsw(){
             value={input.newpassword}
             onChange={handleInputs}
             required
-            className="peer w-full px-3 py-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="peer w-full px-3 py-2 border rounded-lg text-black  focus:outline"
         />
         <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
             New Password
@@ -141,7 +145,7 @@ export default function Setpsw(){
             value={input.confirmpassword}
             onChange={handleInputs}
             required
-            className="peer w-full px-3 py-3 border rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="peer w-full px-3 py-2 border rounded-lg text-black  focus:outline"
         />
         <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
             Confirm Password
@@ -151,7 +155,7 @@ export default function Setpsw(){
     {/* Submit Button */}
     <button
         onClick={handleSubmit}
-        className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition"
+        className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition"
     >
         Submit
     </button>

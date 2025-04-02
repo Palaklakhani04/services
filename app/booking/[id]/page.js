@@ -308,7 +308,7 @@ export default function booking() {
             <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg">
                 {/* Header */}
                 <div className="flex flex-col items-center mb-6">
-                    <img src="/assets/img/logo/black-logo.svg" alt="logo" className="w-20" />
+                    <img src="/assets/img/logo/logo1.png" alt="logo" className="w-18 h-12" />
                     <h2 className="text-2xl font-bold text-gray-800 mt-4">Book a Service</h2>
                     <p className="text-gray-500 text-sm">Secure your appointment today.</p>
                 </div>

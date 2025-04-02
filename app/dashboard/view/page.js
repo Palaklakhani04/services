@@ -225,7 +225,7 @@ export default function View() {
       <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 mt-6" ref={targetRef}>
         <div className="logo">
           <a className="header-logo" href="/">
-            <img src="/assets/img/logo/black-logo.svg" alt="logo-img" />
+            <img src="/assets/img/logo/logo1.png" alt="logo-img" className='w-22 h-16' />
           </a>
         </div>
 

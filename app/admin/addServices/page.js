@@ -176,8 +176,8 @@ export default function addServices() {
 
       {/* Header */}
       <div className="flex flex-col items-center mb-6">
-        <img src="/assets/img/logo/black-logo.svg" alt="logo" className="w-16 sm:w-20" />
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mt-4">Add Service</h2>
+        <img src="/assets/img/logo/logo1.png" alt="logo" className="w-20 sm:w-20 h-12" />
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Add Service</h2>
         {message && <p className="text-red-500 text-sm mt-2">{message}</p>}
       </div>
       <Toaster />
