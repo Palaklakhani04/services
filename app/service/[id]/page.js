@@ -175,9 +175,7 @@ export default function ServiceDetail() {
 
 <div className="max-w-5xl mx-auto mt-8 mb-8">
   {/* Price at the Top-Right */}
-  <div className="flex justify-end">
-    <span className="text-xl font-bold text-green-700">₹{service.price}</span>
-  </div>
+ 
 
   {/* Image & Title Section */}
   <div className="flex items-center mt-2 border-b pb-3">
@@ -190,6 +188,8 @@ export default function ServiceDetail() {
     
     {/* Service Title */}
     <h1 className="ml-3 text-2xl font-semibold text-gray-900">{service.title}</h1>
+
+    
   </div>
 
   {/* Description */}
@@ -220,7 +220,10 @@ export default function ServiceDetail() {
 
 
   {/* Booking Button */}
-  <div className="flex justify-center mt-5">
+  <div className="flex justify-between mt-5">
+  <div className="flex justify-end">
+    <span className="text-xl font-bold justify-end text-green-700">₹{service.price}</span>
+  </div>
     <button
       onClick={() => {
         if (service?._id) {
