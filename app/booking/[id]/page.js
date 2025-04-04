@@ -93,7 +93,7 @@ export default function booking() {
 
     const handleBooking = async () => {
         if (bookedSlots.includes(serviceTime)) {
-            alert(`The ${serviceTime} slot on ${input.date} is already booked. Please choose another slot.`);
+            toast.success(`The ${serviceTime} slot on ${input.date} is already booked. Please choose another slot.`);
             return;
         }
         try {
