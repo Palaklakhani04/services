@@ -31,14 +31,13 @@ const paymentSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['Pending', 'Confirmed', 'Failed'],
-        default: 'Pending'
+        required: true,
     },
     packageTime: {
         type: String,
         required: true
     },
-    bookingDate:{
+    bookingDate: {
         type: Date,
         required: false
     }
@@ -46,6 +45,6 @@ const paymentSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Payment = mongoose.model('Payment', paymentSchema);
+const Payment = mongoose.models.Payment || mongoose.model('Payment', paymentSchema);
 
 export default Payment;

@@ -25,6 +25,8 @@ export default function booking() {
     const [error, setError] = useState("");
 
 
+
+
     const fetchBookedSlots = async (selectedDate) => {
         setLoading(true)
         if (!selectedDate) {
@@ -190,7 +192,7 @@ export default function booking() {
             const res = await axios.post(
                 `/api/create-payment`,
                 {
-                    success_url: window.location.origin + '/successfullyPayment',
+                    success_url: window.location.origin + '/payment-status',
                     service_id: id,
                 }, {
                 headers: {
@@ -202,9 +204,8 @@ export default function booking() {
 
             console.log(res, 'payment response')
             if (res.data?.result) {
-                alert('hello')
                 await addPayment(res?.data?.result)
-                sessionStorage.setItem('payment', JSON.stringify(res.data.result));
+                localStorage?.setItem('payment', JSON.stringify(res?.data?.result));
                 router.replace(res.data.result?.url || '')
             }
         } catch (err) {
@@ -214,33 +215,34 @@ export default function booking() {
             // setIsLoading(false)
         }
     }
-
     const addPayment = async (session) => {
+        console.log(session, 'session data')
         const param = {
-            userId: localStorage?.getItem('userid'),
+            userId: localStorage?.getItem('userId'),
             paymentMode: session.currency,
             transactionId: session.id,
             response: JSON.stringify(session),
             amount: session.amount_total / 100,
-            packageId: data.package_id,
+            packageId: id,
             status: session.payment_status,
             packageTime: serviceTime,
-            bookingDate: input.date,
+            bookingDate: input?.date,
         }
+
         await axios.post(`/api/add-payment`, param, {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage?.getItem('token')}`,  // ✅ Include token in headers
+                "Authorization": `Bearer ${localStorage?.getItem('token')}`,
             },
         }).then(async res => {
             console.log(res, 'add payment response')
             if (res.status === 200) {
-                sessionStorage.setItem('package', JSON.stringify({ ...data, payment_id: res.data?.[0]?.payment_id || 0, order_id: res?.data?.[0]?.orderid || 0 }));
+                localStorage.setItem('services', JSON.stringify({ ...data, payment_id: res.data?.[0]?.payment_id || 0, order_id: res?.data?.[0]?.orderid || 0 }));
             } else {
                 MessageBox('erorr', res.message);
             }
         }).catch(async err => {
-
+            console.log(err, 'add payment error')
             handleError(err);
 
         })
