@@ -1,4 +1,6 @@
 
+'use client'
+
 import BackToTopStart from "../components/BackToTopStart";
 import Dashboard from "../components/Dashboard";
 import FooterSection from "../components/FooterSection";

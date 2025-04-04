@@ -1,3 +1,4 @@
+"use client"
 import BackToTopStart from "../components/BackToTopStart";
 import Forgotpsw from "../components/Forgotpsw";
 import MouseCursor from "../components/MouseCursor";

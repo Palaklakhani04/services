@@ -13,7 +13,7 @@ const PaymentHistory = () => {
     useEffect(() => {
         const fetchPaidBookings = async () => {
             try {
-                const token = localStorage.getItem("token");
+                const token = localStorage?.getItem("token");
                 if (!token) {
                     setError("User not authenticated");
                     setLoading(false);

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-// import { connectDB } from "@/utils/db";
-// import User from "@/models/User";
+
 import dbConnect from "@/app/lib/db";
 import Booking from "../model/Booking";
 import RegisterUser from "../model/RegisterModel";

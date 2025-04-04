@@ -26,14 +26,14 @@ export const handleError = async (err) => {
         }
         if (err.response.status === 401) {
             MessageBox('error', err?.response?.data?.message);
-            localStorage.clear();
+            localStorage?.clear();
             setTimeout(() => {
                 window.location.pathname = '/';
             }, 500);
             return;
         } else {
             MessageBox('error', err?.response?.data?.message);
-            localStorage.clear();
+            localStorage?.clear();
             setTimeout(() => {
                 window.location.pathname = '/';
             }, 500);

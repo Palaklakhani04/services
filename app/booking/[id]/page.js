@@ -25,20 +25,6 @@ export default function booking() {
     const [error, setError] = useState("");
 
 
-
-    // useEffect(async () => {
-    //     if (!id) {
-    //         try {
-    //             const response = await axios.get(/api/services/${id});
-    //             setService(response.data.services);
-    //         } catch (err) {
-    //             setError("Service not found!");
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     }
-
-    // }, [id]);
     const fetchBookedSlots = async (selectedDate) => {
         setLoading(true)
         if (!selectedDate) {
@@ -109,7 +95,7 @@ export default function booking() {
             return;
         }
         try {
-            const token = localStorage.getItem("token"); // Retrieve the token
+            const token = localStorage?.getItem("token"); // Retrieve the token
             console.log("🔑 Token Sent:", token);
 
             if (!token) {
@@ -193,7 +179,7 @@ export default function booking() {
 
 
     const createPayment = async () => {
-        if (!localStorage.getItem('token')) {
+        if (!localStorage?.getItem('token')) {
             // setLogin(true)
             return
         }
@@ -231,7 +217,7 @@ export default function booking() {
 
     const addPayment = async (session) => {
         const param = {
-            userId: localStorage.getItem('userid'),
+            userId: localStorage?.getItem('userid'),
             paymentMode: session.currency,
             transactionId: session.id,
             response: JSON.stringify(session),
@@ -341,21 +327,6 @@ export default function booking() {
                 </div>
 
 
-                {/* Date Picker
-                <div className="relative mb-4">
-                    <input
-                        type="date"
-                        name="date"
-                        value={input.date}
-                        onChange={handleInputs}
-                        required
-                        className="peer w-full px-3 py-3 border rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    />
-                    <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">
-                        Select Date
-                    </label>
-                </div> */}
-
                 {/* Date Picker */}
                 <div className="relative mb-4">
                     <input
@@ -369,41 +340,10 @@ export default function booking() {
                     />
 
                     <label className="absolute left-3 -top-2 text-sm text-gray-500 bg-white px-1">Select Date</label>
-                    {/* <button onClick={checkBookings} className="mt-2 px-3 py-2 bg-blue-500 text-white rounded-lg">
-                        Check Availability
-                    </button> */}
+                    
                 </div>
 
-                {/* Show Booked Slots
-                {bookedSlots.length > 0 ? (
-                    <div className="mb-4">
-                        <h3 className="text-gray-700 font-medium">Booked Slots:</h3>
-                        <ul className="list-disc pl-5 text-red-500">
-                            {bookedSlots.map((slot, index) => (
-                                <li key={index}>{slot}</li>
-                            ))}
-                        </ul>
-                    </div>
-                ) : (
-                    <p className="text-gray-500">No bookings found.</p>
-                )} */}
-
-                {/* Ensure bookedSlots is not empty and filter by selected serviceDate */}
-                {/* {bookedSlots.length > 0 && input.date ? (
-    <div className="mb-4">
-        <h3 className="text-gray-700 font-medium">Booked Slots for {input.date}:</h3>
-        <ul className="list-disc pl-5 text-red-500">
-            {bookedSlots
-                .filter(slot => slot.date === input.date) 
-                .map((slot, index) => (
-                    <li key={index}>{slot.time}</li>
-                ))
-            }
-        </ul>
-    </div>
-) : (
-    <p className="text-gray-500">No bookings found for {input.date}.</p>
-)} */}
+           
 
 
 

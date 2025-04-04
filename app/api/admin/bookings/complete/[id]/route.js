@@ -1,5 +1,4 @@
-// import { connectToDB } from "@/utils/database";
-// import Booking from "@/app/api/model/Booking"; 
+
 import Booking from "@/app/api/model/Booking";
 import dbConnect from "@/app/lib/db";
 

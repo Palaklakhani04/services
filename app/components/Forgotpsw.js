@@ -33,7 +33,7 @@ export default function Forgotpsw() {
       if (response.status === 200) {
         toast.success("OTP sent successfully!");
         console.log("Otp send to your email", response);
-        localStorage.setItem('email', response.data.email)
+        localStorage?.setItem('email', response.data.email)
         router.push('/otpverify');
       } else {
         toast.error('Something went wrong')
@@ -47,32 +47,6 @@ export default function Forgotpsw() {
 
 
   return (
-//     <div>
-//       <div className="registration">
-//         <div className="logo">
-//           <a className="header-logo" href="/">
-//             <img src="/assets/img/logo/black-logo.svg" alt="logo-img" />
-//           </a>
-//         </div>
-//         <div>
-//           <div className="container">
-//             <h2>Forget Password</h2>
-//             {validations &&
-//               <p className="text-[#ff5555] text-lg">{message}</p>
-//             }
-//             <hr />
-//             <label htmlFor="email"><b>Email</b></label>
-//             <input type="text" placeholder="Enter Email" name="email" value={email} onChange={(e) => { setEmail(e.target.value), setValidations(false) }} id="email" required />
-//             <button onClick={() => handelValidation()} className="loginbtn">Send OTP</button>
-//             <hr />
-//             <a href="/" className="centerhome">Home</a>
-//           </div>
-//         </div>
-//       </div>
-
-//     </div>
-//   );
-// }
 
 <div className="flex items-center justify-center min-h-screen p-6">
 <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm">

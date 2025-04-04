@@ -1,3 +1,4 @@
+"use client"
 export default function HeroSection(){
     return(
         <div>
@@ -8,46 +9,6 @@ export default function HeroSection(){
   </div>
   <div className="swiper hero-slider">
     <div className="swiper-wrapper">
-      {/* <div className="swiper-slide">
-        <div className="slider-image bg-cover" style={{backgroundImage: 'url("assets/img/hero/hero-4.jpg")'}}>
-        </div>
-        <div className="container">
-          <div className="row g-4 align-items-center">
-            <div className="col-lg-12">
-              <div className="hero-content">
-                <h1 data-animation="fadeInUp" data-delay="1.3s">
-                  We Are Experts In <br /> Roof Repairs
-                </h1>
-                <div className="hero-button">
-                  <a className="theme-btn" data-animation="fadeInUp" data-delay="1.5s" href="about.html">
-                    Read More <i className="fa-regular fa-angles-right" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* <div className="swiper-slide">
-        <div className="slider-image bg-cover" style={{backgroundImage: 'url("assets/img/hero/hero-5.jpg")'}}>
-        </div>
-        <div className="container">
-          <div className="row g-4 align-items-center">
-            <div className="col-lg-12">
-              <div className="hero-content">
-                <h1 data-animation="fadeInUp" data-delay="1.3s">
-                  We Are Experts In <br /> Roof Repairs
-                </h1>
-                <div className="hero-button">
-                  <a className="theme-btn" data-animation="fadeInUp" data-delay="1.5s" href="about.html">
-                    Read More <i className="fa-regular fa-angles-right" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div className="swiper-slide">
         <div className="slider-image bg-cover" style={{backgroundImage: 'url("assets/img/hero/hero-4.jpg")'}}>
         </div>
@@ -58,11 +19,7 @@ export default function HeroSection(){
                 <h1 data-animation="fadeInUp" data-delay="1.3s">
                 Reliable Home Services at<br/> Your Fingertips
                 </h1>
-                {/* <div className="hero-button">
-                  <a className="theme-btn" data-animation="fadeInUp" data-delay="1.5s" href="about.html">
-                    Read More <i className="fa-regular fa-angles-right" />
-                  </a>
-                </div> */}
+               
               </div>
             </div>
           </div>

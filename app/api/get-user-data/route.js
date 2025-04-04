@@ -10,11 +10,6 @@ export async function POST(req) {
   console.log(_id, 'user ****************** data')
   try {
     await dbConnect();
-    // const { verified, decoded, message } = await verifyToken(req);
-    // if (!verified) {
-    //   return NextResponse.json({ error: message }, { status: 401 });
-    // }
-
 
     const services = await RegisterUser.findById({ _id });
     console.log("Fetched Services from DB:", services);

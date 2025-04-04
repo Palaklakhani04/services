@@ -1,5 +1,4 @@
-// import { connectToDatabase } from "@/utils/db";
-// import Service from "@/models/Service"; // Assuming you have a Mongoose model
+
 import AddServices from "../../model/Addservice";
 import dbConnect from "@/app/lib/db";
 

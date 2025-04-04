@@ -15,28 +15,6 @@ export async function POST(req) {
         );
     }
 
-    // 🔹 Extract Token from Headers
-    // const authHeader = req.headers.get("Authorization");
-    // if (!authHeader || !authHeader.startsWith("Bearer")) {
-    //     console.error("🔴 No Authorization header or incorrect format");
-    //     return new Response(JSON.stringify({ message: "Unauthorized" }), { status: 401 });
-    // }
-
-    // const token = authHeader.split(" ")[1]; // Extract token after "Bearer "
-    // console.log("🔹 Received Token:", token);
-
-    // // 🔹 Verify Token
-    // const decoded = jwt.verify(token, process.env.NEXT_PUBLIC_TOKEN_SECRET);
-    // console.log("✅ Decoded Token:", decoded); // Log the full decoded token
-
-    // // 🔹 Check if 'id' Exists
-    // if (!decoded || !decoded.id) {
-    //     console.error("🔴 User ID missing in decoded token:", decoded);
-    //     return new Response(JSON.stringify({ message: "User ID missing in token" }), { status: 403 });
-    // }
-
-    // const userId = decoded.id; // Extract userId from token
-    // console.log("🔹 Fetching bookings for user:", userId);
 
     const { paymentmode, transactionId, response, amount, packageId, status, packageTime, bookingDate } = await req.json();
 

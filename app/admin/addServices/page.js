@@ -111,63 +111,6 @@ export default function addServices() {
 
 
   return (
-    // <div>
-    //   <div className="registration">
-    //     <div className="logo">
-    //       <a className="header-logo" href="/">
-    //         <img src="/assets/img/logo/black-logo.svg" alt="logo-img" />
-    //       </a>
-    //     </div>
-    //     <div>
-    //       <div className="container">
-    //         <h2>Add Service</h2>
-    //         {message &&
-    //           <p className="text-[#ff5555] text-lg">{message}</p>
-    //         }
-    //         <hr />
-    //         <label htmlFor="title"><b>Title</b></label>
-    //         <input type="text" placeholder="Enter Title" name="title" value={input.title} onChange={handelInputs} required />
-
-    //         <label htmlFor="myfile"><b>Select a file</b></label>
-    //         <input type="file" id="myfile" name="myfile" onChange={handelInputs} />
-
-    //         <label htmlFor="description"><b>Description</b></label>
-    //         <input type="text" placeholder="Enter description" name="description" value={input.description} onChange={handelInputs} required />
-            
-
-
-
-    //         <h3 className="text-base mt-2 font-semibold">Service Features</h3>
-
-    //         {features.map((feature, index) => (
-    //           <div key={index} className="flex gap-2">
-    //             <input type="text" value={feature.name} onChange={(e) => handleFeatureChange(index, "name", e.target.value)}
-    //               placeholder="Feature Title" className="flex-1 text-black p-2 border mt-3 rounded-md" required />
-
-    //             <input type="text" value={feature.description} onChange={(e) => handleFeatureChange(index, "description", e.target.value)}
-    //               placeholder="Feature Description" className="flex-1 text-black p-2 mt-3 border rounded-md" required />
-
-    //             <button type="button" onClick={() => removeFeature(index)}
-    //               className="bg-red-500 text-white px-3 py-1 mt-3 rounded-md hover:bg-red-600">
-    //               ✕
-    //             </button>
-    //           </div>
-    //         ))}
-
-    //         <button type="button" onClick={addFeature}
-    //           className="w-full bg-blue-500 text-white px-3 mt-3 mb-3 py-2 rounded-md hover:bg-blue-600">
-    //           + Add More Feature
-    //         </button>
-
-
-    //         <label htmlFor="price"><b>Price</b></label>
-    //         <input type="number" placeholder="Enter Price" name="price" value={input.price} onChange={handelInputs} required />
-    //         <button onClick={() => handleAdd()} className="registerbtn rounded-md py-2 hover:bg-green-600">Add</button>
-    //       </div>
-    //     </div>
-    //   </div>
-
-    // </div>
 
 <div>
   <AdminDashboardLayout title={'Add Services'} />

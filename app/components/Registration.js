@@ -258,45 +258,5 @@ export default function Registration() {
 </div>
 
 
-
-
-
-
-    // <div>
-    //   <div className="registration">
-    //     <div className="logo">
-    //       <a className="header-logo" href="/">
-    //         <img src="assets/img/logo/black-logo.svg" alt="logo-img" />
-    //       </a>
-    //     </div>
-    //     <div>
-    //       <div className="container">
-    //         <h2>Register</h2>
-    //         <p>Please fill this form to create an account.</p>
-    //         {message &&
-    //           <p className="text-[#ff5555] text-lg">{message}</p>
-    //         }
-    //         <hr />
-    //         <label htmlFor="name"><b>Name</b></label>
-    //         <input type="text" placeholder="Enter Full Name" value={input.name} onChange={handleInputs} name="name" id="name" required />
-    //         <label htmlFor="email"><b>Email</b></label>
-    //         <input type="email" placeholder="Enter Email" name="email" value={input.email} onChange={handleInputs} required />
-    //         <label htmlFor="contact"><b>Contact Number</b></label>
-    //         <input size="number" placeholder="Enter contact number" name="mobile" value={input.mobile} onChange={handleInputs} maxLength={10} required />
-    //         <label htmlFor="address"><b>Address</b></label>
-    //         <textarea name="address" placeholder="Enter Your Full Address " value={input.address} onChange={handleInputs} defaultValue={""} />
-    //         <label htmlFor="psw"><b>Password</b></label>
-    //         <input type="password" placeholder="Enter Password" name="password" value={input.password} onChange={handleInputs} required />
-    //         <label htmlFor="psw-confim"><b>Confirm Password</b></label>
-    //         <input type="password" placeholder="confirm Password" name="confirmpassword" value={input.confirmpassword} onChange={handleInputs} required />
-    //         <button onClick={() => handleRegister()} className="registerbtn">Register</button>
-    //         <p>Already have an account? <a href="/login">login</a>.</p>
-    //         <hr />
-    //         <a href="/" className="centerhome">Home</a>
-    //       </div>
-    //     </div>
-    //   </div>
-
-    // </div>
   );
 }

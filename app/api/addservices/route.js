@@ -34,14 +34,6 @@ export async function POST(req) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
 
-        // Generate unique filename with timestamp
-        //  const ext = path.extname(file.name);
-        //  const baseName = path.basename(file.name, ext);
-        //  const newFileName = `${baseName}-${Date.now()}${ext}`;
-
-        // Define file path
-        //  const filePath = path.join(uploadDir, newFileName);
-
 
         // Rename the file with timestamp
         const timestamp = Date.now();

@@ -1,144 +1,4 @@
-// 'use client'
-// import { FaUserCircle, FaPowerOff, FaSignInAlt, FaUserPlus, FaChartPie } from "react-icons/fa";
-// import { useRouter } from "next/navigation";
-// import { Toaster } from "react-hot-toast";
-// import { useState } from "react";
 
-
-// export default function Header() {
-//   const [hovered, setHovered] = useState(null);
-//   const router = useRouter()
-
-//   const Logout = () => {
-//     localStorage?.clear();
-//     router.push('/');
-
-//   }
-//   return (
-//     <div >
-//       <Toaster />
-//       <header id="header-sticky" className="header-2 style-2">
-//         <div className="container">
-//           <div className="mega-menu-wrapper">
-//             <div className="header-main">
-//               <div className="logo">
-//                 <a className="header-logo" href="/">
-//                   <img src="/assets/img/logo/black-logo.svg" alt="logo-img" />
-//                 </a>
-//               </div>
-//               <div className="header-left">
-//                 <div className="mean__menu-wrapper">
-//                   <div className="main-menu">
-//                     <nav id="mobile-menu">
-//                       <ul>
-//                         <li className="has-dropdown active menu-thumb">
-//                           <a href="/" target="_self">
-//                             Home
-//                           </a>
-                         
-//                         </li>
-                      
-//                         <li>
-//                           <a href="/about">About Us</a>
-//                         </li>
-                        
-//                         <li>
-//                           <a href="/service">
-//                             Services
-//                           </a>
-//                           <ul className="submenu">
-//                             <li><a href="/service">Services</a></li>
-//                             <li><a href="/serviceDetails">Service Details</a></li>
-//                           </ul>
-//                         </li>
-                       
-//                         <li>
-//                           <a href="/contactUs">Contact Us</a>
-//                         </li>
-//                       </ul>
-//                     </nav>
-//                   </div>
-//                 </div>
-//               </div>
-        
-             
-//                 <div className="flex items-center space-x-6">
-//                       {localStorage?.getItem("token") ? (
-//                         <>
-//                           {/* Dashboard */}
-//                           <div 
-//                             className="relative flex flex-col items-center cursor-pointer"
-//                             onMouseEnter={() => setHovered("Dashboard")}
-//                             onMouseLeave={() => setHovered(null)}
-//                             onClick={() => router.push("/dashboard")}
-//                           >
-//                             <FaChartPie className="text-2xl text-blue-600 hover:text-blue-800 transition" />
-//                             {hovered === "Dashboard" && (
-//                               <span className="absolute top-10 bg-black text-white text-xs px-3 py-1 rounded-md transition">
-//                                 Dashboard
-//                               </span>
-//                             )}
-//                           </div>
-
-//                           {/* Logout */}
-//                           <div 
-//                             className="relative flex flex-col items-center cursor-pointer"
-//                             onMouseEnter={() => setHovered("Logout")}
-//                             onMouseLeave={() => setHovered(null)}
-//                             onClick={Logout}
-//                           >
-//                             <FaPowerOff className="text-2xl text-red-500 hover:text-red-700 transition" />
-//                             {hovered === "Logout" && (
-//                               <span className="absolute top-10 bg-black text-white text-xs px-3 py-1 rounded-md transition">
-//                                 Logout
-//                               </span>
-//                             )}
-//                           </div>
-//                         </>
-//                       ) : (
-//                         <>
-//                           {/* Login */}
-//                           <div 
-//                             className="relative flex flex-col items-center cursor-pointer"
-//                             onMouseEnter={() => setHovered("Login")}
-//                             onMouseLeave={() => setHovered(null)}
-//                             onClick={() => router.push("/login")}
-//                           >
-//                             <FaSignInAlt className="text-3xl text-gray-600 hover:text-blue-600 transition" />
-//                             {hovered === "Login" && (
-//                               <span className="absolute top-10 bg-black text-white text-xs px-3 py-1 rounded-md transition">
-//                                 Login
-//                               </span>
-//                             )}
-//                           </div>
-
-//                           {/* Register */}
-//                           <div 
-//                             className="relative flex flex-col items-center cursor-pointer"
-//                             onMouseEnter={() => setHovered("Register")}
-//                             onMouseLeave={() => setHovered(null)}
-//                             onClick={() => router.push("/registration")}
-//                           >
-//                             <FaUserPlus className="text-3xl text-green-500 hover:text-green-700 transition" />
-//                             {hovered === "Register" && (
-//                               <span className="absolute top-10 bg-black text-white text-xs px-3 py-1 rounded-md transition">
-//                                 Register
-//                               </span>
-//                             )}
-//                           </div>
-//                         </>
-//                       )}
-//                 </div>
-
-//             </div>
-//           </div>
-//         </div>
-//       </header>
-
-//     </div>
-//   )
-
-// }
 
 "use client";
 import { useEffect, useState } from "react";
@@ -148,6 +8,7 @@ import {
   FaBars, FaTimes, FaHome, FaInfoCircle, FaTools, FaPhone, 
   FaPowerOff, FaSignInAlt, FaUserPlus, FaChartPie
 } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Header() {
   const [hovered, setHovered] = useState(null);
@@ -178,7 +39,7 @@ export default function Header() {
   return (
     <div >
       <Toaster />
-      {/* <div id="_rht_toaster" style={{position: 'fixed', zIndex: 9999, inset: '16px'}} > */}
+      
       <header id="header-sticky" className={`header-2 ${isScrolled ? "style-2 sticky": "style-2 "}`}>
        <div className="container">
          <div className="mega-menu-wrapper">
@@ -203,23 +64,20 @@ export default function Header() {
               <ul className="lg:flex space-y-4 lg:space-y-0 lg:space-x-6 text-gray-800 text-lg font-medium p-4 lg:p-0">
                 <li className="flex items-center space-x-2">
                   <FaHome className="text-green-600" />
-                  <a href="/" className="block hover:text-green-600 transition">Home</a>
+                  <Link href="/" className="block hover:text-green-600 transition">Home</Link>
                 </li>
                 <li className="flex items-center space-x-2">
                   <FaInfoCircle className="text-green-600" />
-                  <a href="/about" className="block hover:text-green-600 transition">About Us</a>
+                  <Link href="/about" className="block hover:text-green-600 transition">About Us</Link>
                 </li>
                 <li className="relative group flex items-center space-x-2">
                   <FaTools className="text-green-600" />
-                  <a href="/service" className="block hover:text-green-600 transition">Services</a>
-                  {/* <ul className="absolute hidden group-hover:block bg-white shadow-md p-2 space-y-2 rounded-md">
-                    <li><a href="/service" className="block px-4 py-2 hover:bg-gray-200 rounded-md">Services</a></li>
-                    <li><a href="/serviceDetails" className="block px-4 py-2 hover:bg-gray-200 rounded-md">Service Details</a></li>
-                  </ul> */}
+                  <Link href="/service" className="block hover:text-green-600 transition">Services</Link>
+                  
                 </li>
                 <li className="flex items-center space-x-2">
                   <FaPhone className="text-green-600" />
-                  <a href="/contactUs" className="block hover:text-green-600 transition">Contact Us</a>
+                  <Link href="/contactus" className="block hover:text-green-600 transition">Contact Us</Link>
                 </li>
 
                 {/* Mobile Authentication Icons */}
@@ -335,7 +193,7 @@ export default function Header() {
           </div>
         </div>
       </header>
-      {/* </div> */}
+      
     </div>
   );
 }

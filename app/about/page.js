@@ -1,3 +1,4 @@
+'use client'
 import Aboutbg from "../components/Aboutbg";
 import AboutSection from "../components/AboutSection";
 import BackToTopStart from "../components/BackToTopStart";

@@ -1,67 +1,8 @@
  import { NextResponse } from "next/server";
-// import mongoose from "mongoose";
-// import Booking from "@/models/Booking"; // Ensure the correct path to the Booking model
-// import { verifyToken } from "@/utils/auth"; // Import token verification function
-// import dbConnect from "@/utils/dbConnect"; // Import database connection function
-
 import dbConnect from "@/app/lib/db";   
 import { verifyToken } from "../../commanfunction/comman";
 import Booking from "../../model/Booking";
 import jwt from "jsonwebtoken";
-
-
-// export async function GET(req) {
-//     try {
-//         await dbConnect(); // Ensure MongoDB connection
-
-//         // Get token from request headers
-//         const authHeader = req.headers.get("authorization");
-//         if (!authHeader || !authHeader.startsWith("Bearer ")) {
-//             return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-//         }
-
-//         const token = authHeader.split(" ")[1];
-//         const decodedUser = verifyToken(token); // Decode token to get userId
-
-//         if (!decodedUser) {
-//             return NextResponse.json({ message: "Invalid token" }, { status: 403 });
-//         }
-
-//         const userId = decodedUser.id; // Get userId from token
-
-//         // Fetch user's booking history
-//         const bookings = await Booking.find({ userId });
-
-//         return NextResponse.json({ bookings }, { status: 200 });
-//     } catch (error) {
-//         console.error("Error fetching booking history:", error);
-//         return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
-//     }
-// }
-
-
-
-// export async function GET(req) {
-//     try {
-//         // Verify Token
-//         const { verified, decoded } = await verifyToken(req);
-//         if (!verified) {
-//             return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
-//         }
-
-//         await dbConnect();
-
-//         // Get logged-in user ID from the token
-//         const userId = decoded.id;
-
-//         // Fetch only the logged-in user's service history
-//         const serviceHistory = await Booking.find({ userId }).sort({ serviceDate: -1 });
-
-//         return new Response(JSON.stringify(serviceHistory), { status: 200 });
-//     } catch (error) {
-//         return new Response(JSON.stringify({ error: "Failed to fetch service history" }), { status: 500 });
-//     }
-// }
 
 
 

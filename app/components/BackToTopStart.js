@@ -1,3 +1,4 @@
+"use client"
 export default function BackToTopStart(){
     return(
         <div>

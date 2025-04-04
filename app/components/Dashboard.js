@@ -1,72 +1,4 @@
-// 'use client'
-// import Link from "next/link";
-// import {  useEffect, useState } from "react";
-// import axios from "axios";
 
-// export default function Dashboard() {
-//     const [stats, setStats] = useState({
-//         totalServices: 0,
-//         completedServices: 0,
-//         cancelledServices: 0,
-//         upcomingServices: 0,
-//     });
-
-//     const fetchDashboardStats = async () => {
-//       try {
-//           const { data } = await axios.get("/api/dashboard");
-//           console.log(data); // Debugging
-//           setStats(data); // Update state with API data
-//       } catch (error) {
-//           console.error("Failed to fetch dashboard stats:", error);
-//       }
-//   };
-
-//   useEffect(() => {
-//     fetchDashboardStats();
-// }, []);
-
-
-//     return (
-//         <div>
-//             <div className="dash-heading">
-//                 <h2>Dashboard</h2>
-//                 <div>
-//                     <h2>Dashboard</h2>
-//                     <nav>
-//                         <ul>
-//                             <li><Link href="/dashboard/servicehistory">Service History</Link></li>
-//                             <li><Link href="/dashboard/cancelservice">Cancelled Services</Link></li>
-//                             <li><Link href="/dashboard/paymenthistory">Payment History</Link></li>
-//                         </ul>
-//                     </nav>
-//                 </div>
-//             </div>
-
-//             <section className="counter-section fix section-padding">
-
-//                 <div className="container">
-//                     <div className="row g-4">
-//                         <CounterCard title="Up Coming Services" count={stats.upcomingServices} />
-//                         <CounterCard title="Cancel Services" count={stats.cancelledServices} />
-//                         <CounterCard title="Complete Services" count={stats.completedServices} />
-//                         <CounterCard title="Total Service" count={stats.totalServices} />
-//                     </div>
-//                 </div>
-//             </section>
-//         </div>
-//     );
-// }
-
-// const CounterCard = ({ title, count }) => (
-//     <div className="col-xl-3 col-lg-4 col-md-6">
-//         <div className="counter-items">
-//             <div className="content1">
-//                 <h3>{title}</h3>
-//                 <h2><span className="count">{count}</span></h2>
-//             </div>
-//         </div>
-//     </div>
-// );
 
 
 'use client'
@@ -88,7 +20,7 @@ export default function Dashboard() {
     });
 
     const fetchDashboardStats = async () => {
-        const token = localStorage.getItem("token"); // Retrieve token
+        const token = localStorage?.getItem("token"); // Retrieve token
         if (!token) {
             console.error("🚨 No token found. Please log in."); 
             return;

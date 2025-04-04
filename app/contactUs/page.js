@@ -1,3 +1,5 @@
+'use client'
+
 import BackToTopStart from "../components/BackToTopStart";
 import Contactbg from "../components/Contactbg";
 // import ContactInfo from "../components/ContactInfo";
@@ -8,7 +10,7 @@ import MouseCursor from "../components/MouseCursor";
 import Offcanvas from "../components/Offcanvas";
 import Searchwrap from "../components/Searchwrap";
 
-export default function ContactUs(){
+export default function Contactus(){
   return(
     <div>
       {/* <Preloader /> */}
