@@ -5,14 +5,14 @@ import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 export default function FooterSection() {
     return (
-        <footer className="bg-gray-900 text-white py-4">
+        <footer className="bg-gray-900 text-white py-2">
             <div className="container mx-auto flex items-center justify-between px-8">
                 
                 {/* Logo */}
                 <div className="flex items-center space-x-2">
-                <a href="/">
-                    <img src="/assets/img/logo/logo2.png" alt="EaseMate Logo" className="h-12 filter drop-shadow-lg  " />
-                </a>
+                <Link href="/">
+                    <img src="/assets/img/logo/logo2.png" alt="EaseMate Logo" className="h-auto w-36 filter drop-shadow-lg  " />
+                </Link>
                 </div>
 
                 {/* Copyright */}

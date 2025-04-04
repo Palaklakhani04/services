@@ -1,37 +1,48 @@
+import { NextResponse } from 'next/server';
+import Payment from '../../model/PaymentMode';
+import dbConnect from '@/app/lib/db';
 
 
-import dbConnect from "@/app/lib/db";
-import { NextResponse } from "next/server";
-import { verifyToken } from "../../commanfunction/comman";
-import Booking from "../../model/Booking";
-import mongoose from "mongoose";
+// export async function GET() {
+//   await dbConnect();
+
+//   try {
+//     const payments = await Payment.find({}).sort({ date: -1 });
+//     return NextResponse.json(payments, { status: 200 });
+//   } catch (error) {
+//     console.error('Error fetching payments:', error);
+//     return NextResponse.json({ error: 'Failed to fetch payments' }, { status: 500 });
+//   }
+// }
+
+
+// import { NextResponse } from 'next/server';
+// import connectMongoDB from '@/app/api/lib/mongodb';
+// import Payment from '@/app/api/model/Payment';
+ import jwt from 'jsonwebtoken';
 
 export async function GET(req) {
-    try {
-        await dbConnect();
-        console.log("✅ Connected to Database");
+  try {
+    await dbConnect();
 
-        // 🔹 Verify Token
-        const tokenData = await verifyToken(req);
-        if (!tokenData.verified) {
-            return NextResponse.json({ message: tokenData.message }, { status: 401 });
-        }
+    const authHeader = req.headers.get('authorization');
 
-        const userId = tokenData.user.id;
-        if (!userId) {
-            return NextResponse.json({ message: "User ID is required" }, { status: 400 });
-        }
-
-        // 🔹 Fetch Paid Bookings
-        const paidBookings = await Booking.find({
-            userId: new mongoose.Types.ObjectId(userId),
-            servicePay: { $exists: true },
-        });
-
-        console.log("✅ Found Bookings:", paidBookings.length);
-        return NextResponse.json(paidBookings, { status: 200 });
-    } catch (error) {
-        console.error("❌ Error Fetching Payment History:", error);
-        return NextResponse.json({ message: "Server error", error: error.message }, { status: 500 });
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
+
+    const token = authHeader.split(' ')[1];
+
+    // Replace 'your_jwt_secret' with your actual secret key
+     const decoded = jwt.verify(token, process.env.NEXT_PUBLIC_TOKEN_SECRET);
+
+    const userId = decoded.id;
+
+    const payments = await Payment.find({ userId }).sort({ createdAt: -1 });
+
+    return NextResponse.json({ payments });
+  } catch (error) {
+    console.error('Error fetching user payments:', error);
+    return NextResponse.json({ message: 'Failed to fetch payments' }, { status: 500 });
+  }
 }

@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios"
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react"
 
@@ -69,7 +70,7 @@ export default function login() {
 
         {/* Header */}
         <div className="flex flex-col items-center mb-6">
-            <img src="/assets/img/logo/black-logo.svg" alt="logo" className="w-20" />
+            <img src="/assets/img/logo/logo1.png" alt="logo" className="w-36 h-auto" />
             <h2 className="text-2xl font-bold text-gray-800 mt-4">Admin Login</h2>
             {message && <p className="text-red-500 text-sm mt-2">{message}</p>}
         </div>
@@ -116,7 +117,7 @@ export default function login() {
 
         {/* Home Link */}
         <div className="text-center mt-4">
-            <a href="/" className="text-blue-500 hover:underline">← Back to Home</a>
+            <Link href="/" className="text-blue-500 hover:underline">← Back to Home</Link>
         </div>
 
     </div>

@@ -61,21 +61,21 @@ export default function Header() {
             <nav className={`absolute lg:relative top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent lg:flex transition-all duration-300 ${menuOpen ? "block" : "hidden"}`}>
               <ul className="lg:flex space-y-4 lg:space-y-0 lg:space-x-6 text-gray-800 text-lg font-medium p-4 lg:p-0">
                 <li className="flex items-center space-x-2">
-                  <FaHome className="text-green-600" />
-                  <Link href="/" className="block hover:text-green-600 transition">Home</Link>
+                  <FaHome className="text-[#AC7D88]" />
+                  <Link href="/" className="block hover:text-[#AC7D88] transition">Home</Link>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <FaInfoCircle className="text-green-600" />
-                  <Link href="/about" className="block hover:text-green-600 transition">About Us</Link>
+                  <FaInfoCircle className="text-[#AC7D88]" />
+                  <Link href="/about" className="block hover:text-[#AC7D88] transition">About Us</Link>
                 </li>
                 <li className="relative group flex items-center space-x-2">
-                  <FaTools className="text-green-600" />
-                  <Link href="/service" className="block hover:text-green-600 transition">Services</Link>
+                  <FaTools className="text-[#AC7D88]" />
+                  <Link href="/service" className="block hover:text-[#AC7D88] transition">Services</Link>
                   
                 </li>
                 <li className="flex items-center space-x-2">
-                  <FaPhone className="text-green-600" />
-                  <Link href="/contactus" className="block hover:text-green-600 transition">Contact Us</Link>
+                  <FaPhone className="text-[#AC7D88]" />
+                  <Link href="/contactus" className="block hover:text-[#AC7D88] transition">Contact Us</Link>
                 </li>
 
                 {/* Mobile Authentication Icons */}
@@ -130,7 +130,7 @@ export default function Header() {
                     onMouseLeave={() => setHovered(null)}
                     onClick={() => router.push("/dashboard")}
                   >
-                    <FaChartPie className="text-2xl text-blue-600 group-hover:text-blue-800 group-hover:scale-110 transition-transform duration-200" />
+                    <FaChartPie className="text-2xl text-blue-900 group-hover:text-blue-800 group-hover:scale-110 transition-transform duration-200" />
                     {hovered === "Dashboard" && (
                       <span className="absolute top-10 bg-black text-white text-xs px-3 py-1 rounded-md transition-opacity">
                         Dashboard

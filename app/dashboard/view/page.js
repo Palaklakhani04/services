@@ -8,6 +8,7 @@ import { usePDF } from 'react-to-pdf';
 import axios from 'axios';
 import { handleError } from '@/app/lib/HandelError';
 import { useSearchParams } from 'next/navigation';
+import DashboardLayout from '@/app/components/DashboardLayout';
 
 export default function View() {
   const { toPDF, targetRef } = usePDF({ filename: "invoice.pdf" });
@@ -31,10 +32,10 @@ export default function View() {
       if (res.status === 200) {
         setUserData(res.data.services);
       } else {
-        handleError(res);
+        console.log(res);
       }
     } catch (error) {
-      handleError(error);
+      console.log(error);
     }
   };
 
@@ -61,16 +62,17 @@ export default function View() {
 
   return (
     <div>
+      <DashboardLayout title={'View'} />
       {/* Booking Details */}
-      <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 mt-6" ref={targetRef}>
+      <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 mt-2" ref={targetRef}>
         <div className="logo">
           <a className="header-logo" href="/">
-            <img src="/assets/img/logo/logo1.png" alt="logo-img" className='w-22 h-16' />
+            <img src="/assets/img/logo/logo1.png" alt="logo-img" className='w-36 h-auto' />
           </a>
         </div>
 
         {/* Service Details */}
-        <div className="grid gap-4  mt-4 mb-4">
+        <div className="grid gap-4 mb-4">
 
           <div>
             <p className="text-gray-600 text-lg"><strong>Service Name:</strong> {booking.title}</p>
@@ -92,7 +94,7 @@ export default function View() {
       </div>
 
       {/* Download PDF Button */}
-      <div className="mt-6 flex justify-center">
+      <div className="mt-4 flex justify-center">
         <button onClick={() => toPDF()} className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
           📥 Download Invoice
         </button>

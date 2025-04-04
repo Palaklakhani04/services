@@ -1,7 +1,7 @@
 import { HttpStatusCode } from "axios";
 import { NextResponse } from 'next/server';
 import Payment from "../model/PaymentMode";
-const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   try {
