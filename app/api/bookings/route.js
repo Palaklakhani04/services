@@ -1,6 +1,6 @@
 
 
- import dbConnect from "@/app/lib/db";
+import dbConnect from "@/app/lib/db";
 import { NextResponse } from "next/server";
 import Booking from "../model/Booking";
 import RegisterUser from "../model/RegisterModel";
@@ -37,9 +37,9 @@ export async function POST(req) {
         }
 
 
-       
 
-        const newBooking = new Booking({
+
+        const newBooking = new Booking  ({
             userId: decoded.id,
             serviceid,
             title,
@@ -49,10 +49,10 @@ export async function POST(req) {
             servicePay,
         });
 
-        
+
 
         await newBooking.save();
-        return NextResponse.json({ message: "Booking created successfully" }, { status: 201 });
+        return NextResponse.json({ status: 200, data: newBooking, message: "Booking created successfully" });
     } catch (error) {
         console.error("Server Error:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

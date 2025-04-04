@@ -15,7 +15,7 @@ const BookingSchema = new mongoose.Schema({
     serviceid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Addservice", // Reference to Service model
-        required: true  
+        required: true
     },
     title: {
         type: String,
@@ -29,7 +29,7 @@ const BookingSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    serviceTime: { 
+    serviceTime: {
         type: String,
         enum: ["Morning", "Afternoon"],
         required: true
@@ -45,15 +45,15 @@ const BookingSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["Pending", "Completed", "Cancelled","Active"],
+        enum: ["Pending", "Completed", "Cancelled", "Active"],
         default: "Pending" // Initially, all bookings are pending
     }
-   
+
 },
     {
         timestamps: true,
     });
 
-const Booking =      mongoose.model('Booking', BookingSchema);
+const Booking = mongoose.models.Booking || mongoose.model('Booking', BookingSchema);
 
 export default Booking

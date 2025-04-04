@@ -2,13 +2,11 @@ import mongoose from 'mongoose';
 
 const paymentSchema = new mongoose.Schema({
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
         required: true
     },
     paymentMode: {
         type: String,
-        // enum: ['credit_card', 'debit_card', 'paypal', 'bank_transfer', 'upi', 'cash'],
         required: true
     },
     transactionId: {
@@ -16,7 +14,7 @@ const paymentSchema = new mongoose.Schema({
         required: true
     },
     response: {
-        type: mongoose.Schema.Types.Mixed,
+        type: String,
         required: true
     },
     amount: {
@@ -25,8 +23,7 @@ const paymentSchema = new mongoose.Schema({
         min: 0
     },
     packageId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Package',
+        type: String,
         required: true
     },
     status: {
@@ -45,6 +42,6 @@ const paymentSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Payment = mongoose.models.Payment || mongoose.model('Payment', paymentSchema);
+const Payment = mongoose.models.payment || mongoose.model('payment', paymentSchema);
 
 export default Payment;

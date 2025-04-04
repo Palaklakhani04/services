@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../public/assets/css/bootstrap.min.css';
 import "../public/assets/css/all.min.css";
 import "../public/assets/css/animate.css";
 import "../public/assets/css/magnific-popup.css";
@@ -10,6 +10,7 @@ import "../public/assets/css/swiper-bundle.min.css";
 import "../public/assets/css/nice-select.css";
 import "../public/assets/css/color.css";
 import "../public/assets/css/main.css";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +52,8 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Toaster />
+
         <script src="/assets/js/jquery-3.7.1.min.js"></script>
         <script src="/assets/js/viewport.jquery.js"></script>
         <script src="/assets/js/bootstrap.bundle.min.js"></script>

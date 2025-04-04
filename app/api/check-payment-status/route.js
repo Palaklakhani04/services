@@ -1,6 +1,7 @@
 import { HttpStatusCode } from "axios";
 import { NextResponse } from 'next/server';
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+import Payment from "../model/PaymentMode";
+const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   try {
@@ -10,7 +11,22 @@ export async function POST(req) {
     if (id) {
 
       const status = await stripe.checkout.sessions.retrieve(id)
-      console.log(status, 'check payment status api')
+
+      console.log(status.payment_status, 'check payment status api')
+      if (status.payment_status === 'paid') {
+        console.log('updated payment status')
+
+        const updatedPaymentStatus = await Payment.findOneAndUpdate(
+          { transactionId: status.id },
+          { status: status.payment_status },
+          { new: true }
+        );
+        console.log(updatedPaymentStatus, 'updated payment status')
+        return NextResponse.json({ status: 200, message: "Payment successfully", updatedPaymentStatus });
+
+      }
+
+
       return NextResponse.json(
         {
           result: status,

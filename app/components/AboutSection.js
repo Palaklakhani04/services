@@ -3,7 +3,7 @@
 
 "use client";
 import Link from "next/link";
-import { FaCheckCircle, FaTools, FaUsers, FaShieldAlt, FaThumbsUp } from "react-icons/fa";
+import { FaCheckCircle, FaTools, FaUsers, FaShieldAlt } from "react-icons/fa";
 
 export default function AboutUs() {
   return (

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { handleError } from "../lib/HandelError";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 
 
@@ -13,20 +14,18 @@ export default function successfullyPayment() {
   const [paymentDetails, setPaymentDetails] = useState({})
   const [packageDetails, setPackageDetails] = useState({})
   const [paymentStatus, setPaymentStatus] = useState('')
-  const [timeDetails, setTimeDetails] = useState({})
-  const [slotID, setSlotID] = useState()
-  const [orderNo, setOrderNo] = useState()
+  const [bookingDetails, setBookingDetails] = useState({})
   const router = useRouter()
 
   useEffect(() => {
     if (typeof window !== undefined) {
       const paymentData = localStorage?.getItem('payment')
       const packageData = localStorage?.getItem('services')
-      const timeData = localStorage?.getItem('timedetails')
+      // const timeData = localStorage?.getItem('timedetails')
       setPaymentDetails(paymentData ? JSON.parse(paymentData) : {})
       setPackageDetails(packageData ? JSON.parse(packageData) : {})
-      setTimeDetails(timeData ? JSON.parse(timeData) : {})
-      if (!(paymentData && packageData)) {
+      // setTimeDetails(timeData ? JSON.parse(timeData) : {})
+      if (!(paymentData)) {
         setLoading(false)
       }
       return () => {
@@ -36,26 +35,31 @@ export default function successfullyPayment() {
     }
   }, [])
 
+  console.log(paymentDetails, 'payment details')
+  console.log(packageDetails, 'package details')
+  // console.log(timeDetails, 'time details')
+
 
 
   useEffect(() => {
     (async () => {
-      if (paymentDetails?.id && packageDetails?.package_id) {
+      if (paymentDetails?.id) {
         try {
           const checkStatus = await axios.post(`/api/check-payment-status`, { id: paymentDetails.id }, {
             headers: {
-              Authorization: getCookie('token'),
+              Authorization: localStorage.getItem('token'),
             }
           })
-          const statusData = checkStatus?.data?.result
-          if (statusData) {
-            setPaymentStatus(statusData.payment_status || '')
-            await addPayment(statusData, 'CONFIRMPAYMENT')
-            if (statusData.payment_status == 'paid') {
-              confirmSlotBook(packageDetails?.package_id)
-            }
+          console.log(checkStatus, 'status payment data')
+          const statusData = checkStatus?.data?.updatedPaymentStatus?.status
+          // setPaymentStatus(statusData.payment_status || '')
+          // await addPayment(statusData, 'CONFIRMPAYMENT')
+          if (statusData === 'paid') {
+            handleBooking()
           }
         } catch (err) {
+          console.log(err, 'errorrrrr status payment data')
+
           handleError(err)
         } finally {
           setLoading(false)
@@ -64,115 +68,62 @@ export default function successfullyPayment() {
     })()
   }, [paymentDetails])
 
-  const addPayment = async (session) => {
-    console.log(session, 'session data')
-    const param = {
-      userId: localStorage?.getItem('userId'),
-      paymentMode: session.currency,
-      transactionId: session.id,
-      response: JSON.stringify(session),
-      amount: session.amount_total / 100,
-      packageId: id,
-      status: session.payment_status,
-      packageTime: serviceTime,
-      bookingDate: input?.date,
-    }
-
-    await axios.post(`/api/add-payment`, param, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage?.getItem('token')}`,
-      },
-    }).then(async res => {
-      console.log(res, 'add payment response')
-      if (res.status === 200) {
-        localStorage.setItem('services', JSON.stringify({ ...data, payment_id: res.data?.[0]?.payment_id || 0, order_id: res?.data?.[0]?.orderid || 0 }));
-      } else {
-        MessageBox('erorr', res.message);
-      }
-    }).catch(async err => {
-      console.log(err, 'add payment error')
-      handleError(err);
-
-    })
-  }
-
-  const confirmSlotBook = async () => {
-    const ServiceDetails = {
-      "p_userid": localStorage.getItem('userId'),
-      "p_service_id": timeDetails?.service_id,
-      "p_servicestarttime": timeDetails?.time[0]?.start,
-      "p_serviceendtime": timeDetails?.time[0]?.end,
-      "p_service_date": timeDetails?.date,
-      "p_schedule_id": 0,
-    }
-    await axios.post('/api/slotboocking', ServiceDetails, {
-      headers: {
-        Authorization: getCookie('token'),
-      }
-    }).then(async res => {
-      if (res.status === 200) {
-        setSlotID(res.data?.schedule_orderid)
-        setOrderNo(res.data?.orderno)
-        MessageBox('success', res.data.msg)
-      } else {
-        MessageBox('error', res.data.msg)
-      }
-    }).catch(async err => {
-      if (err.response.status === 401) {
-        handleError(err)
-        return
-      }
-      handleError(err)
-
-    })
-  }
-
-
-  const createPayment = async () => {
-    if (!getCookie('token')) {
-      setLogin(true)
-      return
-    }
-    if (loading)
-      return
-
+  const handleBooking = async () => {
     try {
-      setLoading(true)
-      const res = await axios.post(
-        `/api/create-payment`,
-        {
-          success_url: window.location.origin + '/successfullyPayment',
-          service_id: id,
-        }, {
+      const token = localStorage?.getItem("token");
+
+      const bookingData = {
+        serviceid: packageDetails.serviceid,
+        title: packageDetails.title,
+        serviceDate: packageDetails.serviceDate,
+        serviceTime: packageDetails.serviceTime,
+        price: packageDetails.price,
+        servicePay: "Online",
+      };
+
+      console.log("📨 Sending Booking Request with Data:", JSON.stringify(bookingData, null, 2));
+
+      const response = await fetch("/api/bookings", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage?.getItem('token')}`,  // ✅ Include token in headers
+          "Authorization": `Bearer ${token}`,  // ✅ Include token in headers
         },
+        body: JSON.stringify(bookingData),
+      });
+
+      console.log("API Response Status:", response.status);
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        console.error("🚨 Booking failed:", responseData);
+        toast.error(`Booking failed: ${responseData.message || "Unknown error"}`);
+        return;
       }
-      )
-      if (res.data?.result) {
-        await addPayment(res?.data?.result)
-        localStorage?.setItem('payment', JSON.stringify(res?.data?.result));
-        router.replace(res.data.result?.url || '')
-      }
-    } catch (err) {
-      handleError(err)
+
+      console.log("✅ Booking Successful:", responseData);
+      toast.success("Booking successful!");
+      setBookingDetails(responseData.data);
+
+    } catch (error) {
+      console.error("⚠️ Error in handleBooking:", error);
+      toast.error("Something went wrong. Please try again.");
     }
-    finally {
-      setLoading(false)
-    }
-  }
+  };
+
+
+
 
   if (loading) return (
     <div className='flex w-full h-[100vh] fixed top-[0px] left-[0] justify-center items-center bg-primary-25 z-50'>
       <div className='w-[300px] text-center'>
-        <h1>incarcare...</h1>
+        <h1>Loading...</h1>
       </div>
     </div>
   )
 
-  if (!(paymentDetails.id && packageDetails.package_id)) return (
+  if (!(paymentDetails.id)) return (
     <div className='flex w-full h-[100vh] fixed top-[0px] left-[0] justify-center items-center bg-primary-25 z-50'>
       <div className='w-[300px] text-center'>
         <h1>No Payment Found</h1>
@@ -187,13 +138,13 @@ export default function successfullyPayment() {
         <h1 className="text-2xl font-bold text-green-600 mb-4">Payment Successful!</h1>
 
         <div className="bg-gray-50 p-4 rounded-lg shadow-inner text-left w-full">
-          <p className="text-gray-700"><strong>Date:</strong></p>
-          <p className="text-gray-700"><strong>Name:</strong></p>
-          <p className="text-gray-700"><strong>Package Name:</strong></p>
-          <p className="text-gray-700"><strong>Date:</strong> </p>
-          <p className="text-gray-700"><strong>Time Slot:</strong> </p>
-          <p className="text-gray-700"><strong>Payment Mode:</strong> </p>
-          <p className="text-gray-700"><strong>Amount:</strong> </p>
+          <p className="text-gray-700"><strong>Date: {bookingDetails?.bookingDate}</strong></p>
+          <p className="text-gray-700"><strong>Name: {bookingDetails?.userId}</strong></p>
+          <p className="text-gray-700"><strong>Package Name: {bookingDetails?.title}</strong></p>
+          <p className="text-gray-700"><strong>Date: {bookingDetails?.serviceDate}</strong> </p>
+          <p className="text-gray-700"><strong>Time Slot: {bookingDetails?.serviceTime}</strong> </p>
+          <p className="text-gray-700"><strong>Payment Mode: {bookingDetails?.servicePay}</strong> </p>
+          <p className="text-gray-700"><strong>Amount: {bookingDetails?.price}</strong> </p>
         </div>
 
         <button

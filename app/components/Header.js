@@ -3,7 +3,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Toaster } from "react-hot-toast";
 import { 
   FaBars, FaTimes, FaHome, FaInfoCircle, FaTools, FaPhone, 
   FaPowerOff, FaSignInAlt, FaUserPlus, FaChartPie
@@ -38,7 +37,6 @@ export default function Header() {
 
   return (
     <div >
-      <Toaster />
       
       <header id="header-sticky" className={`header-2 ${isScrolled ? "style-2 sticky": "style-2 "}`}>
        <div className="container">

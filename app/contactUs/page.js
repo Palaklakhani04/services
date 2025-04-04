@@ -6,7 +6,6 @@ import Contactbg from "../components/Contactbg";
 import ContactSec from "../components/ContactSec";
 import FooterSection from "../components/FooterSection";
 import Header from "../components/Header";
-import MouseCursor from "../components/MouseCursor";
 import Offcanvas from "../components/Offcanvas";
 import Searchwrap from "../components/Searchwrap";
 
@@ -15,7 +14,6 @@ export default function Contactus(){
     <div>
       {/* <Preloader /> */}
         <BackToTopStart />
-        <MouseCursor />
         <Offcanvas />
         <Header />
         <Searchwrap />

@@ -8,7 +8,6 @@ import FooterSection from "./components/FooterSection";
 import Preloader from "./components/Preloader";
 
 import BackToTopStart from "./components/BackToTopStart";
-import MouseCursor from "./components/MouseCursor";
 import Offcanvas from "./components/Offcanvas";
 import ContactSec from "./components/ContactSec";
 
@@ -18,7 +17,6 @@ export default function Home() {
   <div>
     {/* <Preloader /> */}
     <BackToTopStart />
-    <MouseCursor />
     <Offcanvas />
     <Header />
     <Searchwrap />
