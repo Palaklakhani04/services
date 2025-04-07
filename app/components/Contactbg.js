@@ -1,4 +1,7 @@
 "use client"
+
+import Link from "next/link"
+
 export default function Contactbg(){
     return(
         <div>
@@ -8,9 +11,9 @@ export default function Contactbg(){
       <h1 className="wow fadeInUp" data-wow-delay=".3s">Contact</h1>
       <ul className="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
         <li>
-          <a href="index.htm">
+          <Link href="/">
             Home
-          </a>
+          </Link>
         </li>
         <li>
           <i className="fa-regular fa-chevrons-right" />
