@@ -32,24 +32,3 @@ export async function GET(req) {
     }
 }
 
-
-// export async function GET() {
-//     try {
-//         await dbConnect();
-
-//         const totalServices = await Booking.countDocuments();
-//         const completedServices = await Booking.countDocuments({ status: "completed" });
-//         const cancelledServices = await Booking.countDocuments({ status: "cancelled" });
-//         const upcomingServices = await Booking.countDocuments({ status: "upcoming" });
-
-//         return NextResponse.json({
-//             totalServices,
-//             completedServices,
-//             cancelledServices,
-//             upcomingServices,
-//         });
-//     } catch (error) {
-//         console.error("Dashboard API Error:", error);
-//         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-//     }
-// }

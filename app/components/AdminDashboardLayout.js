@@ -20,6 +20,7 @@ export default function AdminDashboardLayout({ title }) {
         
 
         <div className="min-h-10 bg-gray-50 z-50">
+            
             {/* Navbar */}
             <nav className="bg-white shadow-md fixed top-0 left-0 w-full flex items-center justify-between px-6 py-3 border-b border-gray-200 z-50">
                 

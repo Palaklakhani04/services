@@ -311,8 +311,8 @@ export default function booking() {
                     {/* Header */}
                     <div className="flex flex-col items-center mb-6">
                     <Link href="/">
-                <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 h-auto sm:w-28 md:w-36" />
-              </Link>
+                        <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 h-auto sm:w-28 md:w-36" />
+                    </Link>
                         <h2 className="text-2xl font-bold text-gray-800 ">Book a Service</h2>
                         <p className="text-gray-500 text-sm">Secure your appointment today.</p>
                     </div>

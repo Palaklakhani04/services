@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 
@@ -8,7 +9,15 @@ export default function successfullyPayment(){
   
     return(
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+          
       <div className="bg-white p-6 rounded-2xl shadow-lg text-center max-w-md w-full">
+       
+      <div className="flex flex-col items-center ">
+            <Link href="/">
+                        <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 h-auto sm:w-28 md:w-36" />
+                    </Link>
+      
+            </div>
         <h1 className="text-2xl font-bold text-green-600 mb-4">Payment Successful!</h1>
 
         <div className="bg-gray-50 p-4 rounded-lg shadow-inner text-left w-full">

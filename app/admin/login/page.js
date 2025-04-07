@@ -70,8 +70,10 @@ export default function login() {
 
         {/* Header */}
         <div className="flex flex-col items-center mb-6">
-            <img src="/assets/img/logo/logo1.png" alt="logo" className="w-36 h-auto" />
-            <h2 className="text-2xl font-bold text-gray-800 mt-4">Admin Login</h2>
+        <Link href="/">
+                        <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 h-auto sm:w-28 md:w-36" />
+                    </Link>
+            <h2 className="text-2xl font-bold text-gray-800">Admin Login</h2>
             {message && <p className="text-red-500 text-sm mt-2">{message}</p>}
         </div>
 
