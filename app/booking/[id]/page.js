@@ -3,6 +3,7 @@ import FooterSection from "@/app/components/FooterSection";
 import Header from "@/app/components/Header";
 import { handleError } from "@/app/lib/HandelError";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -272,6 +273,7 @@ export default function booking() {
     return (
         <div>
             <Header />
+            
             <div className="breadcrumb-wrapper bg-cover" style={{ backgroundImage: 'url("/assets/img/breadcrumb/about-breadcrumb.jpg")' }}>
                 <div className="container">
                     <div className="page-heading">
@@ -299,15 +301,19 @@ export default function booking() {
 
 
 
-
+            <div className="bg-gradient-to-r from-indigo-100 to-indigo-50 border border-indigo-200 text-indigo-800 px-4 py-3 rounded-md mt-4 text-sm">
+                <span className="font-semibold">Note:</span> The displayed price is the <span className="font-medium">minimum booking charge</span>. Final cost will be adjusted based on the actual service visit, including time, effort, and materials used.
+            </div>
 
 
             <div className="flex items-center justify-center min-h-screen  p-6">
                 <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg">
                     {/* Header */}
                     <div className="flex flex-col items-center mb-6">
-                        <img src="/assets/img/logo/logo1.png" alt="logo" className="w-18 h-12" />
-                        <h2 className="text-2xl font-bold text-gray-800 mt-4">Book a Service</h2>
+                    <Link href="/">
+                <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 h-auto sm:w-28 md:w-36" />
+              </Link>
+                        <h2 className="text-2xl font-bold text-gray-800 ">Book a Service</h2>
                         <p className="text-gray-500 text-sm">Secure your appointment today.</p>
                     </div>
 

@@ -98,7 +98,7 @@ export default function ContactPage() {
             placeholder="Your Message"
           ></textarea>
 
-          <button onClick={handleSendMessage} className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
+          <button onClick={handleSendMessage} className="w-full bg-[#AC7D88] text-white py-3 rounded-lg hover:bg-[#946b73]">
             Send Message
           </button>
           

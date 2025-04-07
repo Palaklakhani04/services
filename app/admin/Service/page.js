@@ -3,6 +3,7 @@ import AdminDashboardLayout from "@/app/components/AdminDashboardLayout";
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import { useState,useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { FiEdit, FiTrash, FiCheckCircle, FiXCircle, FiTrash2 } from "react-icons/fi"; 
 
 export default function ServiceSection() {
@@ -32,10 +33,10 @@ export default function ServiceSection() {
       try {
         await axios.delete(`/api/delete-service/${id}`);
         setServices(services.filter((service) => service._id !== id));
-        alert("Service deleted successfully!");
+        toast.success("Service deleted successfully!");
       } catch (err) {
         console.error("Error deleting service:", err);
-        alert("Failed to delete service.");
+        toast.error("Failed to delete service.");
       }
     };
   
@@ -48,9 +49,9 @@ export default function ServiceSection() {
             service._id === id ? { ...service, active: !currentStatus } : service
           )
         );
-        alert(`Service ${currentStatus ? "deactivated" : "activated"} successfully!`);
+        toast.success(`Service ${currentStatus ? "deactivated" : "activated"} successfully!`);
       } catch (err) {
-        alert("Failed to update service status.");
+        toast.error("Failed to update service status.");
       }
     };
   
@@ -73,6 +74,7 @@ const filteredServices = services.filter((service) => {
   <h1 className="text-center text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
     🚀 Our Premium Services 🚀
   </h1>
+  <Toaster />
 
   {/* Responsive Filter Buttons */}
   <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">

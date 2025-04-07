@@ -45,9 +45,9 @@ export default function Header() {
             
             {/* Logo */}
             <div className="logo">
-              <a href="/">
+              <Link href="/">
                 <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 sm:w-28 md:w-36" />
-              </a>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}

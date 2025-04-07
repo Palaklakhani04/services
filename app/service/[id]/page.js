@@ -72,6 +72,12 @@ export default function ServiceDetail() {
     </div>
 
 
+<div className="bg-gradient-to-r from-indigo-100 to-indigo-50 border border-indigo-200 text-indigo-800 px-4 py-3 rounded-md mt-4 text-sm">
+  <span className="font-semibold">Note:</span> The displayed price is the <span className="font-medium">minimum booking charge</span>. Final cost will be adjusted based on the actual service visit, including time, effort, and materials used.
+</div>
+
+
+
 
 <div className="max-w-5xl mx-auto mt-8 mb-8">
   {/* Price at the Top-Right */}
@@ -102,7 +108,7 @@ export default function ServiceDetail() {
                     <h4 className="text-lg font-bold text-gray-700 text-left mb-4">🔥 Service Features</h4>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {service?.features?.map((feature, index) => (
-                        <li key={index} className="flex items-center space-x-3 bg-white p-4 rounded-md shadow-sm border-l-4 border-green-500">
+                        <li key={index} className="flex items-center space-x-3 bg-white p-4 rounded-md shadow-sm border-l-4 border-[#AC7D88]">
                         <span className="text-green-600 text-lg">✔</span>
                         <span><strong>{feature.name}</strong> {feature.description}</span>
                         </li>
@@ -114,7 +120,7 @@ export default function ServiceDetail() {
   {/* Booking Button */}
   <div className="flex justify-between mt-5">
   <div className="flex justify-end">
-    <span className="text-xl font-bold justify-end text-green-700">₹{service.price}</span>
+    <span className="text-xl font-bold justify-end text-[#AC7D88]">₹{service.price}</span>
   </div>
     <button
       onClick={() => {
@@ -124,7 +130,7 @@ export default function ServiceDetail() {
           console.error("Service ID is undefined");
         }
       }}
-      className="px-4 py-3 bg-green-600 text-white text-sm font-semibold rounded-md hover:bg-green-700 transition-all"
+      className="px-4 py-3 bg-[#AC7D88] text-white text-sm font-semibold rounded-md hover:bg-[#946b73] transition-all"
     >
       ✅ Book Now
     </button>

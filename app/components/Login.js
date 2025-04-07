@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast";
 import { handleError } from "../lib/HandelError";
+import Link from "next/link";
 
 
 export default function Login() {
@@ -78,8 +79,10 @@ export default function Login() {
         <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-sm">
             {/* Logo */}
             <div className="flex flex-col items-center mb-4">
-                <img src="/assets/img/logo/logo1.png" alt="logo" className="w-18 h-14" />
-                <h2 className="text-xl font-semibold text-gray-800 mt-3">Login</h2>
+            <Link href="/">
+                        <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 h-auto sm:w-28 md:w-36" />
+                    </Link>
+                <h2 className="text-xl font-semibold text-gray-800">Login</h2>
                 <p className="text-gray-500 text-xs mt-1">Access your account securely.</p>
             </div>
     

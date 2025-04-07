@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { EMAIL_REGEX } from "../utils/constants";
 import toast, { Toaster } from "react-hot-toast";
+import Link from "next/link";
 
 
 export default function Forgotpsw() {
@@ -52,7 +53,9 @@ export default function Forgotpsw() {
 <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm">
     {/* Header */}
     <div className="flex flex-col items-center mb-4">
-        <img src="/assets/img/logo/logo1.png" alt="logo" className="w-18 h-12" />
+    <Link href="/">
+            <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 h-auto sm:w-28 md:w-36" />
+    </Link>
         <h2 className="text-xl font-bold text-gray-800">Forgot Password?</h2>
         <p className="text-gray-500 text-xs text-center mt-2">
             Enter your email to receive an OTP.

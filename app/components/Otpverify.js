@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios"
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast";
@@ -53,7 +54,9 @@ export default function Otpverify() {
             <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm">
                 {/* Header */}
                 <div className="flex flex-col items-center mb-6">
-                    <img src="/assets/img/logo/logo1.png" alt="logo" className="w-18 h-14" />
+                <Link href="/">
+                        <img src="/assets/img/logo/logo1.png" alt="EaseMate Logo" className="w-24 h-auto sm:w-28 md:w-36" />
+                </Link>
                     <h2 className="text-xl font-bold text-gray-800">OTP Verification</h2>
                     <p className="text-gray-500 text-sm text-center mt-2">
                         Enter the OTP sent to your email.

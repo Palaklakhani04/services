@@ -36,7 +36,7 @@ const AdminDashboard = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const upcomingServices = bookings.filter(service => new Date(service.serviceDate) > today);
+    const upcomingServices = bookings.filter(service => new Date(service.serviceDate) > today && service.status=== "Pending" );
     const completedServices = bookings.filter(service => service.status === "Completed");
     const canceledServices = bookings.filter(service => service.status === "Cancelled");
 

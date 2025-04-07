@@ -43,6 +43,7 @@ import { useEffect, useState } from 'react';
 export default function HeroSection() {
   const images = [
     '/assets/img/hero/hero-6.jpg',
+    '/assets/img/hero/hero-2.jpg',
     '/assets/img/hero/hero-1.jpg',
     '/assets/img/hero/hero-3.jpg',
   ];
