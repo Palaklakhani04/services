@@ -44,7 +44,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-12 px-6">
+    <div className="min-h-screen bg-[#FDFCFB] flex flex-col items-center py-12 px-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-10">📩 Contact Us</h1>
       <div className="max-w-5xl w-full bg-white shadow-lg rounded-xl p-10 grid lg:grid-cols-2 gap-10">
       <Toaster />

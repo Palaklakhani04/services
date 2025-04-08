@@ -42,10 +42,10 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-green-10 to-gray-200 pt-[130px] px-6"> 
+        <div className="min-h-screen bg-[#FDFCFB] pt-[130px] px-6"> 
             <DashboardLayout title={'Dashboard'} />
             {/* Dashboard Stats Section */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <section className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <CounterCard title="Upcoming Services" count={stats.upcomingServices} color="from-blue-50 to-blue-40" icon="📅" />
                 <CounterCard title="Cancelled Services" count={stats.cancelledServices} color="from-red-50 to-red-40" icon="❌" />
                 <CounterCard title="Completed Services" count={stats.completedServices} color="from-green-50 to-green-40" icon="✅" />
