@@ -59,7 +59,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="w-full min-h-[600px] bg-[#FDFCFB] flex flex-col md:flex-row items-center justify-between overflow-hidden px-6 md:px-20 py-10 md:py-0">
+    <section className="w-full min-h-[600px] bg-[#FDFCFB] flex flex-col md:flex-row items-center justify-between overflow-hidden px-6 md:px-20 py-20 md:py-0 ">
       {/* Left Content */}
       <div className="md:w-1/2 z-10 text-center md:text-left">
         <h1 className="text-4xl md:text-5xl font-bold text-[#2F2F2F] leading-tight">
