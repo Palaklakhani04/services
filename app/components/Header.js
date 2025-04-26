@@ -13,6 +13,7 @@ export default function Header() {
   const [hovered, setHovered] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
+   const [token, setToken] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -28,6 +29,13 @@ export default function Header() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("token");
+      setToken(storedToken);
+    }
   }, []);
 
   const Logout = () => {
@@ -79,7 +87,7 @@ export default function Header() {
                 </li>
 
                 {/* Mobile Authentication Icons */}
-                <div className="lg:hidden flex flex-col space-y-4 mt-4">
+                {/* <div className="lg:hidden flex flex-col space-y-4 mt-4">
                   {localStorage?.getItem("token") ? (
                     <>
                       <li 
@@ -117,11 +125,38 @@ export default function Header() {
                   )}
                 </div>
               </ul>
-            </nav>
+            </nav> */}
+            <div className="lg:hidden flex flex-col space-y-4 mt-4">
+                    {token ? (
+                      <>
+                        <li className="flex items-center space-x-2 cursor-pointer" onClick={() => router.push("/dashboard")}>
+                          <FaChartPie className="text-blue-600" />
+                          <span>Dashboard</span>
+                        </li>
+                        <li className="flex items-center space-x-2 cursor-pointer" onClick={Logout}>
+                          <FaPowerOff className="text-red-500" />
+                          <span>Logout</span>
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <li className="flex items-center space-x-2 cursor-pointer" onClick={() => router.push("/login")}>
+                          <FaSignInAlt className="text-gray-600" />
+                          <span>Login</span>
+                        </li>
+                        <li className="flex items-center space-x-2 cursor-pointer" onClick={() => router.push("/registration")}>
+                          <FaUserPlus className="text-green-500" />
+                          <span>Register</span>
+                        </li>
+                      </>
+                    )}
+                  </div>
+                </ul>
+              </nav>
 
             {/* Desktop Authentication Icons with Hover Effects */}
             <div className="hidden lg:flex items-center space-x-4">
-              {localStorage?.getItem("token") ? (
+              {token ? (
                 <>
                   {/* Dashboard */}
                   <div
