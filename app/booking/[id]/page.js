@@ -28,32 +28,32 @@ export default function booking() {
 
 
 
-    const fetchBookedSlots = async (selectedDate) => {
-        setLoading(true)
-        if (!selectedDate) {
-            setLoading(false)
-            return;
-        }
+    // const fetchBookedSlots = async (selectedDate) => {
+    //     setLoading(true)
+    //     if (!selectedDate) {
+    //         setLoading(false)
+    //         return;
+    //     }
 
-        try {
-            const res = await fetch(`/api/bookings/view?date=${selectedDate}&serviceid=${service?._id}`);
-            const data = await res.json();
+    //     try {
+    //         const res = await fetch(`/api/bookings/view?date=${selectedDate}&serviceid=${service?._id}`);
+    //         const data = await res.json();
 
-            if (res.ok) {
-                setBookedSlots(data.bookedSlots || []);
+    //         if (res.ok) {
+    //             setBookedSlots(data.bookedSlots || []);
 
-            } else {
-                console.error("Error fetching booked slots:", data.error);
-                setBookedSlots([]);
-            }
-        } catch (error) {
-            console.error("Failed to fetch booked slots:", error);
-            setBookedSlots([]);
-        } finally {
-            setLoading(false)
+    //         } else {
+    //             console.error("Error fetching booked slots:", data.error);
+    //             setBookedSlots([]);
+    //         }
+    //     } catch (error) {
+    //         console.error("Failed to fetch booked slots:", error);
+    //         setBookedSlots([]);
+    //     } finally {
+    //         setLoading(false)
 
-        }
-    };
+    //     }
+    // };
 
 
     useEffect(() => {
@@ -82,9 +82,9 @@ export default function booking() {
             [name]: type === "checkbox" ? checked : value,
         }));
 
-        if (name === "date") {
-            fetchBookedSlots(value); // Fetch booked slots when date is selected
-        }
+        // if (name === "date") {
+        //     fetchBookedSlots(value); // Fetch booked slots when date is selected
+        // }
     };
 
     const handleTime = () => alert("Time selected!");

@@ -3,6 +3,7 @@ import axios from "axios"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react"
+import toast, { Toaster } from "react-hot-toast";
 
 
 export default function login() {
@@ -52,9 +53,9 @@ export default function login() {
             const response = await axios.post('/api/admin-login', data)
             if (response.status === 200) {
                 router.push('/admin/dashboard');
-                console.log("Login Successful:", response.data);
+                toast.success("Login Successful:", response.data);
             } else {
-                alert('Something went wrong')
+                toast.error('Something went wrong')
             }
         } catch (error) {
             console.log('Error in login api', error)
@@ -67,7 +68,7 @@ export default function login() {
    
         <div className="flex items-center justify-center min-h-screen p-6 bg-gray-100">
     <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
-
+<Toaster/>
         {/* Header */}
         <div className="flex flex-col items-center mb-6">
         <Link href="/">

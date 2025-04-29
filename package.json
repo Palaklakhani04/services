@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.2.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.4",
+    "env": "^0.0.2",
     "framer-motion": "^12.6.2",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.484.0",

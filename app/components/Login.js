@@ -126,9 +126,9 @@ export default function Login() {
             {/* Forgot Password */}
             <p className="text-gray-500 text-xs mb-3 text-center">
                 Forgot password?{" "}
-                <a href="/forgotpws" className="text-blue-500 hover:underline">
+                <Link href="/forgotpws" className="text-blue-500 hover:underline">
                     Reset Password
-                </a>
+                </Link>
             </p>
     
             {/* Login Button */}
@@ -142,16 +142,16 @@ export default function Login() {
             {/* Registration Link */}
             <p className="text-gray-500 text-xs mt-3 text-center">
                 New user?{" "}
-                <a href="/registration" className="text-blue-500 hover:underline">
+                <Link href="/registration" className="text-blue-500 hover:underline">
                     Register here
-                </a>
+                </Link>
             </p>
     
             {/* Back to Home */}
             <div className="text-center mt-3">
-                <a href="/" className="text-blue-600 hover:underline text-xs font-medium">
+                <Link href="/" className="text-blue-600 hover:underline text-xs font-medium">
                     Back to Home
-                </a>
+                </Link>
             </div>
         </div>
     </div>
